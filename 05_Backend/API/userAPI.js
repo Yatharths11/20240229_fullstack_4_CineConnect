@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
         }
 
         // User is authenticated, create JWT token
-        const accessToken = jwt.sign({ username: user.username, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1h' })
+        const accessToken = jwt.sign({ username: user.username, role: user.role }, process.env.SECRET_KEY, { expiresIn: '10h' })
 
         res.set('Authorization', 'Bearer ' + accessToken)
         res.status(200).json({ message: "User logged in successfully."})

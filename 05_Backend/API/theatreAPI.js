@@ -37,5 +37,28 @@ router.get("/theaters",async (req,res)=>{
 
 
 
+//API to get details of a particular theater
+router.get('/theaters/:id',(req,res)=>{
+    try{
+        const theater = Theatres.find({_id : req.query.id})
+        .then(result=>{
+            if(!result){
+                return res.status(404).json({message:"Theater not found."});
+            }else{
+              return res.status(200).json(result[0]);
+            }
+          })
+          .catch(e =>{
+            console.log(e);
+            res.status(500).json({error: e});
+          })
+    }
+    catch(err){
+        res.status(501).json(err);
+    }
+})
+
+
+
 
 module.exports = router

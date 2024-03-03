@@ -7,7 +7,7 @@ const movieSchema = new mongoose.Schema({
         required: true 
     },
 
-    vid: {
+    venue_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Venue',
         required: true

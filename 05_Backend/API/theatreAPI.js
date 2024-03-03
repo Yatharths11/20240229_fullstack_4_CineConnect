@@ -12,14 +12,17 @@ router.use(express.json())
 router.use((req, res, next) => {
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     if (!token) {
+        
       return res.status(401).json({ message: 'Unauthorized' });
     }
   
     try {
-      const decodedToken = jwt.verify(token, 'yourSecretKey');
+      const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
       req.userData = { userId: decodedToken.userId, username: decodedToken.username };
       next();
     } catch (error) {
+
+        console.log("here")
       return res.status(401).json({ message: 'Unauthorized' });
     }
   });
@@ -60,24 +63,29 @@ router.get('/theaters/:id',(req,res)=>{
 
 
 //API to create a new theaters
-router.post('/theaters',(req,res)=>{
-    const theater = req.body
-    try {
-       Theatres.inserrtMany(theater,(err,docs)=>{
-         if(!err)
-           res.send('Theater added Successfully')
-         else
-           console.log('Error In Adding Theater : ', err)
-           res.status(403).json({message:"There was an issue adding this the theter"})
-       })
-    } 
-    catch(err) {
-      res.status(501).json(err)
-    }
-      
-  })
-  
+// Create a new theatre
+router.post('/', async (req, res) => {
+    const theater = req.body;
 
+    try {
+        const newTheatre = await createTheatre(theater);
+        res.status(201).json(newTheatre);
+    } catch (err) {
+        console.error("Error creating theatre:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// Function to create a new theatre
+async function createTheatre(theatreData) {
+    try {
+        const newTheatre = await Theatres.create(theatreData);
+        return newTheatre;
+    } catch (err) {
+        console.error("Error creating theatre:", err);
+        throw err; // Re-throw the error to be caught in the calling code
+    }
+}
 
 
 

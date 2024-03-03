@@ -7,9 +7,9 @@ const movieSchema = new mongoose.Schema({
         required: true 
     },
 
-    vid: {
+    theatre_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Venue',
+        ref: 'Theatre',
         required: true
     },
 

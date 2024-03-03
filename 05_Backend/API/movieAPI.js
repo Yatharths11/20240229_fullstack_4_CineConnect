@@ -3,72 +3,115 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Movies = require("../schema/movies.js");
-const movies = require("../schema/movies.js");
-const { test } = require("media-typer");
 const Users = require("../schema/users.js");
-//get by Id
 
-//get all movies
+// Get all movies
 router.get("/", async (req, res) => {
-  //fetch Movies from MongoDb
   try {
-    //fetch movies in movies
-    const get_movies = await movies.find();
-    //return data in json
+    // Fetch all movies from the database
+    const get_movies = await Movies.find();
+    // Return the list of movies in JSON format
     return res.status(200).json(get_movies);
   } catch (error) {
+    // Handle any errors that occur during fetching movies
     res.status(500).json({ message: "Internal server error" });
   }
 });
 
-//post //Insert Movies in DB
+// Insert a new movie
 router.post("/:id", async (req, res) => {
-  // Test that user is Admin or not
   try {
     const id = req.params.id;
-    const token = req.headers.authorization; // Extract the JWT token from the request headers
-    // Check if the token exists
+    const token = req.headers.authorization;
+
+    // Check if the JWT token is provided
     if (!token) {
       return res.status(401).send("Access denied. Token not provided.");
     }
 
+    // Find the user by ID
     const userExist = await Users.findOne({ _id: id });
     const decodedToken = jwt.verify(
       token.split(" ")[1],
       process.env.SECRET_KEY
-    ); // Verify the token
+    );
 
-    // Check id if such user exist or not
+    // Check if the user exists
     if (!userExist) {
-      res.status(404).send("User not Found.");
+      return res.status(404).send("User not Found.");
     }
 
-    // Check if the authorised person for request informations.
+    // Check if the user is authorized to create a movie
     if (
       !(decodedToken.username === userExist.username) ||
       !decodedToken.role === "superAdmin"
     ) {
-      res.status(401).status("Sorry, you're not Authorised.");
+      return res.status(401).send("Sorry, you're not Authorized.");
     }
-    //now User is Valid
 
-    // adding new Movie
+    // Create a new movie based on the request body
+    const newMovie = req.body;
+    const createdMovie = await Movies.create(newMovie);
 
-    const newmovie = req.body;
-    console.log("print Movie data :" + newmovie);
-    const createmovie = await movies.create(newmovie);
-
-
-
+    // Return success message and the created movie
     return res.status(200).json({
-      
-
-      message:"user is valid"
-
+      message: "Movie created successfully",
+      movie: createdMovie,
     });
   } catch (error) {
     console.log(error);
     return res.status(500).send("Failed to retrieve data.");
+  }
+});
+
+// Update a movie by ID
+router.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedMovie = req.body;
+
+    // Find and update the movie by its ID
+    const movie = await Movies.findByIdAndUpdate(id, updatedMovie, {
+      new: true,
+    });
+
+    // Check if the movie exists
+    if (!movie) {
+      return res.status(404).send("Movie not found");
+    }
+
+    // Return success message and the updated movie
+    return res.status(200).json({
+      message: "Movie updated successfully",
+      movie: movie,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Failed to update movie.");
+  }
+});
+
+// Delete a movie by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Find and delete the movie by its ID
+    const deletedMovie = await Movies.findByIdAndDelete(id);
+
+    // Check if the movie exists
+    if (!deletedMovie) {
+      return res.status(404).send("Movie not found");
+    }
+
+    // Return success message and the deleted movie
+    return res.status(200).json({
+      message: "Movie deleted successfully",
+      movie: deletedMovie,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Failed to delete movie.");
   }
 });
 

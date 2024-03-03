@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken')
 const Bookings = require('../schema/bookings.js')
 
 
-router.post('/:movie_id',async(req,res) => {
-    
-
-})
+// router.post('/:movie_id',async(req,res) => {
+// })
 module.exports = router

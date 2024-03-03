@@ -37,49 +37,5 @@ router.get("/theaters",async (req,res)=>{
 
 
 
-//API to get details of a particular theater
-router.get('/theaters/:id',(req,res)=>{
-    try{
-        const theater = Theatres.find({_id : req.query.id})
-        .then(result=>{
-            if(!result){
-                return res.status(404).json({message:"Theater not found."});
-            }else{
-              return res.status(200).json(result[0]);
-            }
-          })
-          .catch(e =>{
-            console.log(e);
-            res.status(500).json({error: e});
-          })
-    }
-    catch(err){
-        res.status(501).json(err);
-    }
-})
-
-//API to create a new theaters
-router.post('/theaters',(req,res)=>{
-  const theater = req.body
-  try {
-     Theatres.inserrtMany(theater,(err,docs)=>{
-       if(!err)
-         res.send('Theater added Successfully')
-       else
-         console.log('Error In Adding Theater : ', err)
-         res.status(403).json({message:"There was an issue adding this the theter"})
-     })
-  } 
-  catch(err) {
-    res.status(501).json(err)
-  }
-    
-})
-
-
-//API to
-
-
-
 
 module.exports = router

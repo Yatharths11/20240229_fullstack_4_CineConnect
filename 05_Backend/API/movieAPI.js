@@ -1,21 +1,73 @@
-const express = require("express")
-const router = express.Router()
-const jwt = require("jsonwebtoken")
-const Movies = require("../schema/movies.js")
-const Users = require("../schema/users.js")
+const router = require('../utils/router');
+const { jwt, bcrypt } = require('../utils/auth');
+const Movies = require('../schema/movies')
+const Users = require('../schema/users')
 
 // Get all movies
 router.get("/", async (req, res) => {
   try {
     // Fetch all movies from the database
-    const get_movies = await Movies.find()
+    const movies = await Movies.find()
     // Return the list of movies in JSON format
-    return res.status(200).json(get_movies)
+    return res.status(200).json(movies)
   } catch (error) {
     // Handle any errors that occur during fetching movies
-    res.status(500).json({ message: "Internal server error" })
+    res.status(500).json({ error: "Internal server error" })
   }
 })
+
+
+// Find a movie by ID
+//GET http://localhost:5000/api/movies/id/:id
+router.get("/id/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Find the movie by its ID
+    const movie = await Movies.findById(id);
+
+    // Check if the movie exists
+    if (!movie) {
+      return res.status(404).send("Movie not found");
+    }
+
+    // Return the found movie
+    return res.status(200).json(movie);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Failed to find movie.")
+  }
+});
+
+// Find a movie by name using query parameters
+// API Call 
+// http://localhost:5000/api/movies/search?name=Interstellar
+router.get("/search", async (req, res) => {
+  try {
+    const name = req.query.name;
+
+    console.log("query "+name);
+
+    // Check if the name parameter is provided
+    if (!name) {
+      return res.status(400).send("Name parameter is missing")
+    }
+
+    // Find the movie by its name
+    const movie = await Movies.findOne({ name: name })
+
+    // Check if the movie exists
+    if (!movie) {
+      return res.status(404).send("Movie not found")
+    }
+
+    // Return the found movie
+    return res.status(200).json(movie);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Failed to find movie.")
+  }
+});
 
 // Insert a new movie
 router.post("/:id", async (req, res) => {
@@ -25,7 +77,7 @@ router.post("/:id", async (req, res) => {
 
     // Check if the JWT token is provided
     if (!token) {
-      return res.status(401).send("Access denied. Token not provided.")
+      return res.status(401).json({ error: "Access denied. Token not provided." })
     }
 
     // Find the user by ID
@@ -37,7 +89,7 @@ router.post("/:id", async (req, res) => {
 
     // Check if the user exists
     if (!userExist) {
-      return res.status(404).send("User not Found.")
+      return res.status(404).json({ error: "User not found." })
     }
 
     // Check if the user is authorized to create a movie
@@ -45,7 +97,7 @@ router.post("/:id", async (req, res) => {
       !(decodedToken.username === userExist.username) ||
       !decodedToken.role === "superAdmin"
     ) {
-      return res.status(401).send("Sorry, you're not Authorized.")
+      return res.status(401).json({ error: "Sorry, you're not authorized." })
     }
 
     // Create a new movie based on the request body
@@ -58,8 +110,8 @@ router.post("/:id", async (req, res) => {
       movie: createdMovie,
     })
   } catch (error) {
-    console.log(error)
-    return res.status(500).send("Failed to retrieve data.")
+    console.error(error)
+    return res.status(500).json({ error: "Failed to create movie." })
   }
 })
 
@@ -76,7 +128,7 @@ router.put("/:id", async (req, res) => {
 
     // Check if the movie exists
     if (!movie) {
-      return res.status(404).send("Movie not found")
+      return res.status(404).json({ error: "Movie not found" })
     }
 
     // Return success message and the updated movie
@@ -85,8 +137,8 @@ router.put("/:id", async (req, res) => {
       movie: movie,
     })
   } catch (error) {
-    console.log(error)
-    return res.status(500).send("Failed to update movie.")
+    console.error(error)
+    return res.status(500).json({ error: "Failed to update movie." })
   }
 })
 
@@ -100,7 +152,7 @@ router.delete("/:id", async (req, res) => {
 
     // Check if the movie exists
     if (!deletedMovie) {
-      return res.status(404).send("Movie not found")
+      return res.status(404).json({ error: "Movie not found" })
     }
 
     // Return success message and the deleted movie
@@ -109,8 +161,8 @@ router.delete("/:id", async (req, res) => {
       movie: deletedMovie,
     })
   } catch (error) {
-    console.log(error)
-    return res.status(500).send("Failed to delete movie.")
+    console.error(error)
+    return res.status(500).json({ error: "Failed to delete movie." })
   }
 })
 

@@ -1,0 +1,26 @@
+let movies = [
+  {
+    image:
+      "https://ik.imagekit.io/cineconnect/CineConnect/dum_banner.png?updatedAt=1709492522767",
+  },
+  {
+    image:
+      "https://ik.imagekit.io/cineconnect/CineConnect/dum_banner.png?updatedAt=1709492522767",
+  },
+  {
+    image:
+      "https://ik.imagekit.io/cineconnect/CineConnect/dum_banner.png?updatedAt=1709492522767",
+  },
+  {
+    image:
+      "https://ik.imagekit.io/cineconnect/CineConnect/dum_banner.png?updatedAt=1709492522767",
+  },
+  {
+    image:
+      "https://ik.imagekit.io/cineconnect/CineConnect/dum_banner.png?updatedAt=1709492522767",
+  },
+  {
+    image:
+      "https://ik.imagekit.io/cineconnect/CineConnect/dum_banner.png?updatedAt=1709492522767",
+  },
+];

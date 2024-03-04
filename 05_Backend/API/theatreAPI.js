@@ -120,4 +120,25 @@ router.get("/:id/movies",async (req,res)=>{
 })
 
 
+router.put( "/:id", async (req,res)=>{
+    const theaterId = req.params.id;
+
+    try {
+        const updatedTheatre = await Theatres.findByIdAndUpdate(
+            theaterId,
+            req.body, // Update with the data provided in req.body
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedTheatre) {
+            return res.status(404).json({ message: 'Theater not found' });
+        }
+
+        res.status(200).json(updatedTheatre);
+    } catch (err) {
+        console.error("Error updating theatre:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
 module.exports = router

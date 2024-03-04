@@ -101,4 +101,38 @@ router.get('/:user_id', async(req, res) => {
     }
 })
 
+// Cancel a booking
+router.delete("/:id/cancel", async(req,res) => {
+    try{
+        const bookingId = req.params.id
+        console.log(bookingId)
+        const token = req.headers.authorization // Extract the JWT token from the request headers
+        const booking = await Bookings.findOne({_id : bookingId})
+        console.log(booking)
+
+        // Verify if the user has the role of "user"
+        await verifyUserRole(token)
+        // Verify the token
+        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
+        const user = await Users.findOne({username : decodedToken.username})
+        console.log(booking.user_id)
+        if(user._id.toString() !== booking.user_id.toString()){
+            return res.status(401).send("You're not Authorised to Cancel the Booking.")
+        }
+        //Logic Pending for Cancelling booking based on Dates
+        const movietoUpdate = await Movies.findById(booking.movie_id)
+        movietoUpdate.availableSeats += await booking.seatsBooked // Update the movie available seats
+
+        const cancelBooking = await Bookings.findByIdAndDelete(bookingId)// Cancel the booking
+        const movieUpdate = await movietoUpdate.save() // Update the records of movies
+
+        res.status(200).json({ message: 'Booking Cancelled Successfully'})
+    }
+
+    catch(error){
+        console.log(error)
+        res.status(500).json({ error: 'Failed to Cancel Bookings' })
+    }
+
+} )
 module.exports = router

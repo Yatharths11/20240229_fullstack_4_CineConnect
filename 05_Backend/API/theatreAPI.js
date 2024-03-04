@@ -30,6 +30,7 @@ router.use((req, res, next) => {
 
 //API to get all the list of theatres and their details
 router.get("/",async (req,res)=>{
+    
     try {
         let theatres = await Theatres.find()
         res.status(200).json(theatres)

@@ -28,7 +28,7 @@ router.use((req, res, next) => {
   });
 
 //API to get all the list of theaters and their details
-router.get("/theaters",async (req,res)=>{
+router.get("/",async (req,res)=>{
     try {
         let theaters = await Theatres.find();
         res.status(200).json(theaters);
@@ -41,7 +41,7 @@ router.get("/theaters",async (req,res)=>{
 
 
 //API to get details of a particular theater
-router.get('/theaters/:id',(req,res)=>{
+router.get('/:id',(req,res)=>{
     try{
         const theater = Theatres.find({_id : req.query.id})
         .then(result=>{
@@ -87,7 +87,19 @@ async function createTheatre(theatreData) {
     }
 }
 
-
+router.delete('/:id',async (req,res)=>{
+    let id=req.params.id;
+    try {
+        const result = await Theatres.deleteOne({ _id: id }).exec();
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ message: 'No data with that ID' });
+        }
+        res.status(200).json({ message: 'Theater deleted successfully' });
+    } catch (err) {
+        console.error("Error deleting theatre:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
 
 
 module.exports = router

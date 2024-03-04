@@ -1,9 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const Theatres = require('../schema/theatre.js')
-const Movies = require('../schema/movies.js')
+const router = require('../utils/router');
+const { jwt, bcrypt } = require('../utils/auth');
+const Theatres = require('../schema/theatre')
+const Movies = require('../schema/movies')
 
 
 router.use((req, res, next) => {

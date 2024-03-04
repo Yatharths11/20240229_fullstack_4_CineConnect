@@ -4,8 +4,31 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Users = require('../schema/users.js')
 
+async function verifyUserRole(token) {
+    try {
+        // Check if the token exists
+        if (!token) {
+            res.status(401).send({message : "Access denied. Token not provided."})
+        }
+        // Verify the token
+        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
+        // Fetch the user role
+        const role = decodedToken.role
+        
+        if (!role) {
+            res.status(404).send({message : "User not found"})
+        }
+        // Check if the user has the role of "user"
+        if (role !== 'user') {
+            res.status(403).send({message: "Forbidden. Only users can perform this action." })
+        }
+        return true// User has the role of "user"
+    } catch (error) {
+        throw error// Forward the error to the caller
+    }
+}
 
-// POST /api/users/register
+// Register a new user
 router.post('/register', async (req, res) => {
     try {
         const { username, email, password} = req.body
@@ -18,6 +41,10 @@ router.post('/register', async (req, res) => {
 
         if (emailExist) {
             return res.status(401).json({ error: "Email already exists. Please try another email."})
+        }
+
+        if (!password) {
+            return res.status(400).json({ error: "Password is required." })
         }
 
         // Hash the password
@@ -39,7 +66,7 @@ router.post('/register', async (req, res) => {
 })
 
 
-// POST /api/users/login
+// Login with credentials
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body
@@ -69,9 +96,20 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// router.get('/logout'){
-
-// }// Waiting to understand how to store token in cookie and its uasges.
+// Logout route
+router.post('/logout', (req, res) => {
+    
+    try{
+        const token = req.headers.authorization // Extract the JWT token from the request headers
+        // Verify if the user has the role of "user"
+        verifyUserRole(token)
+        res.status(200).json({ message: "Logged out successfully" })
+    }
+    catch(error){
+        console.error(error)
+        res.status(400).send({ error : "Failed to logout"})
+    }
+})
 
 
 
@@ -83,7 +121,7 @@ router.get('/:id', async(req,res) => {
         const token = req.headers.authorization// Extract the JWT token from the request headers
         // Check if the token exists
         if (!token) {
-            return res.status(401).send("Access denied. Token not provided.")
+            return res.status(401).send({ error: "Access denied. Token not provided." })
         }
         
         const userExist = await Users.findOne({_id : id})
@@ -91,19 +129,19 @@ router.get('/:id', async(req,res) => {
         
         // Check id if such user exist or not
         if(!userExist){
-            res.status(404).send("User not Found.")
+            res.status(404).send({ error: "User not Found." })
         }
 
         // Check if the authorised person for request informations.
         if(!(decodedToken.username === userExist.username) || !decodedToken.role === 'superAdmin' ){
-            res.status(401).status("Sorry, you're not Authorised.")
+            res.status(401).status({ error: "Sorry, you're not Authorised." })
         }
-        
+
         return res.status(200).send(userExist)        
     }
     catch(error){
         console.log(error)
-        return res.status(500).send("Failed to retrieve data.")
+        return res.status(500).send({ error: "Failed to retrieve data." })
     }
     
 })
@@ -116,7 +154,7 @@ router.put('/:id', async (req, res) => {
 
         // Check if the token exists
         if (!token) {
-            return res.status(401).send("Access denied. Token not provided.")
+            return res.status(401).send({ error: "Access denied. Token not provided." })
         }
 
         // Verify the token
@@ -124,7 +162,7 @@ router.put('/:id', async (req, res) => {
         const requestbyUser = await Users.findOne({username : decodedToken.username})
         // Check if the token owner is the same as the user to be updated
         if (requestbyUser._id.toString() !== id) {
-            return res.status(403).send("Access denied. You are not authorized to update this user.")
+            return res.status(403).send({ error: "Access denied. You are not authorized to update this user." })
         }
 
         // Find the user to be updated
@@ -166,7 +204,7 @@ router.delete('/:id', async (req, res) => {
         const token = req.headers.authorization// Extract the JWT token from the request headers
         // Check if the token exists
         if (!token) {
-            return res.status(401).send("Access denied. Token not provided.")
+            return res.status(401).send({ error: "Access denied. Token not provided." })
         }
 
         const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)

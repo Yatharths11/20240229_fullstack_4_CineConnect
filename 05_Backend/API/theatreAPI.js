@@ -115,29 +115,29 @@ router.get("/:id/movies",async (req,res)=>{
         })
     }
     catch(err){
-        res.status(501).json(err);
+        res.status(501).json(err)
     }
 })
 
 
 router.put( "/:id", async (req,res)=>{
-    const theaterId = req.params.id;
+    const theaterId = req.params.id
 
     try {
         const updatedTheatre = await Theatres.findByIdAndUpdate(
             theaterId,
             req.body, // Update with the data provided in req.body
             { new: true, runValidators: true }
-        );
+        )
 
         if (!updatedTheatre) {
-            return res.status(404).json({ message: 'Theater not found' });
+            return res.status(404).json({ message: 'Theater not found' })
         }
 
-        res.status(200).json(updatedTheatre);
+        res.status(200).json(updatedTheatre)
     } catch (err) {
-        console.error("Error updating theatre:", err);
-        res.status(500).json({ error: "Internal Server Error" });
+        console.error("Error updating theatre:", err)
+        res.status(500).json({ error: "Internal Server Error" })
     }
 })
 

@@ -14,7 +14,7 @@ const theatreSchema = new mongoose.Schema({
         },
         area: {
             type: String,
-            required: true
+            required: true 
         },
         city: {
             type: String,

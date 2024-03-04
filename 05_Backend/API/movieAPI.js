@@ -1,8 +1,7 @@
-const express = require("express")
-const router = express.Router()
-const jwt = require("jsonwebtoken")
-const Movies = require("../schema/movies.js")
-const Users = require("../schema/users.js")
+const router = require('../utils/router');
+const { jwt, bcrypt } = require('../utils/auth');
+const Movies = require('../schema/movies')
+const Users = require('../schema/users')
 
 // Get all movies
 router.get("/", async (req, res) => {

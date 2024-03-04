@@ -1,10 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const Bookings = require('../schema/bookings.js')
-const Users = require('../schema/users.js')
-const Movies = require('../schema/movies.js')
+const router = require('../utils/router');
+const { jwt, bcrypt } = require('../utils/auth');
+const Bookings = require('../schema/bookings')
+const Users = require('../schema/users')
+const Movies = require('../schema/movies')
 
 async function verifyUserRole(token) {
     try {

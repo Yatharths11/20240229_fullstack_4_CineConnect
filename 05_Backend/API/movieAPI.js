@@ -5,6 +5,11 @@ const Users = require('../schema/users')
 
 // Get all movies
 router.get("/", async (req, res) => {
+  
+  if(!username_exists(req.headers.username)){
+    res.status.json("Username does not exist in our database.")
+  }
+
   try {
     // Fetch all movies from the database
     const movies = await Movies.find()
@@ -20,6 +25,11 @@ router.get("/", async (req, res) => {
 // Find a movie by ID
 //GET http://localhost:5000/api/movies/id/:id
 router.get("/id/:id", async (req, res) => {
+
+  if(!username_exists(req.headers.username)){
+    res.status.json("Username does not exist in our database.")
+  }
+
   try {
     const id = req.params.id;
 
@@ -43,6 +53,11 @@ router.get("/id/:id", async (req, res) => {
 // API Call 
 // http://localhost:5000/api/movies/search?name=Interstellar
 router.get("/search", async (req, res) => {
+
+  if(!username_exists(req.headers.username)){
+    res.status.json("Username does not exist in our database.")
+  }
+
   try {
     const name = req.query.name;
 
@@ -71,7 +86,10 @@ router.get("/search", async (req, res) => {
 
 // Insert a new movie
 router.post("/:id", async (req, res) => {
-  try {
+  if(!username_exists(req.headers.username)){
+    res.status.json("Username does not exist in our database.")
+  }
+
     const id = req.params.id
     const token = req.headers.authorization
 
@@ -79,7 +97,7 @@ router.post("/:id", async (req, res) => {
     if (!token) {
       return res.status(401).json({ error: "Access denied. Token not provided." })
     }
-
+  try {
     // Find the user by ID
     const userExist = await Users.findOne({ _id: id })
     const decodedToken = jwt.verify(
@@ -117,6 +135,11 @@ router.post("/:id", async (req, res) => {
 
 // Update a movie by ID
 router.put("/:id", async (req, res) => {
+
+  if(!username_exists(req.headers.username)){
+    res.status.json("Username does not exist in our database.")
+  }
+
   try {
     const id = req.params.id
     const updatedMovie = req.body
@@ -144,6 +167,11 @@ router.put("/:id", async (req, res) => {
 
 // Delete a movie by ID
 router.delete("/:id", async (req, res) => {
+
+  if(!username_exists(req.headers.username)){
+    res.status.json("Username does not exist in our database.")
+  }
+
   try {
     const id = req.params.id
 

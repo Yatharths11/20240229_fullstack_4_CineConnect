@@ -3,6 +3,8 @@ const { jwt, bcrypt } = require('../utils/auth');
 const Bookings = require('../schema/bookings')
 const Users = require('../schema/users')
 const Movies = require('../schema/movies')
+const { username_exists,check_user_by_id } = require('../vaidations');
+
 
 async function verifyUserRole(token) {
     try {
@@ -27,6 +29,8 @@ async function verifyUserRole(token) {
         throw error// Forward the error to the caller
     }
 }
+
+
 
 // Book a movie
 router.post('/:movie_id', async (req, res) => {
@@ -72,6 +76,10 @@ router.post('/:movie_id', async (req, res) => {
 router.get('/:user_id', async(req, res) => {
     try {
         const user_id = req.params.user_id
+        if(!check_user_by_id(user_id)){
+            res.status(400).send("Invalid User Id")
+        }
+
         const token = req.headers.authorization // Extract the JWT token from the request headers
         const user = await Users.findById(user_id)
         // Verify if the user has the role of "user"

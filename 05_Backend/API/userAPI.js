@@ -161,8 +161,8 @@ router.put('/:id', async (req, res) => {
 // DELETE existing users
 router.delete('/:id', async (req, res) => {
     try {
-        const id = req.params.id;
-        // const { username, password } = req.body;
+        const id = req.params.id
+        // const { username, password } = req.body
         const token = req.headers.authorization// Extract the JWT token from the request headers
         // Check if the token exists
         if (!token) {
@@ -173,25 +173,25 @@ router.delete('/:id', async (req, res) => {
         const requestbyUser = await Users.findOne({username : decodedToken.username})
 
         if (!requestbyUser) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json({ error: 'User not found' })
         }
 
         if( requestbyUser._id.toString() !== id) {
-            return res.status(403).json({ error: 'Access denied. You are not authorized to delete this user.' });
+            return res.status(403).json({ error: 'Access denied. You are not authorized to delete this user.' })
         }
 
         // Delete user
-        const deletedUser = await Users.findByIdAndDelete(id);
+        const deletedUser = await Users.findByIdAndDelete(id)
         if (!deletedUser) {
-            return res.status(404).json({ error: 'User not found' });
+            return res.status(404).json({ error: 'User not found' })
         }
         
-        res.status(200).json({ message: 'User deleted' });
+        res.status(200).json({ message: 'User deleted' })
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to delete user' });
+        console.error(error)
+        res.status(500).json({ error: 'Failed to delete user' })
     }
-});
+})
 
 
 

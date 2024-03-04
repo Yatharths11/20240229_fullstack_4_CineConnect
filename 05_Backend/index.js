@@ -1,28 +1,28 @@
-require("dotenv").config();
+require("dotenv").config()
 
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-app.use(express.json());
+const express = require("express")
+const app = express()
+const mongoose = require("mongoose")
+app.use(express.json())
 
-const URI = process.env.URI;
+const URI = process.env.URI
 
-const userRoutes = require("./API/userAPI.js");
-const theatreRoutes = require("./API/theatreAPI.js");
-const movieRoutes = require("./API/movieAPI.js");
-const bookingRoutes = require("./API/bookingAPI.js");
+const userRoutes = require("./API/userAPI.js")
+const theatreRoutes = require("./API/theatreAPI.js")
+const movieRoutes = require("./API/movieAPI.js")
+const bookingRoutes = require("./API/bookingAPI.js")
 
 if (mongoose.connect(URI)) {
-  console.log("Connected to Database Successfully.");
+  console.log("Connected to Database Successfully.")
 } else {
-  console.log("Failed to Connected.");
+  console.log("Failed to Connected.")
 }
 
-app.use("/api/users", userRoutes); // Mount the userAPI router at the /api/users base path
+app.use("/api/users", userRoutes) // Mount the userAPI router at the /api/users base path
 // app.use('/api/theatres', theatreRoutes) // Mount the theatreAPI router at the /api/theatres base path
-app.use("/api/movies", movieRoutes); // Mount the movieAPI router at the /api/movies base path
-// app.use('/api/bookings', bookingRoutes)// Mount the bookingAPI router at the /api/bookings base path
+app.use("/api/movies", movieRoutes) // Mount the movieAPI router at the /api/movies base path
+app.use("/api/bookings", bookingRoutes)// Mount the bookingAPI router at the /api/bookings base path
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is running.");
-});
+  console.log("Server is running.")
+})

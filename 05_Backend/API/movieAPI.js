@@ -17,6 +17,33 @@ router.get("/", async (req, res) => {
   }
 })
 
+
+// Find a movie by ID
+//GET http://localhost:5000/api/movies/id/:id
+router.get("/id/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Find the movie by its ID
+    const movie = await Movies.findById(id);
+
+    // Check if the movie exists
+    if (!movie) {
+      return res.status(404).send("Movie not found");
+    }
+
+    // Return the found movie
+    return res.status(200).json(movie);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Failed to find movie.")
+  }
+});
+
+
+
+
+
 // Insert a new movie
 router.post("/:id", async (req, res) => {
   try {

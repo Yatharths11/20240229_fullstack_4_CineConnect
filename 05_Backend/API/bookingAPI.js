@@ -1,9 +1,8 @@
 const router = require('../utils/router');
-const { jwt, bcrypt } = require('../utils/auth');
-const Bookings = require('../schema/bookings')
-const Users = require('../schema/users')
-const Movies = require('../schema/movies')
-const { username_exists,check_user_by_id } = require('../vaidations/username_validation');
+const { jwt, bcrypt } = require('../utils/auth')
+const Bookings = require('../schema/bookings.js')
+const Users = require('../schema/users.js')
+const Movies = require('../schema/movies.js')
 
 
 async function verifyUserRole(token) {
@@ -29,9 +28,6 @@ async function verifyUserRole(token) {
         throw error// Forward the error to the caller
     }
 }
-
-
-
 // Book a movie
 router.post('/:movie_id', async (req, res) => {
     try {
@@ -45,7 +41,6 @@ router.post('/:movie_id', async (req, res) => {
         
         // Verify the token
         const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
-
         // Proceed with creating the booking
         if((movie.availableSeats < 1 || movie.availableSeats < seats)){
             return res.status(400).send({ error: "Seats Not Avaialble." })
@@ -63,7 +58,6 @@ router.post('/:movie_id', async (req, res) => {
         })
         movie.availableSeats -= seats // Remove number of seats booked.
         const updateMovie = await movie.save() // Update the movie database
-
         // res.status(200).json({ message: 'Movie details updated'})
         res.status(201).json({ message: "New booking created", booking_details: newBooking })
     } catch (error) {
@@ -71,41 +65,31 @@ router.post('/:movie_id', async (req, res) => {
         res.status(500).json({ error: "Failed to create booking" })
     }
 })
-
 // Retrieve all the Bookings of the user
 router.get('/:user_id', async(req, res) => {
     try {
         const user_id = req.params.user_id
-        if(!check_user_by_id(user_id)){
-            res.status(400).send("Invalid User Id")
-        }
-
         const token = req.headers.authorization // Extract the JWT token from the request headers
         const user = await Users.findById(user_id)
         // Verify if the user has the role of "user"
         await verifyUserRole(token)
-
         // Verify the token
         const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
-
         if(decodedToken.username !== user.username){
             res.status(401).send({ error : "You're not authorised."})
         }
         // Find all bookings of the user
         const allBookings = await Bookings.find({ user_id: user_id })
         console.log(allBookings)
-
         if (!allBookings || allBookings.length === 0) {
             return res.status(404).json({ message: "No bookings found for this user" })
         }
-
         res.status(200).json({ message: "Retrieved All Bookings Successfully", booking_details: allBookings })
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: "Failed to get Users Bookings" })
     }
 })
-
 // Cancel a booking
 router.delete("/:id/cancel", async(req,res) => {
     try{
@@ -114,7 +98,6 @@ router.delete("/:id/cancel", async(req,res) => {
         const token = req.headers.authorization // Extract the JWT token from the request headers
         const booking = await Bookings.findOne({_id : bookingId})
         console.log(booking)
-
         // Verify if the user has the role of "user"
         await verifyUserRole(token)
         // Verify the token
@@ -127,17 +110,13 @@ router.delete("/:id/cancel", async(req,res) => {
         //Logic Pending for Cancelling booking based on Dates
         const movietoUpdate = await Movies.findById(booking.movie_id)
         movietoUpdate.availableSeats += await booking.seatsBooked // Update the movie available seats
-
         const cancelBooking = await Bookings.findByIdAndDelete(bookingId)// Cancel the booking
         const movieUpdate = await movietoUpdate.save() // Update the records of movies
-
         res.status(200).json({ message: 'Booking Cancelled Successfully'})
     }
-
     catch(error){
         console.log(error)
         res.status(500).json({ error: 'Failed to Cancel Bookings' })
     }
-
 } )
 module.exports = router

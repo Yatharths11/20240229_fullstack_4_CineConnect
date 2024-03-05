@@ -1,33 +1,11 @@
-const router = require('../utils/router');
-const { jwt, bcrypt } = require('../utils/auth');
-const Movies = require('../schema/movies')
-const Users = require('../schema/users')
-const {username_exists} = require('../vaidations/username_validation')
-
-router.use((req, res, next) => {
-  const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' })
-  }
-  try {
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
-    req.userData = { userId: decodedToken.userId, username: decodedToken.username }
-    next()
-  } catch (error) {
-
-      console.log("here")
-    return res.status(401).json({ message: 'Unauthorized' })
-  }
-})
-
+const express = require("express")
+const router = express.Router()
+const jwt = require("jsonwebtoken")
+const Movies = require("../schema/movies.js")
+const Users = require("../schema/users.js")
 
 // Get all movies
 router.get("/", async (req, res) => {
-  
-  if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in the database.")
-  }
-
   try {
     // Fetch all movies from the database
     const movies = await Movies.find()
@@ -38,96 +16,25 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Internal server error" })
   }
 })
-
-
-// Find a movie by ID
-//GET http://localhost:5000/api/movies/id/:id
-router.get("/id/:id", async (req, res) => {
-
-  if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in the database.")
-  }
-
-  try {
-    const id = req.params.id;
-
-    // Find the movie by its ID
-    const movie = await Movies.findById(id);
-
-    // Check if the movie exists
-    if (!movie) {
-      return res.status(404).send("Movie not found");
-    }
-
-    // Return the found movie
-    return res.status(200).json(movie);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send("Failed to find movie.")
-  }
-});
-
-// Find a movie by name using query parameters
-// API Call 
-// http://localhost:5000/api/movies/search?name=Interstellar
-router.get("/search", async (req, res) => {
-
-  if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in the database.")
-  }
-
-  try {
-    const name = req.query.name;
-
-    console.log("query "+name);
-
-    // Check if the name parameter is provided
-    if (!name) {
-      return res.status(400).send("Name parameter is missing")
-    }
-
-    // Find the movie by its name
-    const movie = await Movies.findOne({ name: name })
-
-    // Check if the movie exists
-    if (!movie) {
-      return res.status(404).send("Movie not found")
-    }
-
-    // Return the found movie
-    return res.status(200).json(movie);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send("Failed to find movie.")
-  }
-});
-
 // Insert a new movie
 router.post("/:id", async (req, res) => {
-  if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in the database.")
-  }
-
+  try {
     const id = req.params.id
     const token = req.headers.authorization
-
     // Check if the JWT token is provided
     if (!token) {
       return res.status(401).json({ error: "Access denied. Token not provided." })
     }
-  try {
     // Find the user by ID
     const userExist = await Users.findOne({ _id: id })
     const decodedToken = jwt.verify(
       token.split(" ")[1],
       process.env.SECRET_KEY
     )
-
     // Check if the user exists
     if (!userExist) {
       return res.status(404).json({ error: "User not found." })
     }
-
     // Check if the user is authorized to create a movie
     if (
       !(decodedToken.username === userExist.username) ||
@@ -135,11 +42,9 @@ router.post("/:id", async (req, res) => {
     ) {
       return res.status(401).json({ error: "Sorry, you're not authorized." })
     }
-
     // Create a new movie based on the request body
     const newMovie = req.body
     const createdMovie = await Movies.create(newMovie)
-
     // Return success message and the created movie
     return res.status(200).json({
       message: "Movie created successfully",
@@ -150,28 +55,19 @@ router.post("/:id", async (req, res) => {
     return res.status(500).json({ error: "Failed to create movie." })
   }
 })
-
 // Update a movie by ID
 router.put("/:id", async (req, res) => {
-
-  if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in the database.")
-  }
-
   try {
     const id = req.params.id
     const updatedMovie = req.body
-
     // Find and update the movie by its ID
     const movie = await Movies.findByIdAndUpdate(id, updatedMovie, {
       new: true,
     })
-
     // Check if the movie exists
     if (!movie) {
       return res.status(404).json({ error: "Movie not found" })
     }
-
     // Return success message and the updated movie
     return res.status(200).json({
       message: "Movie updated successfully",
@@ -182,25 +78,16 @@ router.put("/:id", async (req, res) => {
     return res.status(500).json({ error: "Failed to update movie." })
   }
 })
-
 // Delete a movie by ID
 router.delete("/:id", async (req, res) => {
-
-  if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in the database.")
-  }
-
   try {
     const id = req.params.id
-
     // Find and delete the movie by its ID
     const deletedMovie = await Movies.findByIdAndDelete(id)
-
     // Check if the movie exists
     if (!deletedMovie) {
       return res.status(404).json({ error: "Movie not found" })
     }
-
     // Return success message and the deleted movie
     return res.status(200).json({
       message: "Movie deleted successfully",
@@ -211,5 +98,4 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json({ error: "Failed to delete movie." })
   }
 })
-
 module.exports = router

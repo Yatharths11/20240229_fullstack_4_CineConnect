@@ -1,14 +1,28 @@
 const router = require('../utils/router');
 const Users = require('../schema/users')
-const { hashPassword} = require('../utils/utility')
+const { hashPassword } = require('../utils/utility')
 const { check_user } = require('../validator/checkRole')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
+const { isValidUsername, isValidEmail, isValidPassword } = require('../validator/userValidation')
 
 
 // Register a new user
 router.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body
+
+        // Check if username, email, and password are valid
+        if (!isValidUsername(username)) {
+            return res.status(400).json({ error: "Invalid username. Username must contain only letters, numbers, underscores, and hyphens, and be between 3 to 20 characters long." })
+        }
+
+        if (!isValidEmail(email)) {
+            return res.status(400).json({ error: "Invalid email address." })
+        }
+
+        if (!isValidPassword(password)) {
+            return res.status(400).json({ error: "Invalid password. Password must be at least 6 characters long." })
+        }
 
         if (!password) {
             return res.status(400).json({ error: "Password is required." })

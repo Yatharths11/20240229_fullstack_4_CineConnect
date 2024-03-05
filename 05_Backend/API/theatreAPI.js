@@ -2,34 +2,22 @@ const router = require('../utils/router');
 const { jwt, bcrypt } = require('../utils/auth');
 const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
-const {is_admin } = require('../vaidations');
-const { username_exists } = require('../vaidations');
+const {is_admin } = require('../vaidations/username_validation');
+const { username_exists } = require('../vaidations/username_validation');
 
 router.use((req, res, next) => {
-    const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
-    if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' })
-    }
-    try {
-      const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
-      req.userData = { userId: decodedToken.userId, username: decodedToken.username }
-      next()
-    } catch (error) {
-
-        console.log("here")
-      return res.status(401).json({ message: 'Unauthorized' })
-    }
+    
   })
 
 // API to get all the list of theatres and their details
 router.get("/", async (req, res) => {
 
     if(!username_exists(req.headers.username)){
-        res.status.json("Username does not exist in our database.")
+        res.status(404).json("Username does not exist in our database.")
     }
 
     if(!is_admin(req.headers.username)){
-        res.status(402).json("You are not authorised to view this resource.")
+        res.status(401).json("You are not authorised to view this resource.")
     }
     
     
@@ -53,7 +41,7 @@ router.get('/:id', async (req, res) => {
     }
 
     if(!is_admin(req.headers.username)){
-        res.status(402).json("You are not authorised to view this resource.")
+        res.status(401).json("You are not authorised to view this resource.")
     }
 
     try {
@@ -77,7 +65,7 @@ router.post('/', async (req, res) => {
     }
 
     if(!is_admin(req.headers.username)){
-        res.status(402).json("You are not authorised to view this resource.")
+        res.status(401).json("You are not authorised to view this resource.")
     }
 
     const theatre = req.body
@@ -95,18 +83,18 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
     if(!username_exists(req.headers.username)){
-        res.status.json("Username does not exist in our database.")
+        res.status.json({message:"Username does not exist in our database."})
     }
 
     if(!is_admin(req.headers.username)){
-        res.status(402).json("You are not authorised to view this resource.")
+        res.status(401).json("You are not authorised to view this resource.")
     }
 
     const id = req.params.id
     try {
         const result = await Theatres.deleteOne({ _id: id })
         if (result.deletedCount === 0) {
-            return res.status(404).json({ message: 'No data with that ID' })
+            return res.status(404).json({ message: 'No theater with this ID' })
         }
         res.status(200).json({ message: 'Theatre deleted successfully' })
     } catch (err) {
@@ -123,7 +111,7 @@ router.get("/:id/movies", async (req, res) => {
     }
 
     if(!is_admin(req.headers.username)){
-        res.status(402).json("You are not authorised to view this resource.")
+        res.status(401).json("You are not authorised to view this resource.")
     }
 
     try {
@@ -147,7 +135,7 @@ router.put("/:id", async (req, res) => {
     }
 
     if(!is_admin(req.headers.username)){
-        res.status(402).json("You are not authorised to view this resource.")
+        res.status(401).json("You are not authorised to view this resource.")
     }
 
     const theaterId = req.params.id

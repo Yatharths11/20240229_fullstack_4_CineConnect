@@ -3,7 +3,7 @@ const { jwt, bcrypt } = require('../utils/auth');
 const Bookings = require('../schema/bookings')
 const Users = require('../schema/users')
 const Movies = require('../schema/movies')
-const { username_exists,check_user_by_id } = require('../vaidations');
+const { username_exists,check_user_by_id } = require('../vaidations/username_validation');
 
 
 async function verifyUserRole(token) {

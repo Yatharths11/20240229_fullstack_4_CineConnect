@@ -2,12 +2,30 @@ const router = require('../utils/router');
 const { jwt, bcrypt } = require('../utils/auth');
 const Movies = require('../schema/movies')
 const Users = require('../schema/users')
+const {username_exists} = require('../vaidations/username_validation')
+
+router.use((req, res, next) => {
+  const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' })
+  }
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
+    req.userData = { userId: decodedToken.userId, username: decodedToken.username }
+    next()
+  } catch (error) {
+
+      console.log("here")
+    return res.status(401).json({ message: 'Unauthorized' })
+  }
+})
+
 
 // Get all movies
 router.get("/", async (req, res) => {
   
   if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in our database.")
+    res.status.json("Username does not exist in the database.")
   }
 
   try {
@@ -27,7 +45,7 @@ router.get("/", async (req, res) => {
 router.get("/id/:id", async (req, res) => {
 
   if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in our database.")
+    res.status.json("Username does not exist in the database.")
   }
 
   try {
@@ -55,7 +73,7 @@ router.get("/id/:id", async (req, res) => {
 router.get("/search", async (req, res) => {
 
   if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in our database.")
+    res.status.json("Username does not exist in the database.")
   }
 
   try {
@@ -87,7 +105,7 @@ router.get("/search", async (req, res) => {
 // Insert a new movie
 router.post("/:id", async (req, res) => {
   if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in our database.")
+    res.status.json("Username does not exist in the database.")
   }
 
     const id = req.params.id
@@ -137,7 +155,7 @@ router.post("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
 
   if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in our database.")
+    res.status.json("Username does not exist in the database.")
   }
 
   try {
@@ -169,7 +187,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
 
   if(!username_exists(req.headers.username)){
-    res.status.json("Username does not exist in our database.")
+    res.status.json("Username does not exist in the database.")
   }
 
   try {

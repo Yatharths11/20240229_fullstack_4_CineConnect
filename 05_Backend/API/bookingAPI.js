@@ -5,13 +5,14 @@ const Users = require('../schema/users.js')
 const Movies = require('../schema/movies.js')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
 const { check_user } = require('../validator/checkRole')
-
+const {validateSeatData, validateBookingData} = require('../validator/checkBookingSeats.js')
 
 // Book a movie
 router.post('/postBooking/:id', async (req, res) => {
     try {
-        const movieId = req.params.id;
-        const seats = req.body.seats;
+        const movieId = req.params.id
+        const bookingData = req.body
+        const seatsRequested = req.body.seats;
         const token = req.headers.authorization;
         // console.log(token)
         if (!token_provided(token)) {
@@ -25,8 +26,12 @@ router.post('/postBooking/:id', async (req, res) => {
         }
 
         const movie = await Movies.findById(movieId)
-        
-        if (movie.availableSeats < 1 || movie.availableSeats < seats) {
+
+        if(!validateBookingData(bookingData)){
+            return res.status(400).send({message : "Booking data is incomplete. Please provide all required fields."})
+
+        }
+        if (!validateSeatData(seatsRequested, movie.availableSeats)) {
             return res.status(400).send({ error: "Seats Not Available." })
         }
         
@@ -35,13 +40,13 @@ router.post('/postBooking/:id', async (req, res) => {
         console.log(date.toISOString().split('T')[0])
         const newBooking = await Bookings.create({
             movie_id: movieId,
-            seatsBooked: seats,
-            totalPrice: seats * movie.price,
+            seatsBooked: seatsRequested,
+            totalPrice: seatsRequested * movie.price,
             timestamp: date.toISOString().split('T')[0],
             user_id: user._id
         });
 
-        movie.availableSeats -= seats
+        movie.availableSeats -= seatsRequested
         await movie.save()
 
         res.status(201).json({ message: "New booking created", booking_details: newBooking })

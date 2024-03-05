@@ -3,6 +3,7 @@ const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
 const { check_admin, check_superAdmin } = require('../validator/checkRole')
+const { validateTheatreData } = require('../validator/theatreValidator')
 
 
 // API to get all the list of theatres and their details
@@ -26,13 +27,13 @@ router.get('/theatreDetails/:id', async (req, res) => {
         res.status(200).json(theatre)
     } catch (err) {
         console.error("Error retrieving theatre details:", err)
-        res.status(500).json({ error: "Internal Server Error" })
+        return res.status(500).json({ error: "Internal Server Error" })
     }
 })
 
 
 // API to create a new theatre
-router.post('/post', async (req, res) => {
+router.post('/postTheatre', async (req, res) => {
     try {
         // Extract the token from the request headers
         const token = req.headers.authorization
@@ -48,9 +49,13 @@ router.post('/post', async (req, res) => {
         }
         // Create a new theatre based on the request body
         const theatre = req.body
+        // console.log(validateTheatreData(theatre))
+        // if(!validateTheatreData(theatre)){
+        //     return res.status(400).send({message : "Theatre data is incomplete"})
+        // }
         const newTheatre = await Theatres.create(theatre)
         // Return the newly created theatre
-        res.status(201).json(newTheatre)
+        return res.status(201).json(newTheatre)
     } catch (err) {
         console.error("Error creating theatre:", err)
         res.status(500).json({ error: "Internal Server Error" })

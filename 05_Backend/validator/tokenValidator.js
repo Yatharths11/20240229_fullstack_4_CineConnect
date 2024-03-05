@@ -1,4 +1,5 @@
-const jwt = require('jsonwebtoken')
+const { jwt, bcrypt } = require('../utils/auth')
+require('dotenv').config()
 
 /**
  * Function to verify weather toke exists or not
@@ -13,32 +14,25 @@ function token_provided(token){
     }
 }
 
-
-function verifyToken(token) {
-    const secretKey = process.env.secretKey 
+/**
+ * verifying token and returning user data from it.
+ * @param {token} token 
+ * @returns 
+ */
+async function verifyToken(token) {
 
     return new Promise((resolve, reject) => {
-        jwt.verify(token, secretKey, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET_KEY , (err, decoded) => {
             if (err) {
+
                 // Token verification failed
-                return false
+                reject(err);
             } else {
                 // Token is valid, return the decoded payload
-                return true
+                resolve(decoded);
             }
         });
     });
 }
 
-
-
-/** this is how to use the verify token function
- * verifyToken(inputToken)
-    .then(decoded => {
-        console.log('Token is valid. Decoded payload:', decoded);
-    })
-    .catch(err => {
-        console.error('Token verification failed:', err.message);
-    });
- */
 module.exports = {token_provided,verifyToken}

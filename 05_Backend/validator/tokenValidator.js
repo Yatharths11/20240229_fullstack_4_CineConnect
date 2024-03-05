@@ -7,11 +7,13 @@ require('dotenv').config()
  * @returns 
  */
 function token_provided(token){
-    if(!token){
+    const decodedtoken = token.split(' ')[1]
+    // console.log(decodedtoken)
+    if(decodedtoken === null || decodedtoken === undefined){
         return  false;
-    }else{
-        return true;
     }
+    return true;
+
 }
 
 /**

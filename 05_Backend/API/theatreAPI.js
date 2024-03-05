@@ -1,5 +1,4 @@
 const router = require('../utils/router');
-const { jwt, bcrypt } = require('../utils/auth');
 const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
 const {token_provided,verifyToken} = require('../validator/tokenValidator')

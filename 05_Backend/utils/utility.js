@@ -14,4 +14,4 @@ function decodeToken(token) {
     return jwt.verify(token, process.env.SECRET_KEY)
 }
 
-module.exports = { hashPassword, verifyPassword, decodeToken}
+module.exports = { hashPassword, verifyPassword, decodeToken }

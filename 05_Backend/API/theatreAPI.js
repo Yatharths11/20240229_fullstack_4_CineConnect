@@ -1,6 +1,8 @@
 const router = require('../utils/router');
 const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
+const { token_provided, verifyToken } = require('../validator/tokenValidator')
+const { check_admin, check_superAdmin } = require('../validator/checkRole')
 
 
 // API to get all the list of theatres and their details
@@ -14,9 +16,10 @@ router.get("/", async (req, res) => {
     }
 })
 // API to get details of a particular theatre
-router.get('/:id', async (req, res) => {
+router.get('/theatreDetails/:id', async (req, res) => {
     try {
-        const theatre = await Theatres.findById(req.params.id)
+        const theatreId = req.params.id
+        const theatre = await Theatres.findById(theatreId)
         if (!theatre) {
             return res.status(404).json({ message: "Theatre not found." })
         }
@@ -26,21 +29,88 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" })
     }
 })
+
+
 // API to create a new theatre
-router.post('/', async (req, res) => {
-    const theatre = req.body
+router.post('/post', async (req, res) => {
     try {
+        // Extract the token from the request headers
+        const token = req.headers.authorization
+        // Check if the JWT token is provided
+        if (!token_provided(token)) {
+            return res.status(401).json({ error: "Access denied. Token not provided." })
+        }
+        // Verify the token
+        const decodedToken = verifyToken(token)
+        // Check if the user is authorized to create a theatre
+        if (!decodedToken || (!check_admin(token) && !check_superAdmin(token))) {
+            return res.status(401).json({ error: "Sorry, you're not authorized to create a theatre." })
+        }
+        // Create a new theatre based on the request body
+        const theatre = req.body
         const newTheatre = await Theatres.create(theatre)
+        // Return the newly created theatre
         res.status(201).json(newTheatre)
     } catch (err) {
         console.error("Error creating theatre:", err)
         res.status(500).json({ error: "Internal Server Error" })
     }
 })
+
+// API to update a theatre by ID
+router.put("/updateTheatre/:id", async (req, res) => {
+    const theaterId = req.params.id
+    try {
+        // Extract the token from the request headers
+        const token = req.headers.authorization
+        
+        // Check if the JWT token is provided
+        if (!token_provided(token)) {
+            return res.status(401).json({ error: "Access denied. Token not provided." })
+        }
+
+        // Verify the token
+        const decodedToken = verifyToken(token)
+        console.log(decodedToken)
+        // Check if the user is authorized to update a theatre
+        if (!decodedToken || (!check_admin(token) && !check_superAdmin(token))) {
+            return res.status(401).json({ error: "Sorry, you're not authorized to update a theatre." })
+        }
+
+        const updatedTheatre = await Theatres.findByIdAndUpdate(
+            theaterId,
+            req.body, // Update with the data provided in req.body
+            { new: true}
+        );
+        if (!updatedTheatre) {
+            return res.status(404).json({ message: 'Theater not found' })
+        }
+        res.status(200).json(updatedTheatre)
+    } catch (err) {
+        console.error("Error updating theatre:", err)
+        res.status(500).json({ error: "Internal Server Error" })
+    }
+})
+
 // API to delete a theatre by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/deleteTheatre/:id', async (req, res) => {
     const id = req.params.id
     try {
+        // Extract the token from the request headers
+        const token = req.headers.authorization
+        // Check if the JWT token is provided
+        if (!token_provided(token)) {
+            return res.status(401).json({ error: "Access denied. Token not provided." })
+        }
+
+        // Verify the token
+        const decodedToken = verifyToken(token)
+        
+        // Check if the user is authorized to delete a theatre
+        if (!decodedToken || (!check_admin(token) && !check_superAdmin(token))) {
+            return res.status(401).json({ error: "Sorry, you're not authorized to delete a theatre." })
+        }
+
         const result = await Theatres.deleteOne({ _id: id })
         if (result.deletedCount === 0) {
             return res.status(404).json({ message: 'No theater with this ID' })
@@ -51,10 +121,12 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" })
     }
 })
+
 // API to get movies of a particular theatre
 router.get("/:id/movies", async (req, res) => {
     try {
-        const movies = await Movies.findOne({ theatre_id: req.params.id })
+        const movies = await Movies.find({ theatre_id: req.params.id })
+        console.log(movies)
         if (!movies) {
             res.status(200).json(`There are no movies showing at this theatre right now.\nPlease come back again`)
         } else {
@@ -65,22 +137,5 @@ router.get("/:id/movies", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" })
     }
 })
-// API to update a theatre by ID
-router.put("/:id", async (req, res) => {
-    const theaterId = req.params.id
-    try {
-        const updatedTheatre = await Theatres.findByIdAndUpdate(
-            theaterId,
-            req.body, // Update with the data provided in req.body
-            { new: true, runValidators: true }
-        )
-        if (!updatedTheatre) {
-            return res.status(404).json({ message: 'Theater not found' })
-        }
-        res.status(200).json(updatedTheatre)
-    } catch (err) {
-        console.error("Error updating theatre:", err)
-        res.status(500).json({ error: "Internal Server Error" })
-    }
-})
+
 module.exports = router

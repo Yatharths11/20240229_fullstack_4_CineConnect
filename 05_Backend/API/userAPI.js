@@ -2,6 +2,7 @@ const router = require('../utils/router');
 const { jwt, bcrypt } = require('../utils/auth');
 const Users = require('../schema/users')
 
+
 async function verifyUserRole(token) {
     try {
         // Check if the token exists

@@ -1,8 +1,8 @@
 const Users  = require('../schema/users')
 
 function username_exists(username){
-    const username = Users.findOne( { username: username } );
-   if (username){
+    const user = Users.findOne( { username: username } );
+   if (user){
     return true
    }else {
     return false;
@@ -10,8 +10,8 @@ function username_exists(username){
 }
 
 function is_admin(username){
-    const username = Users.findOne( { username: username } );
-    if( username.role === "admin"){
+    const user = Users.findOne( { username: username } );
+    if( user.role === "admin"){
         return true
     }else{
         return false

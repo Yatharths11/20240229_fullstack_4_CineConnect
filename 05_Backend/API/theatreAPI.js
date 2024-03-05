@@ -2,8 +2,8 @@ const router = require('../utils/router');
 const { jwt, bcrypt } = require('../utils/auth');
 const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
-const {is_admin } = require('../vaidations');
-const { username_exists } = require('../vaidations');
+const {is_admin } = require('../vaidations/theatreValidations');
+const { username_exists } = require('../vaidations/theatreValidations');
 
 router.use((req, res, next) => {
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1]

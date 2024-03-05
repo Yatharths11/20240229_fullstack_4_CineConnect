@@ -6,6 +6,7 @@ app.use(express.json())
 
 const URI = process.env.URI
 
+const authRoutes = require("./API/authAPI.js")
 const userRoutes = require("./API/userAPI.js")
 const theatreRoutes = require("./API/theatreAPI.js")
 const movieRoutes = require("./API/movieAPI.js")
@@ -17,10 +18,10 @@ if (mongoose.connect(URI)) {
   console.log("Failed to Connected.")
 }
 
-
+app.use('/api/users', authRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/users', userRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/theatres', theatreRoutes) // Mount the theatreAPI router at the /api/theatres base path
-app.use("/api/movies", movieRoutes); // Mount the movieAPI router at the /api/movies base path
+app.use('/api/movies', movieRoutes); // Mount the movieAPI router at the /api/movies base path
 app.use('/api/bookings', bookingRoutes)// Mount the bookingAPI router at the /api/bookings base path
 
 

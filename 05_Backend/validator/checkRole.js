@@ -1,42 +1,42 @@
-//import internal dependencies
-const {token_provided, verifyToken} = require('./tokenValidator.js')
-// const decoded = require('../utils/utility.js')
+    //import internal dependencies
+    const {token_provided, verifyToken} = require('./tokenValidator.js')
+    // const decoded = require('../utils/utility.js')
 
-//send the token to another function
-//function return decoded token
-//check SuperAdmin
-function check_superAdmin(token) {
+    //send the token to another function
+    //function return decoded token
+    //check SuperAdmin
+    function check_superAdmin(token) {
 
-     //token Role compare with admin role
-    const decodedToken = verifyToken(token)
-    //token Role compare with admin role
-    if (decodedToken.role === "superAdmin") {
-        return true
+        //token Role compare with admin role
+        const decodedToken = verifyToken(token)
+        //token Role compare with admin role
+        if (decodedToken.role === "superAdmin") {
+            return true
+        }
+        return false 
     }
-    return false 
-}
 
-//check Admin
-function check_admin(token) {
-    //token Role compare with admin role
-    const decodedToken = verifyToken(token)
-    //token Role compare with admin role
-    if (decodedToken.role === "admin") {
-        return true
+    //check Admin
+    function check_admin(token) {
+        //token Role compare with admin role
+        const decodedToken = verifyToken(token)
+        //token Role compare with admin role
+        if (decodedToken.role === "admin") {
+            return true
+        }
+        return false 
     }
-    return false 
-}
 
-//check user
-function check_user(token) {
-    //token Role compare with user role
-    const decodedToken = verifyToken(token)
-    //token Role compare with user role
-    if (decodedToken.role === "user") {
-        return true
+    //check user
+    function check_user(token) {
+        //token Role compare with user role
+        const decodedToken = verifyToken(token)
+        //token Role compare with user role
+        if (decodedToken.role === "user") {
+            return true
+        }
+        return false    
     }
-    return false    
-}
 
-//exporting module
-module.exports = { check_superAdmin, check_admin, check_user }
+    //exporting module
+    module.exports = { check_superAdmin, check_admin, check_user }

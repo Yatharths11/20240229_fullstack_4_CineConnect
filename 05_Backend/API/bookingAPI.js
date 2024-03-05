@@ -20,7 +20,7 @@ router.post('/:movie_id', async (req, res) => {
 
         const decodedToken = verifyToken(token)
         if (!decodedToken || !check_user(token)) {
-            console.log("verify hoagaya2")
+            // console.log("verify hoagaya2")
             return res.status(403).send({ message: "Forbidden. Only users can perform this action." })
         }
 

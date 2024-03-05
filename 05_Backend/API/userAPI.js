@@ -1,6 +1,6 @@
 const router = require('../utils/router');
 const Users = require('../schema/users')
-const { hashPassword, decodeToken } = require('../utils/utility')
+const { hashPassword} = require('../utils/utility')
 const { check_user } = require('../validator/checkRole')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
 

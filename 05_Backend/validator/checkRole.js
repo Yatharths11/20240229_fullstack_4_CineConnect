@@ -87,7 +87,4 @@ function check_user(token) {
 
 
 //exporting module
-
-
-
 module.exports = { check_superAdmin, check_admin, check_user }

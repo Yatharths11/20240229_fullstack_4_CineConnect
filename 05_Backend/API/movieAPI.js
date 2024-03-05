@@ -3,8 +3,8 @@ const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Movies = require("../schema/movies.js")
 const Users = require("../schema/users.js")
-const tokenValidator=require("../validator/tokenValidator.js")
-const checkRole=require("../validator/checkRole.js")
+const tokenValidator = require("../validator/tokenValidator.js")
+const checkRole = require("../validator/checkRole.js")
 
 // Get all movies
 router.get("/", async (req, res) => {
@@ -45,13 +45,22 @@ router.post("/:id", async (req, res) => {
     //   return res.status(401).json({ error: "Sorry, you're not authorized." })
     // }
 
-    //testing
+    //checking valid token
     tokenValidator.verifyToken(req.headers.authorization)
-    
-    checkRole.check_admin(req.headers.authorization)
 
+    //check Super admin
+    if (checkRole.check_superAdmin(req.headers.authorization)) {
 
+      console.log("Super Admin is found");
 
+    }
+
+    //check admin
+    if (checkRole.check_admin(req.headers.authorization)) {
+
+      console.log("admin is found");
+
+    }
 
     // Create a new movie based on the request body
     const newMovie = req.body

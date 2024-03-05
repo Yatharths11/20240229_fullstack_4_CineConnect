@@ -20,18 +20,27 @@ function token_provided(token){
  * @returns 
  */
 async function verifyToken(token) {
+    const decodedtoken = token.split(' ')[1]
+    // return new Promise((resolve, reject) => {
+    //     jwt.verify(token, process.env.SECRET_KEY , (err, decoded) => {
+    //         if (err) {
+    //             // Token verification failed
+    //             reject(err);
+    //         } else {
+    //             // Token is valid, return the decoded payload
+    //             resolve(decoded);
+    //         }
+    //     });
+    // });
 
-    return new Promise((resolve, reject) => {
-        jwt.verify(token, process.env.SECRET_KEY , (err, decoded) => {
-            if (err) {
-                // Token verification failed
-                reject(err);
-            } else {
-                // Token is valid, return the decoded payload
-                resolve(decoded);
-            }
-        });
-    });
+    try{
+
+        const decoded = jwt.verify(decodedtoken, process.env.SECRET_KEY);
+    }catch(err){
+
+        return false;
+    }
+  
 }
 
 module.exports = {token_provided,verifyToken}

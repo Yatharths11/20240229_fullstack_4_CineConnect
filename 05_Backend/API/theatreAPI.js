@@ -2,28 +2,14 @@ const router = require('../utils/router');
 const { jwt, bcrypt } = require('../utils/auth');
 const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
+const {token_provided,verifyToken} = require('../validator/tokenValidator')
+const { check_superAdmin, check_admin, check_user } = require('../validator/checkRole')
 
 
-
-router.use((req, res, next) => {
-    const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
-    if (!token) {
-        
-      return res.status(401).json({ message: 'Unauthorized' })
-    }
-  
-    try {
-      const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
-      req.userData = { userId: decodedToken.userId, username: decodedToken.username }
-      next()
-    } catch (error) {
-        console.log("here")
-      return res.status(401).json({ message: 'Unauthorized' })
-    }
-
-  })
 // API to get all the list of theatres and their details
 router.get("/", async (req, res) => {
+
+    console.log("I am in")
     try {
         const theatres = await Theatres.find()
         res.status(200).json(theatres)
@@ -32,21 +18,36 @@ router.get("/", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" })
     }
 })
+
+
 // API to get details of a particular theatre
 router.get('/:id', async (req, res) => {
+    console.log("inside")
     try {
-        const theatre = await Theatres.findById(req.params.id)
+        const id = req.params.id;
+        const theatre = await Theatres.findById(id);
         if (!theatre) {
-            return res.status(404).json({ message: "Theatre not found." })
+            return res.status(404).json({ message: "Theatre not found." });
         }
-        res.status(200).json(theatre)
+        res.status(200).json(theatre);
     } catch (err) {
-        console.error("Error retrieving theatre details:", err)
-        res.status(500).json({ error: "Internal Server Error" })
+        console.error("Error retrieving theatre details:", err);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 })
+
+
 // API to create a new theatre
 router.post('/', async (req, res) => {
+
+    //check token 
+    if(!(await verifyToken(req.header.authorization))){
+        return res.status(401).json({ auth: false, message: 'Failed to authenticate.' })
+    }
+    if(!check_admin || !check_superAdmin){
+        return res.status(403).json({auth:false ,message:"You are not authorized to perform this action!"})
+    }
+
     const theatre = req.body
     try {
         const newTheatre = await Theatres.create(theatre)
@@ -56,6 +57,8 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" })
     }
 })
+
+
 // API to delete a theatre by ID
 router.delete('/:id', async (req, res) => {
     const id = req.params.id

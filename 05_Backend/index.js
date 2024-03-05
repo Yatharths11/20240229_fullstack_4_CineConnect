@@ -28,7 +28,7 @@ if (mongoose.connect(URI)) {
 const key = process.env.SECRET_KEY
 
 
-app.use('/api/users', authRoutes) // Mount the userAPI router at the /api/users base path
+app.use('/api/auth', authRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/users', userRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/theatres', theatreRoutes) // Mount the theatreAPI router at the /api/theatres base path
 app.use('/api/bookings', bookingRoutes)// Mount the bookingAPI router at the /api/bookings base path

@@ -38,6 +38,39 @@ router.get("/:id", async (req, res) => {
   }
 })
 
+// Find a movie by name using query parameters
+// API Call 
+// http://localhost:5000/api/movies/search/name?name=Interstellar
+router.get("/search/name", async (req, res) => {
+
+  try {
+    const name = req.query.name;
+
+    console.log("query " + name);
+
+    // Check if the name parameter is provided
+    if (!name) {
+      return res.status(400).send("Name parameter is missing")
+    }
+
+    // Find the movie by its name
+    const movie = await Movies.findOne({ name: name })
+
+    // Check if the movie exists
+    if (!movie) {
+      return res.status(404).send("Movie not found")
+    }
+
+    // Return the found movie
+    return res.status(200).json(movie);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Failed to find movie.")
+  }
+});
+
+
+
 // Insert a new movie
 router.post("/post", async (req, res) => {
   try {

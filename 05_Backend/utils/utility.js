@@ -10,8 +10,8 @@ async function verifyPassword(user, password) {
 }
 
 function decodeToken(token) {
-    const decodedtoken = token.split(' ')[1]
-    return jwt.verify(decodedtoken, process.env.SECRET_KEY)
+    const decodedToken = token.split(' ')[1]
+    return jwt.verify(token, process.env.SECRET_KEY)
 }
 
 module.exports = { hashPassword, verifyPassword, decodeToken }

@@ -30,6 +30,8 @@ if (mongoose.connect(URI)) {
 
 
 
+
+
 app.use('/api/auth', authRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/users', userRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/theatres', theatreRoutes) // Mount the theatreAPI router at the /api/theatres base path

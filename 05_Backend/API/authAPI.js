@@ -8,14 +8,12 @@ router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body
         // Check if the password is correct
-        console.log(username, password)
         const user = await Users.findOne({ username: username });
 
         if (!user) {
             throw new Error("Username doesn't exist. Please enter the right username.");
         }
         const checkPassword = await verifyPassword(user, password)
-        console.log(checkPassword)
 
         if (!checkPassword) {
             return res.status(401).json({ error: "Incorrect password." })

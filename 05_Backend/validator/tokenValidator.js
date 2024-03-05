@@ -7,11 +7,13 @@ require('dotenv').config()
  * @returns 
  */
 function token_provided(token){
-    if(!token){
+    const decodedtoken = token.split(' ')[1]
+    // console.log(decodedtoken)
+    if(decodedtoken === null || decodedtoken === undefined){
         return  false;
-    }else{
-        return true;
     }
+    return true;
+
 }
 
 /**
@@ -19,28 +21,17 @@ function token_provided(token){
  * @param {token} token 
  * @returns 
  */
-async function verifyToken(token) {
-    const decodedtoken = token.split(' ')[1]
-    // return new Promise((resolve, reject) => {
-    //     jwt.verify(token, process.env.SECRET_KEY , (err, decoded) => {
-    //         if (err) {
-    //             // Token verification failed
-    //             reject(err);
-    //         } else {
-    //             // Token is valid, return the decoded payload
-    //             resolve(decoded);
-    //         }
-    //     });
-    // });
+function verifyToken(token) {
 
-    try{
-
-        const decoded = jwt.verify(decodedtoken, process.env.SECRET_KEY);
-    }catch(err){
-
-        return false;
+    if(!token_provided(token)){
+        return res.status(400).send({message : "Token missing"})
     }
-  
+    const decodedtoken = token.split(' ')[1]
+    // console.log(decodedtoken)
+    // console.log(jwt.verify(decodedtoken, process.env.SECRET_KEY))
+    return jwt.verify(decodedtoken, process.env.SECRET_KEY)
+    
+    
 }
 
 module.exports = {token_provided,verifyToken}

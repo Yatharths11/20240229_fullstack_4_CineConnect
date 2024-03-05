@@ -24,7 +24,6 @@ async function verifyToken(token) {
     return new Promise((resolve, reject) => {
         jwt.verify(token, process.env.SECRET_KEY , (err, decoded) => {
             if (err) {
-
                 // Token verification failed
                 reject(err);
             } else {

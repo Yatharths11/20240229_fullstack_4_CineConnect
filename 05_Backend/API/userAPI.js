@@ -1,6 +1,7 @@
 const router = require('../utils/router');
-const { jwt, bcrypt } = require('../utils/auth');
 const Users = require('../schema/users')
+const { hashPassword, decodeToken} = require('../utils/utility')
+
 
 async function verifyUserRole(token) {
     try {
@@ -9,7 +10,7 @@ async function verifyUserRole(token) {
             res.status(401).send({message : "Access denied. Token not provided."})
         }
         // Verify the token
-        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
+        const decodedToken = decodeToken(token)
         // Fetch the user role
         const role = decodedToken.role
         
@@ -43,8 +44,7 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: "Password is required." })
         }
         // Hash the password
-        const salt = await bcrypt.genSalt()
-        const hashedPassword = await bcrypt.hash(password, salt)
+        const hashedPassword = await hashPassword(password)
         // Create a new user
         const newUser = await Users.create({
             username: username,
@@ -71,7 +71,7 @@ router.get('/:id', async(req,res) => {
         }
         
         const userExist = await Users.findOne({_id : id})
-        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)// Verify the token
+        const decodedToken = decodeToken(token)// Verify the token
         
         // Check id if such user exist or not
         if(!userExist){
@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
             return res.status(401).send({ error: "Access denied. Token not provided." })
         }
         // Verify the token
-        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
+        const decodedToken = decodeToken(token)
         const requestbyUser = await Users.findOne({username : decodedToken.username})
         // Check if the token owner is the same as the user to be updated
         if (requestbyUser._id.toString() !== id) {
@@ -108,7 +108,7 @@ router.put('/:id', async (req, res) => {
         // Find the user to be updated
         const userToUpdate = await Users.findById(id)
         if (!userToUpdate) {
-            return res.status(404).json({ error: 'User not found' })
+            return res.status(404).json({ error: "User not found" })
         }
         // Update user details, if some fields are not provided in the request body, 
         // keep them the same as before
@@ -119,8 +119,8 @@ router.put('/:id', async (req, res) => {
             userToUpdate.email = req.body.email
         }
         if (req.body.password) {
-            const salt = await bcrypt.genSalt()
-            const hashedPassword = await bcrypt.hash(req.body.password,salt)
+            // const salt = await bcrypt.genSalt()
+            const hashedPassword = await hashPassword(req.body.password)
             userToUpdate.password = hashedPassword
         }
         // Save the updated user
@@ -141,7 +141,7 @@ router.delete('/:id', async (req, res) => {
         if (!token) {
             return res.status(401).send({ error: "Access denied. Token not provided." })
         }
-        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
+        const decodedToken = decodeToken(token)
         const requestbyUser = await Users.findOne({username : decodedToken.username})
         if (!requestbyUser) {
             return res.status(404).json({ error: 'User not found' })

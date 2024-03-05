@@ -1,21 +1,21 @@
 const router = require('../utils/router')
 const { jwt, bcrypt } = require('../utils/auth')
+const {verifyPassword} = require('../utils/utility')
 const Users = require('../schema/users')
 
 // Login with credentials
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body
-
-        // Check if the user exists
-        const user = await Users.findOne({ username: username })
+        // Check if the password is correct
+        console.log(username, password)
+        const user = await Users.findOne({ username: username });
 
         if (!user) {
-            return res.status(401).json({ error: "Username doesn't exist. Please enter the right username." })
+            throw new Error("Username doesn't exist. Please enter the right username.");
         }
-
-        // Check if the password is correct
-        const checkPassword = await bcrypt.compare(password, user.password)
+        const checkPassword = await verifyPassword(user, password)
+        console.log(checkPassword)
 
         if (!checkPassword) {
             return res.status(401).json({ error: "Incorrect password." })

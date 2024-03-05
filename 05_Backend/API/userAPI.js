@@ -30,7 +30,6 @@ async function verifyUserRole(token) {
 router.post('/register', async (req, res) => {
     try {
         const { username, email, password} = req.body
-        console.log(req.body)
         // Check if username and email already exists
         const usernameExist = await Users.findOne({ username: username })
         const emailExist = await Users.findOne({email : email})

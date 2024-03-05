@@ -10,6 +10,7 @@ async function verifyPassword(user, password) {
 }
 
 function decodeToken(token) {
+    const decodedToken = token.split(' ')[1]
     return jwt.verify(token, process.env.SECRET_KEY)
 }
 

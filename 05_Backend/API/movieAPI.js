@@ -3,6 +3,8 @@ const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Movies = require("../schema/movies.js")
 const Users = require("../schema/users.js")
+const tokenValidator=require("../validator/tokenValidator.js")
+const checkRole=require("../validator/checkRole.js")
 
 // Get all movies
 router.get("/", async (req, res) => {
@@ -19,29 +21,38 @@ router.get("/", async (req, res) => {
 // Insert a new movie
 router.post("/:id", async (req, res) => {
   try {
-    const id = req.params.id
-    const token = req.headers.authorization
-    // Check if the JWT token is provided
-    if (!token) {
-      return res.status(401).json({ error: "Access denied. Token not provided." })
-    }
-    // Find the user by ID
-    const userExist = await Users.findOne({ _id: id })
-    const decodedToken = jwt.verify(
-      token.split(" ")[1],
-      process.env.SECRET_KEY
-    )
-    // Check if the user exists
-    if (!userExist) {
-      return res.status(404).json({ error: "User not found." })
-    }
-    // Check if the user is authorized to create a movie
-    if (
-      !(decodedToken.username === userExist.username) ||
-      !decodedToken.role === "superAdmin"
-    ) {
-      return res.status(401).json({ error: "Sorry, you're not authorized." })
-    }
+    // const id = req.params.id
+    // const token = req.headers.authorization
+    // // Check if the JWT token is provided
+    // if (!token) {
+    //   return res.status(401).json({ error: "Access denied. Token not provided." })
+    // }
+    // // Find the user by ID
+    // const userExist = await Users.findOne({ _id: id })
+    // const decodedToken = jwt.verify(
+    //   token.split(" ")[1],
+    //   process.env.SECRET_KEY
+    // )
+    // // Check if the user exists
+    // if (!userExist) {
+    //   return res.status(404).json({ error: "User not found." })
+    // }
+    // // Check if the user is authorized to create a movie
+    // if (
+    //   !(decodedToken.username === userExist.username) ||
+    //   !decodedToken.role === "superAdmin"
+    // ) {
+    //   return res.status(401).json({ error: "Sorry, you're not authorized." })
+    // }
+
+    //testing
+    tokenValidator.verifyToken(req.headers.authorization)
+    
+    checkRole.check_admin(req.headers.authorization)
+
+
+
+
     // Create a new movie based on the request body
     const newMovie = req.body
     const createdMovie = await Movies.create(newMovie)

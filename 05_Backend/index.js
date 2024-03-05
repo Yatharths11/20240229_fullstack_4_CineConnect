@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require("mongoose")
 app.use(express.json())
 
+
 const URI = process.env.URI
 
 const authRoutes = require("./API/authAPI.js")
@@ -12,11 +13,20 @@ const theatreRoutes = require("./API/theatreAPI.js")
 const movieRoutes = require("./API/movieAPI.js")
 const bookingRoutes = require("./API/bookingAPI.js")
 
+
+
 if (mongoose.connect(URI)) {
   console.log("Connected to Database Successfully.")
 } else {
   console.log("Failed to Connected.")
 }
+
+
+
+
+
+const key = process.env.SECRET_KEY
+
 
 app.use('/api/users', authRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/users', userRoutes) // Mount the userAPI router at the /api/users base path
@@ -26,6 +36,8 @@ app.use('/api/movies', movieRoutes) // Mount the movieAPI router at the /api/mov
 
 
 
+
 app.listen(process.env.PORT, () => {
   console.log("Server is running.")
 })
+

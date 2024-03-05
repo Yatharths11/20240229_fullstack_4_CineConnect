@@ -38,12 +38,5 @@
         return false    
     }
 
-
-
-
-
-
-
-
-//exporting module
-module.exports = { check_superAdmin, check_admin, check_user }
+    //exporting module
+    module.exports = { check_superAdmin, check_admin, check_user }

@@ -42,7 +42,7 @@ router.post('/register', async (req, res) => {
 
 
 //Get the information of specific User
-router.get('/:id', async (req, res) => {
+router.get('/info/:id', async (req, res) => {
     try {
         const id = req.params.id
         const token = req.headers.authorization
@@ -70,12 +70,13 @@ router.get('/:id', async (req, res) => {
         return res.status(200).send(userExist)
     } catch (error) {
         console.log(error)
+        console.log("idhar kaise")
         return res.status(500).send({ error: "Failed to retrieve data." })
     }
 })
 
 // Update the user's information
-router.put('/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
     try {
         const id = req.params.id
         const token = req.headers.authorization
@@ -119,7 +120,7 @@ router.put('/:id', async (req, res) => {
 })
 
 // DELETE existing users
-router.delete('/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id
         const token = req.headers.authorization

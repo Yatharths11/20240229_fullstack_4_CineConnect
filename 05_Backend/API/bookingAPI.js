@@ -3,14 +3,14 @@ const { jwt } = require('../utils/auth')
 const Bookings = require('../schema/bookings.js')
 const Users = require('../schema/users.js')
 const Movies = require('../schema/movies.js')
-const { token_provided, verifyToken } = require('../validator/tokenValidator');
-const { check_user } = require('../validator/checkRole');
+const { token_provided, verifyToken } = require('../validator/tokenValidator')
+const { check_user } = require('../validator/checkRole')
 
 
 // Book a movie
-router.post('/:movie_id', async (req, res) => {
+router.post('/post/:id', async (req, res) => {
     try {
-        const movieId = req.params.movie_id;
+        const movieId = req.params.id;
         const seats = req.body.seats;
         const token = req.headers.authorization;
         // console.log(token)
@@ -53,30 +53,40 @@ router.post('/:movie_id', async (req, res) => {
 
 
 // Retrieve all the Bookings of the user
-router.get('/:user_id', async(req, res) => {
+router.get('/myBooking', async (req, res) => {
     try {
-        const user_id = req.params.user_id
         const token = req.headers.authorization // Extract the JWT token from the request headers
-        const user = await Users.findById(user_id)
-        // Verify if the user has the role of "user"
-        await verifyUserRole(token)
-        // Verify the token
-        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
-        if(decodedToken.username !== user.username){
-            res.status(401).send({ error : "You're not authorised."})
+        console.log(token)
+        // Check if the JWT token is provided
+        if (!token_provided(token)) {
+            return res.status(401).json({ error: "Access denied. Token not provided." })
+        }
+        // Verify the token and extract the decoded token
+        const decodedToken = verifyToken(token)
+        // Find the user associated with the token
+        const user = await Users.findOne({ username: decodedToken.username })
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).json({ error: "User not found" })
+        }
+        // Check if the user is admin or superadmin
+        if (check_admin(token) || check_superAdmin(token)) {
+            return res.status(403).json({ error: "Forbidden. Only regular users can access their bookings." })
         }
         // Find all bookings of the user
-        const allBookings = await Bookings.find({ user_id: user_id })
-        console.log(allBookings)
+        const allBookings = await Bookings.find({ user_id: user._id })
+        // Check if bookings exist for the user
         if (!allBookings || allBookings.length === 0) {
             return res.status(404).json({ message: "No bookings found for this user" })
         }
-        res.status(200).json({ message: "Retrieved All Bookings Successfully", booking_details: allBookings })
+        // Return the bookings of the user
+        return res.status(200).json({ message: "Retrieved all bookings successfully", booking_details: allBookings })
     } catch (error) {
         console.error(error)
-        res.status(500).json({ error: "Failed to get Users Bookings" })
+        return res.status(500).json({ error: "Failed to get user's bookings" })
     }
-})
+});
+
 // Cancel a booking
 router.delete("/:id/cancel", async(req,res) => {
     try{

@@ -65,6 +65,7 @@ router.get('/:id', async(req,res) => {
         const id = req.params.id
         const token = req.headers.authorization// Extract the JWT token from the request headers
         // Check if the token exists
+        console.log("yaha pe kaisa aaya")
         if (!token) {
             return res.status(401).send({ error: "Access denied. Token not provided." })
         }

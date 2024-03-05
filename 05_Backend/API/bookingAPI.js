@@ -8,7 +8,7 @@ const { check_user } = require('../validator/checkRole')
 
 
 // Book a movie
-router.post('/post/:id', async (req, res) => {
+router.post('/postBooking/:id', async (req, res) => {
     try {
         const movieId = req.params.id;
         const seats = req.body.seats;
@@ -70,7 +70,7 @@ router.get('/myBooking', async (req, res) => {
             return res.status(404).json({ error: "User not found" })
         }
         // Check if the user is admin or superadmin
-        if (check_admin(token) || check_superAdmin(token)) {
+        if (!check_user(token)) {
             return res.status(403).json({ error: "Forbidden. Only regular users can access their bookings." })
         }
         // Find all bookings of the user
@@ -88,32 +88,57 @@ router.get('/myBooking', async (req, res) => {
 });
 
 // Cancel a booking
-router.delete("/:id/cancel", async(req,res) => {
-    try{
+router.delete("/cancelBooking/:id/", async(req, res) => {
+    try {
         const bookingId = req.params.id
-        console.log(bookingId)
         const token = req.headers.authorization // Extract the JWT token from the request headers
-        const booking = await Bookings.findOne({_id : bookingId})
-        console.log(booking)
-        // Verify if the user has the role of "user"
-        await verifyUserRole(token)
-        // Verify the token
-        const decodedToken = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY)
-        const user = await Users.findOne({username : decodedToken.username})
-        console.log(booking.user_id)
-        if(user._id.toString() !== booking.user_id.toString()){
-            return res.status(401).send({ error : "You're not Authorised to Cancel the Booking."})
+        
+        // Check if the JWT token is provided
+        if (!token_provided(token)) {
+            return res.status(401).json({ error: "Access denied. Token not provided." })
         }
-        //Logic Pending for Cancelling booking based on Dates
+
+        // Verify the token
+        const decodedToken = verifyToken(token)
+
+        // Check if the user is authorized to cancel a booking
+        if (!decodedToken || !check_user(token)) {
+            return res.status(401).json({ error: "Sorry, you're not authorized to cancel a booking." })
+        }
+
+        // Retrieve the booking
+        const booking = await Bookings.findOne({ _id: bookingId })
+
+        // Verify if the booking exists
+        if (!booking) {
+            return res.status(404).json({ error: "Booking not found" })
+        }
+
+        // Retrieve the user based on the token
+        const user = await Users.findOne({ username: decodedToken.username })
+
+        // Check if the user is authorized to cancel this booking
+        if (user._id.toString() !== booking.user_id.toString()) {
+            return res.status(401).json({ error: "You're not authorized to cancel this booking." })
+        }
+
+        // Logic for cancelling the booking based on dates (Pending)
+        // Update the movie available seats
         const movietoUpdate = await Movies.findById(booking.movie_id)
-        movietoUpdate.availableSeats += await booking.seatsBooked // Update the movie available seats
-        const cancelBooking = await Bookings.findByIdAndDelete(bookingId)// Cancel the booking
-        const movieUpdate = await movietoUpdate.save() // Update the records of movies
-        res.status(200).json({ message: 'Booking Cancelled Successfully'})
+        movietoUpdate.availableSeats += booking.seatsBooked
+
+        // Cancel the booking
+        const cancelBooking = await Bookings.findByIdAndDelete(bookingId)
+
+        // Update the records of movies
+        const movieUpdate = await movietoUpdate.save()
+
+        res.status(200).json({ message: 'Booking cancelled successfully' })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Failed to cancel booking' })
     }
-    catch(error){
-        console.log(error)
-        res.status(500).json({ error: 'Failed to Cancel Bookings' })
-    }
-} )
+})
+
+
 module.exports = router

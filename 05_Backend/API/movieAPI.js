@@ -44,9 +44,9 @@ router.get("/:id", async (req, res) => {
 router.get("/search/name", async (req, res) => {
 
   try {
-    const name = req.query.name;
+    const name = req.query.name
 
-    console.log("query " + name);
+    console.log("query " + name)
 
     // Check if the name parameter is provided
     if (!name) {
@@ -62,12 +62,12 @@ router.get("/search/name", async (req, res) => {
     }
 
     // Return the found movie
-    return res.status(200).json(movie);
+    return res.status(200).json(movie)
   } catch (error) {
     console.log(error);
     return res.status(500).send("Failed to find movie.")
   }
-});
+})
 
 
 

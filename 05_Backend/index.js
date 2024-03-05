@@ -21,8 +21,9 @@ if (mongoose.connect(URI)) {
 app.use('/api/users', authRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/users', userRoutes) // Mount the userAPI router at the /api/users base path
 app.use('/api/theatres', theatreRoutes) // Mount the theatreAPI router at the /api/theatres base path
-app.use('/api/movies', movieRoutes); // Mount the movieAPI router at the /api/movies base path
 app.use('/api/bookings', bookingRoutes)// Mount the bookingAPI router at the /api/bookings base path
+app.use('/api/movies', movieRoutes) // Mount the movieAPI router at the /api/movies base path
+
 
 
 app.listen(process.env.PORT, () => {

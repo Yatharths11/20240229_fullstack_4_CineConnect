@@ -1,10 +1,9 @@
 const router = require('../utils/router')
 const { jwt, bcrypt } = require('../utils/auth')
 const Users = require('../schema/users')
-// const { loginValidation, logoutValidation } = require('../validations/authValidation')
 
 // Login with credentials
-router.post('/login',async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body
 
@@ -31,18 +30,19 @@ router.post('/login',async (req, res) => {
         console.error(error)
         res.status(500).json({ error: "Failed to login. Try again." })
     }
-})
+});
 
 // Logout route
 router.post('/logout', (req, res) => {
     try {
         const token = req.headers.authorization; // Extract the JWT token from the request headers
-        // Verify if the user has the role of "user
+        // Verify if the user has the role of "user"
+        verifyUserRole(token);
         res.status(200).json({ message: "Logged out successfully" })
     } catch (error) {
         console.error(error)
         res.status(400).send({ error: "Failed to logout" })
     }
-})
+});
 
 module.exports = router

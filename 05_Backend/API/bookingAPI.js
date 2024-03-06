@@ -26,7 +26,7 @@ router.post('/postBooking/:id', async (req, res) => {
         }
 
         const movie = await Movies.findById(movieId)
-
+        // console.log(bookingData)
         if(!validateBookingData(bookingData)){
             return res.status(400).send({message : "Booking data is incomplete. Please provide all required fields."})
 

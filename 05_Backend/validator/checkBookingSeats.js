@@ -8,7 +8,8 @@ const validateSeatData = (seatsRequested, seatsAvailable) => {
 
 const validateBookingData = (data) => {
     // Check if the required fields are present in the booking data
-    if (!data.movie_id || !data.seatsBooked || !data.timestamp || !data.user_id) {
+    // console.log(data.seats)
+    if (!data.seats) {
         return false
     }
 

@@ -1,7 +1,7 @@
 const router = require('../utils/router');
 const Users = require('../schema/users')
 const { hashPassword } = require('../utils/utility')
-const { check_user } = require('../validator/checkRole')
+const { check_user } = require('../validator/RoleValidator')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
 const { isValidUsername, isValidEmail, isValidPassword } = require('../validator/userValidation')
 

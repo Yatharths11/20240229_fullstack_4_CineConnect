@@ -3,7 +3,7 @@ const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Movies = require("../schema/movies.js")
 const Users = require("../schema/users.js")
-const { check_admin, check_superAdmin } = require('../validator/checkRole')
+const { check_admin, check_superAdmin } = require('../validator/RoleValidator.js')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
 
 // Get all movies
@@ -54,7 +54,7 @@ router.get("/search/name", async (req, res) => {
     }
 
     // Find the movie by its name
-    const movie = await Movies.findOne({ name: name })
+    const movie = await Movies.find({ name: name })
 
     // Check if the movie exists
     if (!movie) {

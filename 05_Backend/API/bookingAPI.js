@@ -1,4 +1,4 @@
-const router = require('../utils/router');
+const router = require('../utils/router')
 const { jwt } = require('../utils/auth')
 const Bookings = require('../schema/bookings.js')
 const Users = require('../schema/users.js')
@@ -12,20 +12,17 @@ router.post('/postBooking/:id', async (req, res) => {
     try {
         const movieId = req.params.id
         const bookingData = req.body
-        const token = req.headers.authorization;
-        // console.log(token)
+        const token = req.headers.authorization
         if (!token_provided(token)) {
-            return res.status(401).send({ message: "Access denied. Token not provided." });
+            return res.status(401).send({ message: "Access denied. Token not provided." })
         }
 
         const decodedToken = verifyToken(token)
         if (!decodedToken || !check_user(token)) {
-            // console.log("verify hoagaya2")
             return res.status(403).send({ message: "Forbidden. Only users can perform this action." })
         }
 
         const movie = await Movies.findById(movieId)
-        // console.log(movie)
         if (!movie) {
             return res.status(404).send({ error: "Movie requested for booking doesn't exist" })
         }
@@ -43,7 +40,6 @@ router.post('/postBooking/:id', async (req, res) => {
             user_id: user._id
         }
 
-        console.log(newBookingData)
         if (!validateBookingData(newBookingData)) {
             return res.status(400).send({ message: "Booking data is incomplete or invalid." })
         }
@@ -52,11 +48,8 @@ router.post('/postBooking/:id', async (req, res) => {
         }
 
         const newBooking = await Bookings.create(newBookingData)
-        console.log("1")
-        console.log(newBooking)
-        console.log("2")
 
-        movie.availableSeats -= bookingData.seats
+        movie.availableSeats -= bookingData.seats// Update movies available seats
         await movie.save()
 
         res.status(201).json({ message: "New booking created", booking_details: newBooking })
@@ -71,7 +64,6 @@ router.post('/postBooking/:id', async (req, res) => {
 router.get('/myBooking', async (req, res) => {
     try {
         const token = req.headers.authorization // Extract the JWT token from the request headers
-        console.log(token)
         // Check if the JWT token is provided
         if (!token_provided(token)) {
             return res.status(401).json({ error: "Access denied. Token not provided." })
@@ -100,7 +92,7 @@ router.get('/myBooking', async (req, res) => {
         console.error(error)
         return res.status(500).json({ error: "Failed to get user's bookings" })
     }
-});
+})
 
 // Cancel a booking
 router.delete("/cancelBooking/:id/", async (req, res) => {

@@ -56,6 +56,7 @@ const movieSchema = new mongoose.Schema({
   pgRating: {
     type: String,
     required: true,
+    enum : ["G", "PG", "PG-13","R","NC-17"]
   },
 })
 

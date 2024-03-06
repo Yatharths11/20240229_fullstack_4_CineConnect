@@ -3,8 +3,9 @@ const router = express.Router()
 const jwt = require("jsonwebtoken")
 const Movies = require("../schema/movies.js")
 const Users = require("../schema/users.js")
-const { check_admin, check_superAdmin } = require('../validator/checkRole')
+const { check_admin, check_superAdmin } = require('../validator/RoleValidator.js')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
+const { validateMovieData } = require('../validator/validateMovieData.js')
 
 // Get all movies
 router.get("/", async (req, res) => {
@@ -54,7 +55,7 @@ router.get("/search/name", async (req, res) => {
     }
 
     // Find the movie by its name
-    const movie = await Movies.findOne({ name: name })
+    const movie = await Movies.find({ name: name })
 
     // Check if the movie exists
     if (!movie) {
@@ -90,8 +91,21 @@ router.post("/post", async (req, res) => {
 
     // Create a new movie based on the request body
     const newMovie = req.body;
+
+    // Validate the movie data
+    const validationResult = validateMovieData(newMovie);
+    if (!validationResult.valid) {
+      return res.status(400).json({ error: validationResult.error });
+    }
+
+
+
+
     const createdMovie = await Movies.create(newMovie)
     // Return success message and the created movie
+
+
+
     return res.status(200).json({
       message: "Movie created successfully",
       movie: createdMovie,

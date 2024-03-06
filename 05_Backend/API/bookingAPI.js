@@ -4,14 +4,14 @@ const Bookings = require('../schema/bookings.js')
 const Users = require('../schema/users.js')
 const Movies = require('../schema/movies.js')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
-const { check_user } = require('../validator/checkRole')
-
+const { check_user } = require('../validator/RoleValidator.js')
+const { validateSeatData, validateBookingData } = require('../validator/bookingValidator.js')
 
 // Book a movie
 router.post('/postBooking/:id', async (req, res) => {
     try {
-        const movieId = req.params.id;
-        const seats = req.body.seats;
+        const movieId = req.params.id
+        const bookingData = req.body
         const token = req.headers.authorization;
         // console.log(token)
         if (!token_provided(token)) {
@@ -25,23 +25,40 @@ router.post('/postBooking/:id', async (req, res) => {
         }
 
         const movie = await Movies.findById(movieId)
-        
-        if (movie.availableSeats < 1 || movie.availableSeats < seats) {
+        // console.log(bookingData)
+        if(!validateBookingData(bookingData)){
+            return res.status(400).send({message : "Booking data is incomplete. Please provide all required fields."})
+
+        }
+        if (!validateSeatData(seatsRequested, movie.availableSeats)) {
             return res.status(400).send({ error: "Seats Not Available." })
         }
         
         const user = await Users.findOne({ username: decodedToken.username })
         const date = new Date()
-        console.log(date.toISOString().split('T')[0])
-        const newBooking = await Bookings.create({
-            movie_id: movieId,
-            seatsBooked: seats,
-            totalPrice: seats * movie.price,
-            timestamp: date.toISOString().split('T')[0],
-            user_id: user._id
-        });
 
-        movie.availableSeats -= seats
+        const newBookingData = {
+            movie_id: movie._id,
+            seatsBooked: bookingData.seats,
+            totalPrice: bookingData.seats * movie.price,
+            timestamp: date,
+            user_id: user._id
+        }
+
+        console.log(newBookingData)
+        if (!validateBookingData(newBookingData)) {
+            return res.status(400).send({ message: "Booking data is incomplete or invalid." })
+        }
+        if (!validateSeatData(bookingData.seats, movie.availableSeats)) {
+            return res.status(400).send({ error: "Seats Not Available." })
+        }
+
+        const newBooking = await Bookings.create(newBookingData)
+        console.log("1")
+        console.log(newBooking)
+        console.log("2")
+
+        movie.availableSeats -= bookingData.seats
         await movie.save()
 
         res.status(201).json({ message: "New booking created", booking_details: newBooking })
@@ -88,11 +105,11 @@ router.get('/myBooking', async (req, res) => {
 });
 
 // Cancel a booking
-router.delete("/cancelBooking/:id/", async(req, res) => {
+router.delete("/cancelBooking/:id/", async (req, res) => {
     try {
         const bookingId = req.params.id
         const token = req.headers.authorization // Extract the JWT token from the request headers
-        
+
         // Check if the JWT token is provided
         if (!token_provided(token)) {
             return res.status(401).json({ error: "Access denied. Token not provided." })

@@ -1,4 +1,4 @@
-const { jwt, bcrypt } = require('../utils/auth')
+const { jwt } = require('../utils/auth')
 require('dotenv').config()
 
 /**

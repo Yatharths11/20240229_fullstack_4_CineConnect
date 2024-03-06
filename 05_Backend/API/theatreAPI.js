@@ -2,7 +2,8 @@ const router = require('../utils/router');
 const Theatres = require('../schema/theatre')
 const Movies = require('../schema/movies')
 const { token_provided, verifyToken } = require('../validator/tokenValidator')
-const { check_admin, check_superAdmin } = require('../validator/checkRole')
+const { check_admin, check_superAdmin } = require('../validator/RoleValidator')
+const { validateTheatrePost ,validateTheatreUpdate } = require('../validator/theatreValidator')
 
 
 // API to get all the list of theatres and their details
@@ -26,13 +27,13 @@ router.get('/theatreDetails/:id', async (req, res) => {
         res.status(200).json(theatre)
     } catch (err) {
         console.error("Error retrieving theatre details:", err)
-        res.status(500).json({ error: "Internal Server Error" })
+        return res.status(500).json({ error: "Internal Server Error" })
     }
 })
 
 
 // API to create a new theatre
-router.post('/post', async (req, res) => {
+router.post('/postTheatre', async (req, res) => {
     try {
         // Extract the token from the request headers
         const token = req.headers.authorization
@@ -48,9 +49,12 @@ router.post('/post', async (req, res) => {
         }
         // Create a new theatre based on the request body
         const theatre = req.body
+        if(!validateTheatrePost(theatre)){
+            return res.status(400).send({message : "Theatre data is incomplete"})
+        }
         const newTheatre = await Theatres.create(theatre)
         // Return the newly created theatre
-        res.status(201).json(newTheatre)
+        return res.status(201).json(newTheatre)
     } catch (err) {
         console.error("Error creating theatre:", err)
         res.status(500).json({ error: "Internal Server Error" })
@@ -71,21 +75,21 @@ router.put("/updateTheatre/:id", async (req, res) => {
 
         // Verify the token
         const decodedToken = verifyToken(token)
-        console.log(decodedToken)
         // Check if the user is authorized to update a theatre
         if (!decodedToken || (!check_admin(token) && !check_superAdmin(token))) {
             return res.status(401).json({ error: "Sorry, you're not authorized to update a theatre." })
         }
-
+        if(!validateTheatreUpdate(req.body)){
+            return res.status(400).send("Data body is empty or name shouldn't contain any symbols or number and adrress should be String.")
+        }
         const updatedTheatre = await Theatres.findByIdAndUpdate(
             theaterId,
             req.body, // Update with the data provided in req.body
-            { new: true}
-        );
+        )
         if (!updatedTheatre) {
-            return res.status(404).json({ message: 'Theater not found' })
+            return res.status(404).json({ message: "Theater not found" })
         }
-        res.status(200).json(updatedTheatre)
+        res.status(200).json({message : "Theatre Details Updated Sucessfully"})
     } catch (err) {
         console.error("Error updating theatre:", err)
         res.status(500).json({ error: "Internal Server Error" })

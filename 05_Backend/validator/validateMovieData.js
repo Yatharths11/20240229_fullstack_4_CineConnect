@@ -1,12 +1,11 @@
 // Validate movie Data
 /**
- * @function validateMovieData
- * @param {Body} data 
- * @returns movie data 
+ * @function validateMovieData - This function is utilised to validata values provided inside data Object.
+ * @param {Object} data - Takes an object for validation for Movie Data
+ * @returns {boolean} - Return an boolean value
  * 
  * To Validate all fields of Movie Data
  */
-
 function validateMovieData(data) {
     const {
         name,

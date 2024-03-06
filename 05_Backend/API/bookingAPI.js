@@ -23,12 +23,15 @@ router.post('/postBooking/:id', async (req, res) => {
         }
 
         const movie = await Movies.findById(movieId)
-        if (!movie) {
-            return res.status(404).send({ error: "Movie requested for booking doesn't exist" })
+        // console.log(bookingData)
+        if(!validateBookingData(bookingData)){
+            return res.status(400).send({message : "Booking data is incomplete. Please provide all required fields."})
+
         }
-
-
-
+        if (!validateSeatData(seatsRequested, movie.availableSeats)) {
+            return res.status(400).send({ error: "Seats Not Available." })
+        }
+        
         const user = await Users.findOne({ username: decodedToken.username })
         const date = new Date()
 

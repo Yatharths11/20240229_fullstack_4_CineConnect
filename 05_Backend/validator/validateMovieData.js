@@ -78,10 +78,12 @@ function validateMovieData(data) {
         return { valid: false, error: "Available seats must be a non-negative number and cannot exceed 1200." };
     }
 
+
     // Validate PG rating
-    if (typeof pgRating !== 'string' || pgRating.trim() === '') {
-        return { valid: false, error: "PG Rating must be a non-empty string." };
+    if (typeof pgRating !== 'string' || pgRating.trim() === '' || !["G", "PG", "PG-13", "R", "NC-17"].includes(pgRating)) {
+        return { valid: false, error: "PG Rating must be a non-empty string and must be one of the following values: 'G', 'PG', 'PG-13', 'R', 'NC-17'." };
     }
+
 
     // Convert the date to the desired format "YYYY-MM-DD"
     const formattedDate = myDate.toISOString().split('T')[0];

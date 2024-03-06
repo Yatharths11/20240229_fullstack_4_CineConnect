@@ -18,9 +18,9 @@ const bookingRoutes = require("./API/bookingAPI.js")
 
 
 if (mongoose.connect(URI)) {
-  console.log("Connected to Database Successfully.")
+  console.log("🚀 Connected to Database Successfully 🚀")
   app.listen(process.env.PORT, () => {
-    console.log("Server is running.")
+    console.log("🚀 Server is running 🚀")
   })
 } else {
   console.log("Failed to Connected.")

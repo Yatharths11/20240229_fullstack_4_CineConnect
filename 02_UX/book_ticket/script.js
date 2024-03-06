@@ -80,6 +80,29 @@ container.addEventListener("click", (e) => {
   }
 });
 
+function showDetails(theater, showtime) {
+  const details = document.querySelector(".showdetails")
+  details.innerHTML=`<h5>${theater} </h5><h5>${showtime}</h5>`
+  // You can perform other actions with the retrieved data
+}
+
+
+
+details.addEventListener("click",(e)=>{
+  
+})
+
+container.addEventListener("click", (e) => {
+  if (
+      e.target.classList.contains("seat") &&
+      !e.target.classList.contains("occupied")
+  ) {
+      e.target.classList.toggle("selected");
+
+      updateCountAndTotal();
+  }
+});
+
 // update count and total happens only on event change
 // we need to trigger the updateCountAndTotal()
 updateCountAndTotal();

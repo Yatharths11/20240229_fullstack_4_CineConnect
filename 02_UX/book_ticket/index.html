@@ -10,109 +10,135 @@
 
 <body>
   <!-- partial:index.partial.html -->
-
-  <body>
-    <div class="movie-container">
-      <h2>CineConnect</h2>
-      <label>Select a Movie:</label>
-      <select id="movie">
-        <option value="Select a movie">Select a Theatre</option>
-        <option value="15">PVR</option>
-        <option value="10">INOX</option>
-        <option value="12">CINEPLEX</option>
-        <option value="8">AM CINEMA</option>
-      </select>
+  <div class="body">
+    <div class="half theaterlist">
+      <div class="theater">
+        <h3>PVR</h3>
+        <button onclick="showDetails('PVR', '6:00 PM | 8:30 PM')"><h5>6:00 PM | 8:30 PM</h5></button>
+        <button onclick="showDetails('PVR', '9:00 PM | 11:30 PM')"><h5> 9:00 PM | 11:30 PM</h5></button>
+      </div>
+      <div class="theater">
+        <h3>PVR</h3>
+        <button onclick="showDetails('PVR', '6:00 PM | 8:30 PM')"><h5>6:00 PM | 8:30 PM</h5></button>
+        <button onclick="showDetails('PVR', '9:00 PM | 11:30 PM')"><h5> 9:00 PM | 11:30 PM</h5></button>
+      </div>
+      <div class="theater">
+        <h3>PVR</h3>
+        <button onclick="showDetails('PVR', '6:00 PM | 8:30 PM')"><h5>6:00 PM | 8:30 PM</h5></button>
+        <button onclick="showDetails('PVR', '9:00 PM | 11:30 PM')"><h5> 9:00 PM | 11:30 PM</h5></button>
+      </div>
+      <div class="theater">
+        <h3>PVR</h3>
+        <button onclick="showDetails('PVR', '6:00 PM | 8:30 PM')"><h5>6:00 PM | 8:30 PM</h5></button>
+        <button onclick="showDetails('PVR', '9:00 PM | 11:30 PM')"><h5> 9:00 PM | 11:30 PM</h5></button>
+      </div>
+      <div class="theater">
+        <h3>PVR</h3>
+        <button onclick="showDetails('PVR', '6:00 PM | 8:30 PM')"><h5>6:00 PM | 8:30 PM</h5></button>
+        <button onclick="showDetails('PVR', '9:00 PM | 11:30 PM')"><h5> 9:00 PM | 11:30 PM</h5></button>
+      </div>
+      
     </div>
-
-    <ul class="showcase">
-      <li>
-        <div class="seat"></div>
-        <small>Available</small>
-      </li>
-      <li>
-        <div class="seat selected"></div>
-        <small>Selected</small>
-      </li>
-      <li>
-        <div class="seat occupied"></div>
-        <small>Occupied</small>
-      </li>
-    </ul>
-
-    <div class="container">
-      <div class="screen"></div>
-
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
+    <div class="half seats">
+      <div class="movie-container">
+        <h2>CineConnect</h2>
+        <div class="showdetails">
+          
+        </div>
       </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
+  
+      <ul class="showcase">
+        <li>
+          <div class="seat"></div>
+          <small>Available</small>
+        </li>
+        <li>
+          <div class="seat selected"></div>
+          <small>Selected</small>
+        </li>
+        <li>
+          <div class="seat occupied"></div>
+          <small>Occupied</small>
+        </li>
+      </ul>
+  
+      <div class="container">
+        <div class="screen"></div>
+  
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat occupied"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat occupied"></div>
+          <div class="seat"></div>
+        </div>
       </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat occupied"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-      <div class="row">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat occupied"></div>
-        <div class="seat"></div>
-      </div>
+  
+      <p class="text">
+        You have selected <span id="count">0</span> movies for price of $<span id="total">0</span>
+      </p>
+      <!-- <script src="script.js"></script> -->
+  
+      <button style="height: 35px;width: 100px; background-color: red; color: white;">PAY</button>
+  
+      <script src="script.js"></script>
     </div>
+  </div>
 
-    <p class="text">
-      You have selected <span id="count">0</span> movies for price of $<span id="total">0</span>
-    </p>
-    <!-- <script src="script.js"></script> -->
 
-    <button style="height: 35px;width: 100px; background-color: red; color: white;">PAY</button>
-
-    <script src="script.js"></script>
-  </body>
   <!-- partial -->
   <script src="./script.js"></script>
 

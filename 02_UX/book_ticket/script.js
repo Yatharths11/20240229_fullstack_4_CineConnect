@@ -72,10 +72,9 @@ selectMovie.addEventListener("change", (e) => {
 container.addEventListener("click", (e) => {
   if (
     e.target.classList.contains("seat") &&
-    !e.target.classList.contains("occupied")
+    !e.target.classList.contains("occupied") 
   ) {
     e.target.classList.toggle("selected");
-
     updateCountAndTotal();
   }
 });
@@ -85,9 +84,6 @@ function showDetails(theater, showtime) {
   details.innerHTML=`<h5>${theater} </h5><h5>${showtime}</h5>`
   // You can perform other actions with the retrieved data
 }
-
-
-
 details.addEventListener("click",(e)=>{
   
 })

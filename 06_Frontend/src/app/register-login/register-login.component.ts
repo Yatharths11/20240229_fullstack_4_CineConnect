@@ -7,7 +7,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./register-login.component.css']
 })
 
-export class RegisterLoginComponent {
+export class RegisterLoginComponent{
+  isformInvalid: boolean = false;
+
   registerForm = new FormGroup({
      userName: new FormControl('', [
        Validators.required,
@@ -24,4 +26,17 @@ export class RegisterLoginComponent {
        Validators.minLength(6)
      ])
   });
+
+  get username(){
+    return this.registerForm.get('username');
+  }
+
+  get email(){
+    return this.registerForm.get('email');
+  }
+
+  get password(){
+    return this.registerForm.get('password');
+  }
+
  }

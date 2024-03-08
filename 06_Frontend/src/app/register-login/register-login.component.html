@@ -13,7 +13,7 @@
                                     <div class="section text-center">
                                         <h4 class="mb-4 pb-3">Log In</h4>
                                         <!-- Form Group for Email -->
-                                        <form [formGroup]="registerForm">
+                                        <form [formGroup]="registerForm" >
                                             <div class="form-group">
                                                 <i class="input-icon uil uil-at"></i>
                                                 <input type="email" formControlName="email" name="logemail"
@@ -21,10 +21,10 @@
                                                     autocomplete="off">
                                             </div>
                                             <div
-                                                *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['required']">
+                                                *ngIf=" registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
                                                 Email is required.</div>
                                             <div
-                                                *ngIf=" (registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['email']">
+                                                *ngIf=" registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">
                                                 Email is not valid.</div>
                                         </form>
                                         <!-- Form Group for Password -->
@@ -37,15 +37,16 @@
                                                     autocomplete="off">
 
                                                 <div
-                                                    *ngIf="(registerForm.controls.password.dirty || registerForm.controls.password.touched) && registerForm.controls.password.errors?.['required']">
+                                                    *ngIf="registerForm.controls.password.touched && registerForm.controls.password.errors?.['required']">
                                                     Password is required.</div>
                                                 <div
-                                                    *ngIf="(registerForm.controls.password.dirty || registerForm.controls.password.touched) && registerForm.controls.password.errors?.['minlength']">
+                                                    *ngIf="registerForm.controls.password.touched && registerForm.controls.password.errors?.['minlength']">
                                                     Password must be at least 6 characters long.</div>
                                             </div>
                                         </form>
 
-                                        <a href="#" class="btn mt-4">Login</a>
+                                        <button type="button" class="btn mt-4" [disabled]="registerForm.controls.email.errors || registerForm.controls.password.errors">Login</button>
+
                                         <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
                                                 password?</a></p>
                                     </div>
@@ -63,16 +64,16 @@
                                                     autocomplete="off">
                                                 <i class="input-icon uil uil-user"></i>
                                                 <div
-                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['required']">
+                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['required']">
                                                     UserName is required.</div>
                                                 <div
-                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['minlength']">
+                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['minlength']">
                                                     UserName must be at least 4 characters long.</div>
                                                 <div
-                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['maxlength']">
+                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['maxlength']">
                                                     UserName cannot be more than 100 characters long.</div>
                                                 <div
-                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['pattern']">
+                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['pattern']">
                                                     UserName can only contain alphanumeric .</div>
                                             </div></form>
                                         <br>
@@ -84,10 +85,10 @@
                                                     autocomplete="off">
                                                 <i class="input-icon uil uil-at"></i>
                                                 <div
-                                                    *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['required']">
+                                                    *ngIf="registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
                                                     Email is required.</div>
                                                 <div
-                                                    *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['email']">
+                                                    *ngIf="registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">
                                                     Email is not valid.</div>
                                             </div>
                                         </form>
@@ -101,15 +102,15 @@
                                                     autocomplete="off">
                                                 <i class="input-icon uil uil-lock-alt"></i>
                                                 <div
-                                                    *ngIf="(registerForm.controls.password.dirty || registerForm.controls.email.touched) && registerForm.controls.password.errors?.['required']">
+                                                    *ngIf="registerForm.controls.email.touched && registerForm.controls.password.errors?.['required']">
                                                     Password is required.</div>
-                                                <div *ngIf="(registerForm.controls.password.dirty || registerForm.controls.email.touched) && registerForm.controls.password.errors?.['minlength']">Password
+                                                <div *ngIf="registerForm.controls.email.touched && registerForm.controls.password.errors?.['minlength']">Password
                                                     must be at least 6 characters long.</div>
                                             </div>
                                         </form>
                                         
                                         <!-- Form Groups for Sign Up are similar to Log In, but ensure unique IDs and names -->
-                                        <a href="#" class="btn mt-4">submit</a>
+                                        <button type="button" class="btn mt-4" [disabled]="registerForm.controls.email.errors || registerForm.controls.password.errors">Submit</button>
                                     </div>
                                 </div>
                             </div>

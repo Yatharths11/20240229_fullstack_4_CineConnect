@@ -23,5 +23,23 @@ export class RegisterLoginComponent {
        Validators.required,
        Validators.minLength(6)
      ])
-  });
+  })
+  
+  email: string = '';
+  showWarning: boolean = false;
+
+  onFocus() {
+    this.showWarning = false;
+  }
+
+  onBlur() {
+    this.showWarning = true;
+  }
+
+  isValidEmail() {
+    // Implement your email validation logic
+    // For simplicity, this example uses a basic regex for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(this.email);
+  }
  }

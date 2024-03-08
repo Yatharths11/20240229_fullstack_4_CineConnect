@@ -16,9 +16,12 @@
                                         <form [formGroup]="registerForm">
                                             <div class="form-group">
                                                 <i class="input-icon uil uil-at"></i>
-                                                <input type="email" formControlName="email" name="logemail"
+                                                <input type="email" [(ngModel)]="email"
+                                                (focus)="onFocus()"
+                                                (blur)="onBlur()" formControlName="email" name="logemail"
                                                     class="form-style" placeholder="Your Email" id="logemail"
                                                     autocomplete="off">
+                                                    <div *ngIf="showWarning && !isValidEmail()">Username cannot be empty or invalid</div>
                                             </div>
                                             <div
                                                 *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['required']">

@@ -7,7 +7,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./register-login.component.css']
 })
 
-export class RegisterLoginComponent {
+export class RegisterLoginComponent{
+  isformInvalid: boolean = false;
+
   registerForm = new FormGroup({
      userName: new FormControl('', [
        Validators.required,
@@ -23,23 +25,19 @@ export class RegisterLoginComponent {
        Validators.required,
        Validators.minLength(6)
      ])
-  })
-  
-  email: string = '';
-  showWarning: boolean = false;
 
-  onFocus() {
-    this.showWarning = false;
+  });
+
+  get username(){
+    return this.registerForm.get('username');
   }
 
-  onBlur() {
-    this.showWarning = true;
+  get email(){
+    return this.registerForm.get('email');
   }
 
-  isValidEmail() {
-    // Implement your email validation logic
-    // For simplicity, this example uses a basic regex for email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(this.email);
+  get password(){
+    return this.registerForm.get('password');
   }
+
  }

@@ -16,9 +16,11 @@
                                         <form [formGroup]="registerForm" >
                                             <div class="form-group">
                                                 <i class="input-icon uil uil-at"></i>
-                                                <input type="email" formControlName="email" name="logemail"
+                                                <input type="email" [(ngModel)]="email"
+                                                (focus)="onFocus()"
+                                                (blur)="onBlur()" formControlName="email" name="logemail"
                                                     class="form-style" placeholder="Your Email" id="logemail"
-                                                    autocomplete="off" (focus)="onFocus('userName')" (blur)="onBlur('userName')">
+                                                    autocomplete="off">
                                             </div>
                                             <div
                                                 *ngIf=" registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">

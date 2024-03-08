@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payments Hub</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .payment-form {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .form-fields input {
+            width: calc(50% - 5px);
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .checkbox-section {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .checkbox-section input {
+            margin-right: 10px;
+        }
+
+        .button-section {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .billing-section {
+            margin-top: 20px;
+        }
+
+        .order-summary,
+        .payment-confirmation,
+        .security-assurance {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="Logo">
+        <div>
+            <span>Welcome [User's Name]</span>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="payment-form">
+        <div class="tabs">
+            <button onclick="changeTab('credit-card')">Credit Card</button>
+            <button onclick="changeTab('paypal')">PayPal</button>
+        </div>
+
+        <div class="form-fields" id="credit-card-tab">
+            <!-- Credit Card Fields -->
+            <input type="text" placeholder="Cardholder's Name">
+            <input type="text" placeholder="Card Number">
+            <input type="text" placeholder="Expiry Date">
+            <input type="text" placeholder="CVV">
+
+            <div class="checkbox-section">
+                <input type="checkbox" id="save-details">
+                <label for="save-details">Save card details</label>
+            </div>
+
+            <div class="button-section">
+                <button onclick="processPayment()">Pay Now</button>
+            </div>
+        </div>
+
+        <div class="form-fields" id="paypal-tab" style="display: none;">
+            <!-- PayPal Fields -->
+            <p>PayPal integration goes here...</p>
+        </div>
+
+        <div class="billing-section">
+            <div class="checkbox-section">
+                <input type="checkbox" id="use-same-info">
+                <label for="use-same-info">Use the same information as provided during registration</label>
+            </div>
+
+            <div class="form-fields" id="billing-info">
+                <!-- Billing Information Fields -->
+                <input type="text" placeholder="Full Name">
+                <input type="text" placeholder="Address">
+                <input type="text" placeholder="City">
+                <input type="text" placeholder="Country">
+                <input type="text" placeholder="ZIP Code">
+            </div>
+        </div>
+    </div>
+
+    <div class="order-summary">
+        <!-- Order Summary Section -->
+        <h2>Order Summary</h2>
+        <!-- Display items in the
+                    <!-- Display items in the cart with quantities and prices -->
+        <div class="cart-item">
+            <span>Product 1</span>
+            <span>Quantity: 2</span>
+            <span>Price: $20.99</span>
+        </div>
+
+        <div class="cart-item">
+            <span>Product 2</span>
+            <span>Quantity: 1</span>
+            <span>Price: $15.49</span>
+        </div>
+
+        <!-- Total amount payable -->
+        <div class="total-amount">
+            <span>Total Amount Payable: $36.48</span>
+        </div>
+    </div>
+
+    <div class="payment-confirmation">
+        <!-- Payment Confirmation Section -->
+        <h2>Payment Confirmation</h2>
+        <!-- Visual confirmation of successful payment -->
+        <p>Visual confirmation of successful payment goes here...</p>
+        <!-- Receipt details -->
+        <div class="receipt-details">
+            <span>Transaction ID: 123456789</span>
+            <span>Date: March 5, 2024</span>
+            <span>Amount: $36.48</span>
+        </div>
+    </div>
+
+    <div class="security-assurance">
+        <!-- Security Assurance Section -->
+        <h2>Security Assurance</h2>
+        <!-- Icons indicating secure payment methods -->
+        <p>Icons indicating secure payment methods go here...</p>
+        <!-- Assurance text about secure transactions -->
+        <p>Your payment is secure with us. We use industry-standard security measures to protect your information.</p>
+    </div>
+
+    <footer>
+        <!-- Footer Section -->
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+    </footer>
+
+    <script>
+        function changeTab(tabName) {
+            // Function to switch between Credit Card and PayPal tabs
+            document.getElementById('credit-card-tab').style.display = tabName === 'credit-card' ? 'flex' : 'none';
+            document.getElementById('paypal-tab').style.display = tabName === 'paypal' ? 'flex' : 'none';
+        }
+
+        function processPayment() {
+            // Function to handle the payment process
+            alert('Payment processed successfully!');
+        }
+    </script>
+
+</body>
+</html>

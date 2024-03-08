@@ -25,6 +25,7 @@ export class RegisterLoginComponent{
        Validators.required,
        Validators.minLength(6)
      ])
+
   });
 
   get username(){

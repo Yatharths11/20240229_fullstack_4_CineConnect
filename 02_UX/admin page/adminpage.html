@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Management System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eae2b7;
+            color: #003049;
+            transition: background-color 0.5s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d62828;
+            padding: 10px 20px;
+            color: #eae2b7;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .auth-buttons button {
+            padding: 8px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            background-color: #f77f00;
+            border: none;
+            border-radius: 5px;
+            color: #eae2b7;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .auth-buttons button:hover {
+            background-color: #fcbf49;
+            color: #003049;
+        }
+
+        .left-sidebar {
+            width: 200px;
+            background-color: #003049;
+            padding: 20px;
+            color: #eae2b7;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: width 0.5s;
+        }
+
+        .left-sidebar h3 {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .left-sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            background-color: #f77f00;
+            border: none;
+            border-radius: 5px;
+            color: #eae2b7;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .left-sidebar button:hover {
+            background-color: #fcbf49;
+            color: #003049;
+        }
+
+        .content-area {
+            margin-left: 200px;
+            padding: 20px;
+            transition: margin-left 0.5s, opacity 0.5s;
+            opacity: 1;
+        }
+
+        .movie-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .movie-card {
+            flex: 1 0 200px;
+            margin: 10px;
+            padding: 15px;
+            background-color: #eae2b7;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .movie-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .movie-details {
+            flex-grow: 1;
+        }
+
+        .movie-details h4 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+
+        .movie-details p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .action-buttons button {
+            padding: 8px 15px;
+            cursor: pointer;
+            background-color: #003049;
+            border: none;
+            border-radius: 5px;
+            color: #eae2b7;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons button:hover {
+            background-color: #f77f00;
+            color: #eae2b7;
+        }
+
+        .form-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: #eae2b7;
+            border: 1px solid #003049;
+            border-radius: 8px;
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s;
+            opacity: 1;
+        }
+
+        .form-container input,
+        .form-container select {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #003049;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #003049;
+            border: none;
+            border-radius: 5px;
+            color: #eae2b7;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #f77f00;
+            color: #eae2b7;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Logo</div>
+    <div class="auth-buttons">
+        <button>Login</button>
+        <button>Register</button>
+    </div>
+</nav>
+
+<div class="left-sidebar" id="leftSidebar">
+    <h3>Menu</h3>
+    <button onclick="toggleContent('create')">Create New Movie</button>
+    <button onclick="toggleContent('update')">Update Movie</button>
+    <button onclick="toggleContent('details')">See Details</button>
+    <button onclick="toggleContent('remove')">Remove Movie</button>
+</div>
+
+<div class="content-area" id="contentArea">
+    <div class="movie-list" id="movieList">
+        <!-- Movie list -->
+
+        <div class="movie-card" onclick="toggleContent('details', 1)">
+            <img src="movie1.jpg" alt="Movie 1">
+            <div class="movie-details">
+                <h4>Movie 1</h4>
+                <p>Genre: Action</p>
+                <p>Rating: 8</p>
+                <p>Price: $10.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 1)">Update</button>
+                <button onclick="toggleContent('remove', 1)">Remove</button>
+            </div>
+        </div>
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+
+        <div class="movie-card" onclick="toggleContent('details', 2)">
+            <img src="movie2.jpg" alt="Movie 2">
+            <div class="movie-details">
+                <h4>Movie 2</h4>
+                <p>Genre: Comedy</p>
+                <p>Rating: 7.5</p>
+                <p>Price: $8.99</p>
+            </div>
+            <div class="action-buttons">
+                <button onclick="toggleContent('update', 2)">Update</button>
+                <button onclick="toggleContent('remove', 2)">Remove</button>
+            </div>
+        </div>
+
+
+        <!-- Add more movie cards as needed -->
+
+    </div>
+</div>
+
+<div class="form-container" id="formContainer">
+    <form id="movieForm">
+        <!-- Form fields for creating/updating movie will be dynamically populated here -->
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Dummy data for movie list
+    const movies = [
+        { id: 1, name: "Movie 1", genre: "Action", rating: 8, price: "$10.99", image: "movie1.jpg" },
+        { id: 2, name: "Movie 2", genre: "Comedy", rating: 7.5, price: "$8.99", image: "movie2.jpg" },
+        // Add more movies as needed
+    ];
+
+    // Function to display movies in the movie list
+    function displayMovies() {
+        const movieListContainer = document.getElementById('movieList');
+        movieListContainer.innerHTML = '';
+
+        movies.forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.classList.add('movie-card');
+            movieCard.innerHTML = `
+                <img src="${movie.image}" alt="${movie.name}">
+                <div class="movie-details">
+                    <h4>${movie.name}</h4>
+                    <p>Genre: ${movie.genre}</p>
+                    <p>Rating: ${movie.rating}</p>
+                    <p>Price: ${movie.price}</p>
+                </div>
+                <div class="action-buttons">
+                    <button onclick="toggleContent('update', ${movie.id})">Update</button>
+                    <button onclick="toggleContent('details', ${movie.id})">Details</button>
+                    <button onclick="toggleContent('remove', ${movie.id})">Remove</button>
+                </div>
+            `;
+            movieCard.addEventListener('click', () => toggleContent('details', movie.id));
+            movieListContainer.appendChild(movieCard);
+        });
+    }
+
+    // Function to show/hide the form container and content area with fade-in effect
+    function toggleContent(action, movieId = null) {
+        const formContainer = document.getElementById('formContainer');
+        const contentArea = document.getElementById('contentArea');
+
+        // Handle form fields and submit button based on the action
+        const movieForm = document.getElementById('movieForm');
+        if (action === 'create') {
+            movieForm.innerHTML = `
+                <input type="text" placeholder="Movie Name" required>
+                <input type="text" placeholder="Genre" required>
+                <input type="number" placeholder="Rating" step="0.1" required>
+                <input type="text" placeholder="Price" required>
+                <input type="text" placeholder="Image URL" required>
+            `;
+        } else if (action === 'update') {
+            const movieDetails = movies.find(movie => movie.id === movieId);
+            if (movieDetails) {
+                alert(`Movie Details:\nName: ${movieDetails.name}\nGenre: ${movieDetails.genre}\nRating: ${movieDetails.rating}\nPrice: ${movieDetails.price}`);
+            }
+        } else if (action === 'remove') {
+            const movieToRemove = movies.find(movie => movie.id === movieId);
+            if (movieToRemove) {
+                const confirmRemove = confirm(`Are you sure you want to remove ${movieToRemove.name}?`);
+                if (confirmRemove) {
+                    // Remove the movie from the array
+                    movies.splice(movies.indexOf(movieToRemove), 1);
+                    // Update the displayed movie list
+                    displayMovies();
+                    alert(`${movieToRemove.name} has been removed from the database.`);
+                }
+            }
+        }
+
+        // Toggle display of form container and content area with fade-in effect
+        formContainer.style.display = 'flex';
+        contentArea.style.opacity = formContainer.style.display === 'none' ? '1' : '0';
+        setTimeout(() => {
+            contentArea.style.marginLeft = formContainer.style.display === 'none' ? '200px' : '0';
+            contentArea.style.opacity = '1';
+        }, 500);
+    }
+
+    // Display the initial list of movies
+    displayMovies();
+</script>
+
+</body>
+</html>
+
+

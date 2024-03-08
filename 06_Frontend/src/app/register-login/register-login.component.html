@@ -18,7 +18,7 @@
                                                 <i class="input-icon uil uil-at"></i>
                                                 <input type="email" formControlName="email" name="logemail"
                                                     class="form-style" placeholder="Your Email" id="logemail"
-                                                    autocomplete="off">
+                                                    autocomplete="off" (focus)="onFocus('userName')" (blur)="onBlur('userName')">
                                             </div>
                                             <div
                                                 *ngIf=" registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">

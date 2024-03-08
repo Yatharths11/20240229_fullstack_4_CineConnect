@@ -39,4 +39,16 @@ export class RegisterLoginComponent{
     return this.registerForm.get('password');
   }
 
+  // Method to handle input focus
+  onFocus(controlName: string) {
+    console.log(this.registerForm.get(controlName)!.markAsUntouched());
+    
+    return this.registerForm.get(controlName)!.markAsUntouched();
+  }
+
+  // Method to handle input blur
+  onBlur(controlName: string) {
+    this.registerForm.get(controlName)!.markAsTouched();
+  }
+
  }

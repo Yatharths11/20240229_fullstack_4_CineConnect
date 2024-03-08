@@ -1,0 +1,122 @@
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                    <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Log In</h4>
+                                        <!-- Form Group for Email -->
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <i class="input-icon uil uil-at"></i>
+                                                <input type="email" formControlName="email" name="logemail"
+                                                    class="form-style" placeholder="Your Email" id="logemail"
+                                                    autocomplete="off">
+                                            </div>
+                                            <div
+                                                *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['required']">
+                                                Email is required.</div>
+                                            <div
+                                                *ngIf=" (registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['email']">
+                                                Email is not valid.</div>
+                                        </form>
+                                        <!-- Form Group for Password -->
+                                        <br>
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                <input type="password" formControlName="password" name="logpass"
+                                                    class="form-style" placeholder="Your Password" id="logpass"
+                                                    autocomplete="off">
+
+                                                <div
+                                                    *ngIf="(registerForm.controls.password.dirty || registerForm.controls.password.touched) && registerForm.controls.password.errors?.['required']">
+                                                    Password is required.</div>
+                                                <div
+                                                    *ngIf="(registerForm.controls.password.dirty || registerForm.controls.password.touched) && registerForm.controls.password.errors?.['minlength']">
+                                                    Password must be at least 6 characters long.</div>
+                                            </div>
+                                        </form>
+
+                                        <a href="#" class="btn mt-4">Login</a>
+                                        <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
+                                                password?</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Back for Sign Up -->
+                            <div class="card-back">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Sign Up</h4>
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <input type="text" formControlName="userName" name="logname"
+                                                    class="form-style" placeholder="Your User Name" id="logname"
+                                                    autocomplete="off">
+                                                <i class="input-icon uil uil-user"></i>
+                                                <div
+                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['required']">
+                                                    UserName is required.</div>
+                                                <div
+                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['minlength']">
+                                                    UserName must be at least 4 characters long.</div>
+                                                <div
+                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['maxlength']">
+                                                    UserName cannot be more than 100 characters long.</div>
+                                                <div
+                                                    *ngIf="(registerForm.controls.userName.dirty || registerForm.controls.userName.touched) && registerForm.controls.userName.errors?.['pattern']">
+                                                    UserName can only contain alphanumeric .</div>
+                                            </div></form>
+                                        <br>
+                                        <!-- Form Group for Email -->
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <input type="email" formControlName="email" name="logemail"
+                                                    class="form-style" placeholder="Your Email" id="logemail"
+                                                    autocomplete="off">
+                                                <i class="input-icon uil uil-at"></i>
+                                                <div
+                                                    *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['required']">
+                                                    Email is required.</div>
+                                                <div
+                                                    *ngIf="(registerForm.controls.email.dirty || registerForm.controls.email.touched) && registerForm.controls.email.errors?.['email']">
+                                                    Email is not valid.</div>
+                                            </div>
+                                        </form>
+                                        
+                                        <!-- Form Group for Password -->
+                                        <br>
+                                        <form [formGroup]="registerForm">
+                                            <div class="form-group">
+                                                <input type="password" formControlName="password" name="logpass"
+                                                    class="form-style" placeholder="Your Password" id="logpass"
+                                                    autocomplete="off">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                <div
+                                                    *ngIf="(registerForm.controls.password.dirty || registerForm.controls.email.touched) && registerForm.controls.password.errors?.['required']">
+                                                    Password is required.</div>
+                                                <div *ngIf="(registerForm.controls.password.dirty || registerForm.controls.email.touched) && registerForm.controls.password.errors?.['minlength']">Password
+                                                    must be at least 6 characters long.</div>
+                                            </div>
+                                        </form>
+                                        
+                                        <!-- Form Groups for Sign Up are similar to Log In, but ensure unique IDs and names -->
+                                        <a href="#" class="btn mt-4">submit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

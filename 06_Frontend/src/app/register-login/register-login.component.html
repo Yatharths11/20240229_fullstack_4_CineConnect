@@ -12,22 +12,26 @@
                                 <div class="center-wrap">
                                     <div class="section text-center">
                                         <h4 class="mb-4 pb-3">Log In</h4>
-                                        <!-- Form Group for Email -->
-                                        <form [formGroup]="registerForm" >
+                                        <!-- Form Group for UserName -->
+                                        <form [formGroup]="registerForm">
                                             <div class="form-group">
                                                 <i class="input-icon uil uil-at"></i>
-                                                <input type="email" [(ngModel)]="email"
-                                                (focus)="onFocus()"
-                                                (blur)="onBlur()" formControlName="email" name="logemail"
+                                                <input type="email" formControlName="email" name="logemail"
                                                     class="form-style" placeholder="Your Email" id="logemail"
-                                                    autocomplete="off">
+                                                    autocomplete="off" (focus)="onFocus('userName')" (blur)="onBlur('userName')">
                                             </div>
                                             <div
-                                                *ngIf=" registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
-                                                Email is required.</div>
+                                                *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['required']">
+                                                UserName is required.</div>
                                             <div
-                                                *ngIf=" registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">
-                                                Email is not valid.</div>
+                                                *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['minlength']">
+                                                UserName must be at least 4 characters long.</div>
+                                            <div
+                                                *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['maxlength']">
+                                                UserName cannot be more than 100 characters long.</div>
+                                            <div
+                                                *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['pattern']">
+                                                UserName can only contain alphanumeric .</div>
                                         </form>
                                         <!-- Form Group for Password -->
                                         <br>
@@ -36,18 +40,19 @@
                                                 <i class="input-icon uil uil-lock-alt"></i>
                                                 <input type="password" formControlName="password" name="logpass"
                                                     class="form-style" placeholder="Your Password" id="logpass"
-                                                    autocomplete="off">
+                                                    autocomplete="off" (focus)="onFocus('password')" (blur)="onBlur('password')">
 
                                                 <div
-                                                    *ngIf="registerForm.controls.password.touched && registerForm.controls.password.errors?.['required']">
+                                                    *ngIf="!passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['required']">
                                                     Password is required.</div>
                                                 <div
-                                                    *ngIf="registerForm.controls.password.touched && registerForm.controls.password.errors?.['minlength']">
+                                                    *ngIf="!passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['minlength']">
                                                     Password must be at least 6 characters long.</div>
                                             </div>
                                         </form>
 
-                                        <button type="button" class="btn mt-4" [disabled]="registerForm.controls.email.errors || registerForm.controls.password.errors">Login</button>
+                                        <button type="button" class="btn mt-4"
+                                            [disabled]="registerForm.controls.email.errors || registerForm.controls.password.errors">Login</button>
 
                                         <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your
                                                 password?</a></p>
@@ -63,56 +68,60 @@
                                             <div class="form-group">
                                                 <input type="text" formControlName="userName" name="logname"
                                                     class="form-style" placeholder="Your User Name" id="logname"
-                                                    autocomplete="off">
+                                                    autocomplete="off" (focus)="onFocus('userName')" (blur)="onBlur('userName')">
                                                 <i class="input-icon uil uil-user"></i>
                                                 <div
-                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['required']">
+                                                    *ngIf=" !usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['required']">
                                                     UserName is required.</div>
                                                 <div
-                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['minlength']">
+                                                    *ngIf=" !usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['minlength']">
                                                     UserName must be at least 4 characters long.</div>
                                                 <div
-                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['maxlength']">
+                                                    *ngIf=" !usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['maxlength']">
                                                     UserName cannot be more than 100 characters long.</div>
                                                 <div
-                                                    *ngIf="registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['pattern']">
+                                                    *ngIf=" !usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['pattern']">
                                                     UserName can only contain alphanumeric .</div>
-                                            </div></form>
+                                            </div>
+                                        </form>
                                         <br>
                                         <!-- Form Group for Email -->
                                         <form [formGroup]="registerForm">
                                             <div class="form-group">
                                                 <input type="email" formControlName="email" name="logemail"
                                                     class="form-style" placeholder="Your Email" id="logemail"
-                                                    autocomplete="off">
+                                                    autocomplete="off" (focus)="onFocus('email')" (blur)="onBlur('email')">
                                                 <i class="input-icon uil uil-at"></i>
                                                 <div
-                                                    *ngIf="registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
+                                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
                                                     Email is required.</div>
                                                 <div
-                                                    *ngIf="registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">
+                                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">
                                                     Email is not valid.</div>
                                             </div>
                                         </form>
-                                        
+
                                         <!-- Form Group for Password -->
                                         <br>
                                         <form [formGroup]="registerForm">
                                             <div class="form-group">
                                                 <input type="password" formControlName="password" name="logpass"
                                                     class="form-style" placeholder="Your Password" id="logpass"
-                                                    autocomplete="off">
+                                                    autocomplete="off" (focus)="onFocus('password')" (blur) ="onBlur('password')">
                                                 <i class="input-icon uil uil-lock-alt"></i>
                                                 <div
-                                                    *ngIf="registerForm.controls.email.touched && registerForm.controls.password.errors?.['required']">
+                                                    *ngIf=" !passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['required']">
                                                     Password is required.</div>
-                                                <div *ngIf="registerForm.controls.email.touched && registerForm.controls.password.errors?.['minlength']">Password
+                                                <div
+                                                    *ngIf=" !passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['minlength']">
+                                                    Password
                                                     must be at least 6 characters long.</div>
                                             </div>
                                         </form>
-                                        
+
                                         <!-- Form Groups for Sign Up are similar to Log In, but ensure unique IDs and names -->
-                                        <button type="button" class="btn mt-4" [disabled]="registerForm.controls.email.errors || registerForm.controls.password.errors">Submit</button>
+                                        <button type="button" class="btn mt-4"
+                                            [disabled]="registerForm.controls.email.errors || registerForm.controls.password.errors">Submit</button>
                                     </div>
                                 </div>
                             </div>

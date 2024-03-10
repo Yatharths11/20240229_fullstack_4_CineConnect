@@ -14,7 +14,7 @@
               <span class="login-text04"><span>Login</span></span>
               <span class="login-text06"><span>Glad you’re back.!</span></span>
             </div>
-            <form class="login-credentials" [formGroup]="loginForm">
+            <form class="login-credentials" [formGroup] = "loginForm" >
               <input class="login-username" type="text" placeholder="Username" formControlName="userName"
                 (blur)="onBlur('userName')" (focus)="onFocus('userName')">
 

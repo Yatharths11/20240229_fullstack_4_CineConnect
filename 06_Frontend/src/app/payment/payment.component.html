@@ -1,0 +1,177 @@
+<div class="checkout-container">
+    <div class="checkout-checkout">
+        <form class="checkout-frame2" [formGroup]="paymentForm">
+            <img src="../../assets/external/rectangle5294-v6u7-200w.png" alt="Rectangle5294"
+                class="checkout-rectangle5" />
+            <div class="checkout-pay-form">
+                <button class="checkout-main-button">
+                    Pay with UPI
+                </button>
+                <div class="checkout-group4">
+                    <span class="checkout-text02"><span>Or pay with card</span></span>
+                    <img src="../../assets/external/line22910-aid.svg" alt="Line22910" class="checkout-line2" />
+                    <img src="../../assets/external/line32911-kmlqh.svg" alt="Line32911" class="checkout-line3" />
+                </div>
+                <div class="checkout-text-input">
+                    <span class="checkout-text04"><span>Email</span></span>
+                    <input class="checkout-backplate" type="email" placeholder="Email" formControlName="email"
+                        (blur)="onBlur('email')" (focus)="onFocus('email')">
+
+                    <div
+                        *ngIf="!inputFocused['email'] && paymentForm.controls.email.touched && paymentForm.controls.email.errors?.['required']">
+                        Email is required.</div>
+                    <div
+                        *ngIf="!inputFocused['email'] && paymentForm.controls.email.touched && paymentForm.controls.email.errors?.['email']">
+                        Email is not valid.</div>
+                    <div
+                        *ngIf="!inputFocused['email'] && paymentForm.controls.email.touched && paymentForm.controls.email.errors?.['pattern']">
+                        Domain not provided.</div>
+                </div>
+                <div class="checkout-frame6">
+                    <div class="checkout-text-input1">
+                        <span class="checkout-text06"><span>Card Number</span></span>
+                        <input class="checkout-backplate1" formControlName="card" type="number" (blur)="onBlur('card')"
+                            (focus)="onFocus('card')">
+                        <div
+                            *ngIf="!inputFocused['card'] && paymentForm.controls.card.touched && paymentForm.controls.card.errors?.['required']">
+                            Card number is required.</div>
+                        <div
+                            *ngIf="!inputFocused['card'] && paymentForm.controls.card.touched && paymentForm.controls.card.errors?.['pattern']">
+                            Card number should be of 16 digits.</div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="checkout-cards">
+                        <div class="checkout-visa">
+                            <div class="checkout-frame319">
+                                <div class="checkout-new-icons">
+                                    <div class="checkout-card-brands">
+                                        <div class="checkout-color">
+                                            <div class="checkout-visa1">
+                                                <img src="../../assets/external/container2936-zc5x.svg"
+                                                    alt="Container2936" class="checkout-container1" />
+                                                <img src="../../assets/external/shape2937-dj19.svg" alt="Shape2937"
+                                                    class="checkout-shape" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-mastercard">
+                            <div class="checkout-group">
+                                <img src="../../assets/external/vector2940-cy2.svg" alt="Vector2940"
+                                    class="checkout-vector" />
+                                <img src="../../assets/external/vector2941-17p.svg" alt="Vector2941"
+                                    class="checkout-vector01" />
+                                <img src="../../assets/external/vector2942-ico.svg" alt="Vector2942"
+                                    class="checkout-vector02" />
+                                <img src="../../assets/external/vector2943-em8i.svg" alt="Vector2943"
+                                    class="checkout-vector03" />
+                            </div>
+                        </div>
+                        <div class="checkout-american-express">
+                            <div>
+                                <img src="../../assets/external/vector2946-dsbj.svg" alt="Vector2946"
+                                    class="checkout-vector04" />
+                                <img src="../../assets/external/vector2947-nh5t.svg" alt="Vector2947"
+                                    class="checkout-vector05" />
+                                <img src="../../assets/external/vector2948-99tv.svg" alt="Vector2948"
+                                    class="checkout-vector06" />
+                                <img src="../../assets/external/vector2949-jqvv.svg" alt="Vector2949"
+                                    class="checkout-vector07" />
+                                <img src="../../assets/external/vector2950-1bdn.svg" alt="Vector2950"
+                                    class="checkout-vector08" />
+                                <div>
+                                    <img src="../../assets/external/vector2952-9mn.svg" alt="Vector2952"
+                                        class="checkout-vector09" />
+                                    <img src="../../assets/external/vector2953-jlvl.svg" alt="Vector2953"
+                                        class="checkout-vector10" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-discover">
+                            <div class="checkout-frame3191">
+                                <div class="checkout-new-icons1">
+                                    <div class="checkout-card-brands1">
+                                        <div class="checkout-color1">
+                                            <div class="checkout-discover1">
+                                                <img src="../../assets/external/shape2960-f43.svg" alt="shape2960"
+                                                    class="checkout-shape1" />
+                                                <img src="../../assets/external/shape2961-hcaq.svg" alt="shape2961"
+                                                    class="checkout-shape2" />
+                                                <img src="../../assets/external/shape2962-twcc.svg" alt="shape2962"
+                                                    class="checkout-shape3" />
+                                                <img src="../../assets/external/shape2963-sko.svg" alt="shape2963"
+                                                    class="checkout-shape4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="checkout-frame7">
+                        <div class="checkout-frame11">
+                            <input class="checkout-backplate2" input="number" placeholder="MM/YY"
+                                formControlName="expiryDate" (blur)="onBlur('expiryDate')"
+                                (focus)="onFocus('expiryDate')">
+                            <div
+                                *ngIf="!inputFocused['expiryDate'] && paymentForm.controls.expiryDate.touched && paymentForm.controls.expiryDate.errors?.['required']">
+                                Expiry Date is required.</div>
+                            <div
+                                *ngIf="!inputFocused['expiryDate'] && paymentForm.controls.expiryDate.touched && paymentForm.controls.expiryDate.errors?.['pattern']">
+                                Expiry Date should be in format of MM/YY</div>
+                            <input class="checkout-backplate3" input="number" placeholder="CVC" formControlName="cvc"
+                                (blur)="onBlur('cvc')" (focus)="onFocus('cvc')">
+                            <div
+                                *ngIf="!inputFocused['cvc'] && paymentForm.controls.cvc.touched && paymentForm.controls.cvc.errors?.['required']">
+                                CVC is required.</div>
+                            <div
+                                *ngIf="!inputFocused['cvc'] && paymentForm.controls.cvc.touched && paymentForm.controls.cvc.errors?.['pattern']">
+                                CVC is not in valid format</div>
+
+                        </div>
+                        <div class="checkout-cvc-card">
+                            <div class="checkout-group2">
+                                <img src="../../assets/external/frame2978-5yt.svg" alt="Frame2978"
+                                    class="checkout-frame" />
+                                <img src="../../assets/external/vector2981-bl2c.svg" alt="Vector2981"
+                                    class="checkout-vector11" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="checkout-text-input2" [formGroup] = "paymentForm">
+                    <span class="checkout-text14"><span>Name on card</span></span>
+                    <input class="checkout-backplate4" type="text" placeholder="Your Name" ormControlName="name"
+                        (blur)="onBlur('name')" (focus)="onFocus('name')">
+                    <div
+                        *ngIf="!inputFocused['name'] && paymentForm.controls.name.touched && paymentForm.controls.name.errors?.['required']">
+                        Name is required.</div>
+                    <div
+                        *ngIf="!inputFocused['name'] && paymentForm.controls.name.touched && paymentForm.controls.name.errors?.['pattern']">
+                        Name should only ocntain alphabets</div>
+                    <div
+                        *ngIf="!inputFocused['name'] && paymentForm.controls.name.touched && paymentForm.controls.name.errors?.['maxlength']">
+                        Name should be in within 64 characters.</div>
+
+                </form>
+                <button class="checkout-pay-button">
+                    <span class="checkout-text22"><span>Pay $42.00</span></span>
+                </button>
+            </div>
+            <div>
+                <img src="../../assets/external/vector2910-7b5g.svg" alt="Vector2910" class="checkout-vector12" />
+                <img src="../../assets/external/vector2910-8dqr.svg" alt="Vector2910" class="checkout-vector13" />
+                <img src="../../assets/external/vector2910-b90b.svg" alt="Vector2910" class="checkout-vector14" />
+                <img src="../../assets/external/vector2911-m96.svg" alt="Vector2911" class="checkout-vector15" />
+                <img src="../../assets/external/vector2911-ne4a.svg" alt="Vector2911" class="checkout-vector16" />
+            </div>
+        </form>
+        <div class="checkout-frame1">
+
+        </div>
+    </div>
+</div>

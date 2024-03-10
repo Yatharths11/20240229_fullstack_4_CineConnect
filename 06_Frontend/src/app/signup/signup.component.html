@@ -17,7 +17,7 @@
                             </span>
                         </div>
                         <div class="signup-credentials">
-                            <form [formGroup]="registerForm">
+                            <form [formGroup] = "registerForm">
                                 <input class="signup-username" type="text" placeholder="Username"
                                     formControlName="userName" (blur)="onBlur('userName')"
                                     (focus)="onFocus('userName')">
@@ -40,7 +40,7 @@
                                     *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
                                     Email is required.</div>
                                 <div
-                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
+                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['pattern']">
                                     Domain not provided.</div>
                                 <div
                                     *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">

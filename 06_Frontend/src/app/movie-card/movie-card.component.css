@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600&display=swap');
+
+/* Add your CSS styles from the signup page here, adjusting as necessary for the movie page */
+.signup-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(153, 102, 102, 1);
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.signup-signup {
+    width: 100%;
+    height: 1024px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.signup-text {
+    top: 381px;
+    left: 60px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 96px;
+    font-weight: 600;
+}
+
+.signup-frame1 {
+    gap: 10px;
+    top: 512px;
+    left: 73px;
+    width: 236px;
+    display: flex;
+    padding: 14px 24px;
+    position: absolute;
+    align-items: flex-start;
+    border-color: rgba(255, 255, 255, 1);
+    border-style: solid;
+    border-width: 4px;
+}
+
+.signup-text02 {
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    font-size: 32px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* Add more styles as needed */

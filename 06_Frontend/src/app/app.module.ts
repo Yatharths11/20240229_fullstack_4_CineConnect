@@ -9,6 +9,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+// import { MovieComponent } from './movie/movie.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { ManageShowsComponent } from './manage-shows/manage-shows.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
@@ -18,6 +22,10 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     LoginComponent,
     SignupComponent,
     PagenotfoundComponent,
+    // MovieComponent,
+    MovieCardComponent,
+    ManageShowsComponent,
+    PaymentComponent,
 
   ],
   imports: [

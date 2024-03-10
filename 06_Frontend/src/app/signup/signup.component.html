@@ -1,0 +1,113 @@
+<div class="signup-container">
+    <div class="signup-signup">
+        <span class="signup-text"><span>Roll the Carpet.!</span></span>
+        <div class="signup-frame1">
+            <span class="signup-text02"><span>Skip the lag ?</span></span>
+        </div>
+        <img src="/assets/external/ellipse118-2ydl-400h.png" alt="Ellipse118" class="signup-ellipse1" />
+        <img src="/assets/external/ellipse219-rfaj-300h.png" alt="Ellipse219" class="signup-ellipse2" />
+        <div class="signup-frame2">
+            <div class="signup-frame5">
+                <div class="signup-frame4">
+                    <div class="signup-upper-section">
+                        <div class="signup-logintext">
+                            <span class="signup-text04"><span>Signup</span></span>
+                            <span class="signup-text06">
+                                <span>Just some details to get you in.!</span>
+                            </span>
+                        </div>
+                        <div class="signup-credentials">
+                            <form [formGroup]="registerForm">
+                                <input class="signup-username" type="text" placeholder="Username"
+                                    formControlName="userName" (blur)="onBlur('userName')"
+                                    (focus)="onFocus('userName')">
+                                <div
+                                    *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['required']">
+                                    UserName is required.</div>
+                                <div
+                                    *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['minlength']">
+                                    UserName must be at least 4 characters long.</div>
+                                <div
+                                    *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['maxlength']">
+                                    UserName cannot be more than 100 characters long.</div>
+                                <div
+                                    *ngIf="!usernameInputFocused && registerForm.controls.userName.touched && registerForm.controls.userName.errors?.['pattern']">
+                                    UserName can only contain alphanumeric .</div>
+                                <br>
+                                <input class="signup-email" type="email" placeholder="Email" formControlName="email"
+                                    (blur)="onBlur('email')" (focus)="onFocus('email')">
+                                <div
+                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
+                                    Email is required.</div>
+                                <div
+                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['required']">
+                                    Domain not provided.</div>
+                                <div
+                                    *ngIf=" !emailInputFocused && registerForm.controls.email.touched && registerForm.controls.email.errors?.['email']">
+                                    Email is not valid.</div>
+                                <br>
+                                <input class="signup-password" type="password" placeholder="Password"
+                                    formControlName="password" (blur)="onBlur('password')"
+                                    (focus)="onFocus('password')">
+                                <div
+                                    *ngIf="!passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['required']">
+                                    Password is required.</div>
+                                <div
+                                    *ngIf="!passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['minlength']">
+                                    Password must be at least 6 characters long.</div>
+                                <br>
+                                <input class="signup-password1" type="password" placeholder="Confirm Password"
+                                    formControlName="password" (blur)="onBlur('password')"
+                                    (focus)="onFocus('password')">
+                                <div
+                                    *ngIf="!passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['required']">
+                                    Password is required.</div>
+                                <div
+                                    *ngIf="!passwordInputFocused && registerForm.controls.password.touched && registerForm.controls.password.errors?.['minlength']">
+                                    Password must be at least 6 characters long.</div>
+                                <br>
+                                <div class="signup-loginbt-fp">
+                                    <button class="signup-login">Signup</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="signup-otherlogins">
+                        <div class="signup-or">
+                            <img src="/assets/external/line1137-umyb.svg" alt="Line1137" class="signup-line1" />
+                            <span class="signup-text18"><span>Or</span></span>
+                            <img src="/assets/external/line2139-imtk.svg" alt="Line2139" class="signup-line2" />
+                        </div>
+                        <div class="signup-frame3">
+                            <img src="/assets/external/devicongoogle141-yc7.svg" alt="devicongoogle141"
+                                class="signup-devicongoogle" />
+                            <img src="/assets/external/logosfacebook147-9xq.svg" alt="logosfacebook147"
+                                class="signup-logosfacebook" />
+                            <img src="/assets/external/bigithub150-sv9r.svg" alt="bigithub150"
+                                class="signup-bigithub" />
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-frame9">
+                    <span class="signup-text20">
+                        <a href=""><span>Already Registered? Login</span></a>
+                    </span>
+                    <div class="signup-customercare">
+                        <div class="signup-frame6">
+                            <span class="signup-text22">
+                                <span>Terms &amp; Conditions</span>
+                            </span>
+                        </div>
+                        <div class="signup-frame7">
+                            <span class="signup-text24"><span>Support</span></span>
+                        </div>
+                        <div class="signup-frame8">
+                            <span class="signup-text26"><span>Customer Care</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="/assets/external/line3161-dimk.svg" alt="Line3161" class="signup-line3" />
+    </div>
+</div>

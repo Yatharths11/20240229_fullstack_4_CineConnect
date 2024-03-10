@@ -1,0 +1,95 @@
+<div class="login-container">
+  <div class="login-login">
+    <span class="login-text"><span>Welcome Back .!</span></span>
+    <div class="login-frame1">
+      <span class="login-text02"><span>Skip the lag ?</span></span>
+    </div>
+    <img src="/assets/external/ellipse1166-iy4f-400h.png" alt="Ellipse1166" class="login-ellipse1" />
+    <img src="/assets/external/ellipse2167-xx1-300h.png" alt="Ellipse2167" class="login-ellipse2" />
+    <div class="login-frame2">
+      <div class="login-frame5">
+        <div class="login-frame4">
+          <div class="login-upper-section">
+            <div class="login-logintext">
+              <span class="login-text04"><span>Login</span></span>
+              <span class="login-text06"><span>Glad you’re back.!</span></span>
+            </div>
+            <form class="login-credentials" [formGroup]="loginForm">
+              <input class="login-username" type="text" placeholder="Username" formControlName="userName"
+                (blur)="onBlur('userName')" (focus)="onFocus('userName')">
+
+              <div
+                *ngIf="!usernameInputFocused && loginForm.controls.userName.touched && loginForm.controls.userName.errors?.['required']">
+                UserName is required.</div>
+              <div
+                *ngIf="!usernameInputFocused && loginForm.controls.userName.touched && loginForm.controls.userName.errors?.['minlength']">
+                UserName must be at least 4 characters long.</div>
+              <div
+                *ngIf="!usernameInputFocused && loginForm.controls.userName.touched && loginForm.controls.userName.errors?.['maxlength']">
+                UserName cannot be more than 100 characters long.</div>
+              <div
+                *ngIf="!usernameInputFocused && loginForm.controls.userName.touched && loginForm.controls.userName.errors?.['pattern']">
+                UserName can only contain alphanumeric .</div>
+              <div class="login-password-rem">
+                <!-- <img src="/assets/external/closedeye181-8pw.svg" alt="closedeye181" class="login-closedeye" /> -->
+                <input class="login-password" type="password" placeholder="Password" formControlName="password"
+                  (blur)="onBlur('password')" (focus)="onFocus('password')">
+                  <div
+                  *ngIf="!passwordInputFocused && loginForm.controls.password.touched && loginForm.controls.password.errors?.['required']">
+                  Password is required.</div>
+              <div
+                  *ngIf="!passwordInputFocused && loginForm.controls.password.touched && loginForm.controls.password.errors?.['minlength']">
+                  Password must be at least 6 characters long.</div>
+
+                <div class="login-remember">
+                  <img src="/assets/external/fluentcheckboxchecked16filled184-5lo.svg"
+                    alt="fluentcheckboxchecked16filled184" class="login-fluentcheckboxchecked16filled" />
+                  <span class="login-text12"><span>Remember me</span></span>
+                </div>
+              </div>
+              <div class="login-loginbt-fp">
+                <button class="login-login1">
+                  <span>Login</span>
+                </button>
+                <a class="login-text16"><span>Forgot password ?</span></a>
+              </div>
+            </form>
+          </div>
+          <div class="login-otherlogins">
+            <div class="login-or">
+              <img src="/assets/external/line1193-wj1g.svg" alt="Line1193" class="login-line1" />
+              <span class="login-text18"><span>Or</span></span>
+              <img src="/assets/external/line2195-p01k.svg" alt="Line2195" class="login-line2" />
+            </div>
+            <div class="login-frame3">
+              <img src="/assets/external/devicongoogle197-me8d.svg" alt="devicongoogle197"
+                class="login-devicongoogle" />
+              <img src="/assets/external/logosfacebook1103-p9ff.svg" alt="logosfacebook1103"
+                class="login-logosfacebook" />
+              <img src="/assets/external/bigithub1106-qa4.svg" alt="bigithub1106" class="login-bigithub" />
+            </div>
+          </div>
+        </div>
+        <div class="login-frame9">
+          <a class="login-text20">
+            <span>Don’t have an account ? Signup</span>
+          </a>
+          <div class="login-customercare">
+            <div class="login-frame6">
+              <span class="login-text22">
+                <span>Terms &amp; Conditions</span>
+              </span>
+            </div>
+            <div class="login-frame7">
+              <span class="login-text24"><span>Support</span></span>
+            </div>
+            <div class="login-frame8">
+              <span class="login-text26"><span>Customer Care</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img src="/assets/external/line31117-jl0v.svg" alt="Line31117" class="login-line3" />
+  </div>
+</div>

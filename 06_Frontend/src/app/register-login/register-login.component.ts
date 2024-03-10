@@ -7,48 +7,63 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./register-login.component.css']
 })
 
-export class RegisterLoginComponent{
+export class RegisterLoginComponent {
   isformInvalid: boolean = false;
 
   registerForm = new FormGroup({
-     userName: new FormControl('', [
-       Validators.required,
-       Validators.minLength(4),
-       Validators.maxLength(100),
-       Validators.pattern('^[a-zA-Z0-9]*$') // Custom validator for alphabets only
-     ]),
-     email: new FormControl('', [
-       Validators.required,
-       Validators.email
-     ]),
-     password: new FormControl('', [
-       Validators.required,
-       Validators.minLength(6)
-     ])
+    userName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(100),
+      Validators.pattern('^[a-zA-Z0-9]*$') // Custom validator for alphabets only
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ])
   });
 
-  get username(){
-    return this.registerForm.get('username');
-  }
+  usernameInputFocused: boolean = false;
+  emailInputFocused: boolean = false;
+  passwordInputFocused: boolean = false;
 
-  get email(){
-    return this.registerForm.get('email');
-  }
-
-  get password(){
-    return this.registerForm.get('password');
-  }
-
-  // Method to handle input focus
   onFocus(controlName: string) {
-    console.log(this.registerForm.get(controlName)!.markAsUntouched());
-    
-    return this.registerForm.get(controlName)!.markAsUntouched();
+    if (controlName === 'userName') {
+      this.usernameInputFocused = true;
+      console.log("username pe focus")
+      console.log(this.usernameInputFocused);
+      
+    } else if (controlName === 'email') {
+      this.emailInputFocused = true;
+      console.log("email pe focus")
+      console.log(this.emailInputFocused);
+      
+    } else if (controlName === 'password') {
+      this.passwordInputFocused = true;
+      console.log("password pe focus")
+      console.log(this.passwordInputFocused);
+      
+    }
   }
 
-  // Method to handle input blur
   onBlur(controlName: string) {
-    this.registerForm.get(controlName)!.markAsTouched();
+    if (controlName === 'userName') {
+      this.usernameInputFocused = false;
+      console.log(this.usernameInputFocused);
+      console.log("username pe blur")
+    } else if (controlName === 'email') {
+      this.emailInputFocused = false;
+      console.log(this.emailInputFocused);
+      console.log("email pe blur")
+    } else if (controlName === 'password') {
+      this.passwordInputFocused = false;
+      console.log(this.passwordInputFocused);
+      console.log("pass pe blur")
+    }
   }
 
- }
+}

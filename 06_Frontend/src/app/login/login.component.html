@@ -2,7 +2,7 @@
   <div class="login-login">
     <span class="login-text"><span>Welcome Back .!</span></span>
     <div class="login-frame1">
-      <span class="login-text02"><span>Skip the lag ?</span></span>
+      <span class="login-text02">Cine Connect</span>
     </div>
     <img src="/assets/external/ellipse1166-iy4f-400h.png" alt="Ellipse1166" class="login-ellipse1" />
     <img src="/assets/external/ellipse2167-xx1-300h.png" alt="Ellipse2167" class="login-ellipse2" />
@@ -14,7 +14,7 @@
               <span class="login-text04"><span>Login</span></span>
               <span class="login-text06"><span>Glad you’re back.!</span></span>
             </div>
-            <form class="login-credentials" [formGroup] = "loginForm" >
+            <form class="login-credentials" [formGroup]="loginForm">
               <input class="login-username" type="text" placeholder="Username" formControlName="userName"
                 (blur)="onBlur('userName')" (focus)="onFocus('userName')">
 
@@ -34,10 +34,10 @@
                 <!-- <img src="/assets/external/closedeye181-8pw.svg" alt="closedeye181" class="login-closedeye" /> -->
                 <input class="login-password" type="password" placeholder="Password" formControlName="password"
                   (blur)="onBlur('password')" (focus)="onFocus('password')">
-                  <div
+                <div
                   *ngIf="!passwordInputFocused && loginForm.controls.password.touched && loginForm.controls.password.errors?.['required']">
                   Password is required.</div>
-              <div
+                <div
                   *ngIf="!passwordInputFocused && loginForm.controls.password.touched && loginForm.controls.password.errors?.['minlength']">
                   Password must be at least 6 characters long.</div>
 

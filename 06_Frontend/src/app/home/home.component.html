@@ -1,0 +1,577 @@
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+
+        <nav class="sidenavbar">
+            <h1>Hey!</h1>
+        </nav>
+
+        <nav class="sidesubnavbar">
+            <img src="img/rewards.webp">
+            <p>Unlock special offers & great benifits</p>
+            <button class="login" onclick="document.getElementById('id01').style.display='block'">Login /
+                Register</button>
+        </nav>
+
+        <a href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="notifications-outline"></ion-icon> -->
+            </div>
+            <div class="text">Notifications</div>
+            <div class="righticon">
+                <!-- <ion-icon name="chevron-forward-outline"></ion-icon> -->
+            </div>
+        </a>
+        <a class="btn-disabled" href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="ticket-outline"></ion-icon> -->
+            </div>
+            <div class="text">Purchase History<br>
+                <div class="subtext">View all your bookings & Purchases</div>
+            </div>
+            <div class="righticon">
+                <!-- <ion-icon name="lock-closed-outline"></ion-icon> -->
+            </div>
+        </a>
+        <a class="btn-disabled" href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="tv-outline"></ion-icon> -->
+            </div>
+            <div class="text">Stream Library<br>
+                <div class="subtext">Rented & Purchased Movies</div>
+            </div>
+            <div class="righticon">
+                <!-- <ion-icon name="lock-closed-outline"></ion-icon> -->
+            </div>
+        </a>
+        <a href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="chatbubble-ellipses-outline"></ion-icon> -->
+            </div>
+            <div class="text">Help & Support<br>
+                <div class="subtext">View commonly asked queries and Chat</div>
+            </div>
+            <div class="righticon">
+                <!-- <ion-icon name="chevron-forward-outline"></ion-icon> -->
+            </div>
+        </a>
+        <a class="btn-disabled" href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="settings-outline"></ion-icon> -->
+            </div>
+            <div class="text">Accounts & Settings<br>
+                <div class="subtext">Location, Payments, Addresses & More</div>
+            </div>
+            <div class="righticon">
+                <!-- <ion-icon name="lock-closed-outline"></ion-icon> -->
+            </div>
+        </a>
+        <a href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="gift-outline"></ion-icon> -->
+            </div>
+            <div class="text">Rewards<br>
+                <div class="subtext">View your rewards & unlock new ones</div>
+            </div>
+            <div class="righticon">
+                <!-- <ion-icon name="chevron-forward-outline"></ion-icon> -->
+            </div>
+        </a>
+        <a href="#">
+            <div class="lefticon">
+                <!-- <ion-icon name="heart-outline"></ion-icon> -->
+            </div>
+            <div class="text">BookASmile</div>
+            <div class="righticon">
+                <!-- <ion-icon name="chevron-forward-outline"></ion-icon> -->
+            </div>
+        </a>
+
+    </nav>
+    <!-- End sidebar -->
+
+    <!-- Dark overlay -->
+    <div class="overlay"></div>
+
+    <!-- Content -->
+    <div class="content">
+
+        <nav class="navbar">
+            <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_logo.png?updatedAt=1709492515762"
+                class="brand-logo" alt="" />
+
+            <div class='input'>
+                <!-- <x name="search"></ion-icon> -->
+                <input className='search' placeholder='Search for Movies, Events, Plays, Sports, and Activities' />
+            </div>
+
+            <div class="right-container">
+                <!-- <a href="#" class="location">Hyderabad<ion-icon name="caret-down-sharp"></ion-icon></a> -->
+                <button class="signin" onclick="document.getElementById('id01').style.display='block'">Sign in</button>
+
+                <div id="id01" class="modal">
+
+                    <div class="modal-content">
+                        <div class="getstart">
+                            <h3>Get Started</h3>
+                            <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                                title="Close Modal">
+                                <!-- <ion-icon name="close-outline"></ion-icon> -->
+                            </span>
+                        </div>
+
+                        <div class="container">
+                            <a href="#" class="button">
+                                <div class="logo">
+                                    <img src="img/googlelogo.svg">
+                                </div>
+                                <div class="text">Continue with Google</div>
+                            </a>
+                            <a href="#" class="button">
+                                <div class="logo">
+                                    <!-- <ion-icon name="mail-outline" style="font-size: 22px;"></ion-icon> -->
+                                </div>
+                                <div class="text">Continue with Email</div>
+                            </a>
+                            <a href="#" class="button">
+                                <div class="logo">
+                                    <!-- <ion-icon name="logo-apple" style="font-size: 22px;"></ion-icon> -->
+                                </div>
+                                <div class="text">Continue with Apple</div>
+                            </a>
+                        </div>
+                        <h2>OR</h2>
+
+                        <div class="phone">
+                            <img alt="indian flag" src="img/indianflag.svg">
+                            <div class="code">+91</div>
+                            <input id="mobileNo" type="tel" pattern="[0-9]*" placeholder="Continue with mobile number"
+                                class="mobileNo">
+                        </div>
+                        <p>I agree to the <u>Terms & Conditions</u>&<u>Privacy Policy</u></p>
+
+
+                        <div id="id01" class="modal">
+                            <button class="login"
+                                onclick="document.getElementById('id01').style.display='block'">Login</button>
+                        </div>
+
+                    </div>
+
+                    <a href="#" class="btn-customized open-menu">
+                        <!-- <ion-icon name="menu-outline"></ion-icon> -->
+                    </a>
+                </div>
+            </div>
+
+        </nav>
+        <nav class="subnavbar">
+            <ul class='navitem'>
+                <li><a href='#Movies'>Movies</a></li>
+                <li><a href='#Movies'>Stream<span>NEW</span></a></li>
+                <li><a href='#Movies'>Events</a></li>
+                <li><a href='#Movies'>Plays</a></li>
+                <li><a href='#Movies'>Sports</a></li>
+                <li><a href='#Movies'>Activities</a></li>
+                <li><a href='#Movies'>Buzz</a></li>
+            </ul>
+            <ul class='navitem1'>
+                <li><a href='#Movies'>ListYourShow<span>NEW</span></a></li>
+                <li><a href='#Movies'>Corporates</a></li>
+                <li><a href='#Movies'>Offers</a></li>
+                <li><a href='#Movies'>Gift Cards</a></li>
+            </ul>
+        </nav>
+
+        <div class="carousel-container">
+            <!-- <div class="carousel">
+              
+            </div> -->
+
+            <div class="carousel"></div>
+
+        </div>
+
+
+
+        <!-- <script src="js/data.js"></script>
+        <script src="js/app.js"></script> -->
+
+        <h1 class="title">Recommended Movies</h1>
+
+        <!-- copy -->
+
+        <div class="movies-list">
+            <div class="card-container">
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>93% &ThinSpace; 928 votes</p>
+                        </div>
+                    </div>
+                    <h3>Theerppu</h3>
+                    <p class="detail">Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart"></ion-icon> -->
+                            <p>92% &ThinSpace; 16k votes</p>
+                        </div>
+                    </div>
+                    <h3>Thallumaala</h3>
+                    <p class="detail">Action/Comedey</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>94% &ThinSpace; 14k votes</p>
+                        </div>
+                    </div>
+                    <h3>Nna Thaan Case Kodu</h3>
+                    <p class="detail">Comedy/Drama</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>59% &ThinSpace; 74k votes</p>
+                        </div>
+                    </div>
+                    <h3>Liger</h3>
+                    <p class="detail">Action/Drama/Romantic</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>87% &ThinSpace; 34k votes</p>
+                        </div>
+                    </div>
+                    <h3>Thiruchitrambalam</h3>
+                    <p class="detail">Comedy/Drama/Musical</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>92% &ThinSpace; 120k votes</p>
+                        </div>
+                    </div>
+                    <h3>Sita Ramam</h3>
+                    <p class="detail">Action/Drama/Romantic</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="thumbs-up-sharp" style="color: green;"></ion-icon> -->
+                            <p>3k likes</p>
+                        </div>
+                    </div>
+                    <h3>Kudukka 2025</h3>
+                    <p class="detail">Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>84% &ThinSpace; 226 votes</p>
+                        </div>
+                    </div>
+                    <h3>Peace</h3>
+                    <p class="detail">Comedy/Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="thumbs-up-sharp" style="color: green;"></ion-icon> -->
+                            <p>111 likes</p>
+                        </div>
+                    </div>
+                    <h3>Beyond The 7 Seas</h3>
+                    <p class="detail">Drama/Fantasy/Thriller</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="movies-list">
+            <div class="card-container">
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>93% &ThinSpace; 928 votes</p>
+                        </div>
+                    </div>
+                    <h3>Theerppu</h3>
+                    <p class="detail">Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>92% &ThinSpace; 16k votes</p>
+                        </div>
+                    </div>
+                    <h3>Thallumaala</h3>
+                    <p class="detail">Action/Comedey</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>94% &ThinSpace; 14k votes</p>
+                        </div>
+                    </div>
+                    <h3>Nna Thaan Case Kodu</h3>
+                    <p class="detail">Comedy/Drama</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>59% &ThinSpace; 74k votes</p>
+                        </div>
+                    </div>
+                    <h3>Liger</h3>
+                    <p class="detail">Action/Drama/Romantic</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>87% &ThinSpace; 34k votes</p>
+                        </div>
+                    </div>
+                    <h3>Thiruchitrambalam</h3>
+                    <p class="detail">Comedy/Drama/Musical</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>92% &ThinSpace; 120k votes</p>
+                        </div>
+                    </div>
+                    <h3>Sita Ramam</h3>
+                    <p class="detail">Action/Drama/Romantic</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="thumbs-up-sharp" style="color: green;"></ion-icon> -->
+                            <p>3k likes</p>
+                        </div>
+                    </div>
+                    <h3>Kudukka 2025</h3>
+                    <p class="detail">Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>84% &ThinSpace; 226 votes</p>
+                        </div>
+                    </div>
+                    <h3>Peace</h3>
+                    <p class="detail">Comedy/Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="thumbs-up-sharp" style="color: green;"></ion-icon> -->
+                            <p>111 likes</p>
+                        </div>
+                    </div>
+                    <h3>Beyond The 7 Seas</h3>
+                    <p class="detail">Drama/Fantasy/Thriller</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="movies-list">
+            <div class="card-container">
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>93% &ThinSpace; 928 votes</p>
+                        </div>
+                    </div>
+                    <h3>Theerppu</h3>
+                    <p class="detail">Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>92% &ThinSpace; 16k votes</p>
+                        </div>
+                    </div>
+                    <h3>Thallumaala</h3>
+                    <p class="detail">Action/Comedey</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>94% &ThinSpace; 14k votes</p>
+                        </div>
+                    </div>
+                    <h3>Nna Thaan Case Kodu</h3>
+                    <p class="detail">Comedy/Drama</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>59% &ThinSpace; 74k votes</p>
+                        </div>
+                    </div>
+                    <h3>Liger</h3>
+                    <p class="detail">Action/Drama/Romantic</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>87% &ThinSpace; 34k votes</p>
+                        </div>
+                    </div>
+                    <h3>Thiruchitrambalam</h3>
+                    <p class="detail">Comedy/Drama/Musical</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>92% &ThinSpace; 120k votes</p>
+                        </div>
+                    </div>
+                    <h3>Sita Ramam</h3>
+                    <p class="detail">Action/Drama/Romantic</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="thumbs-up-sharp" style="color: green;"></ion-icon> -->
+                            <p>3k likes</p>
+                        </div>
+                    </div>
+                    <h3>Kudukka 2025</h3>
+                    <p class="detail">Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="heart-sharp"></ion-icon> -->
+                            <p>84% &ThinSpace; 226 votes</p>
+                        </div>
+                    </div>
+                    <h3>Peace</h3>
+                    <p class="detail">Comedy/Drama/Thriller</p>
+                </div>
+
+                <div class="movie">
+                    <div class="card">
+                        <img src="https://ik.imagekit.io/cineconnect/CineConnect/dum_post.png?updatedAt=1709528063547"
+                            class="card-img" alt="">
+                        <div class="card-body">
+                            <!-- <ion-icon name="thumbs-up-sharp" style="color: green;"></ion-icon> -->
+                            <p>111 likes</p>
+                        </div>
+                    </div>
+                    <h3>Beyond The 7 Seas</h3>
+                    <p class="detail">Drama/Fantasy/Thriller</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- End content -->
+
+</div>

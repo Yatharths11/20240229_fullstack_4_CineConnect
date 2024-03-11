@@ -9,10 +9,12 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-// import { MovieComponent } from './movie/movie.component';
-import { MovieCardComponent } from './movie-card/movie-card.component';
+
 import { ManageShowsComponent } from './manage-shows/manage-shows.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ManageTheatreComponent } from './manage-theatre/manage-theatre.component';
+import { CreateShowComponent } from './create-show/create-show.component';
+import { CreateTheatreComponent } from './create-theatre/create-theatre.component';
 
 
 @NgModule({
@@ -22,10 +24,11 @@ import { PaymentComponent } from './payment/payment.component';
     LoginComponent,
     SignupComponent,
     PagenotfoundComponent,
-    // MovieComponent,
-    MovieCardComponent,
     ManageShowsComponent,
     PaymentComponent,
+    ManageTheatreComponent,
+    CreateShowComponent,
+    CreateTheatreComponent,
 
   ],
   imports: [

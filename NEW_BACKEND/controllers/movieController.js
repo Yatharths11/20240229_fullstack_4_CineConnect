@@ -1,17 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const jwt = require("jsonwebtoken");
-const Movies = require("../schema/movies.js");
-const Users = require("../schema/users.js");
+const Movies = require("../models/movies.js");
 const {
   check_admin,
   check_superAdmin,
-} = require("../validator/RoleValidator.js");
-const { token_provided, verifyToken } = require("../validator/tokenValidator");
-const { validateMovieData } = require("../validator/validateMovieData.js");
+} = require("../validators/RoleValidator.js");
+const { token_provided, verifyToken } = require("../validators/tokenValidator");
+const { validateMovieData } = require("../validators/validateMovieData.js");
 
 // Get all movies
-router.get("/", async (req, res) => {
+const getMovies = async (req, res) => {
   try {
     // Fetch all movies from the database
     const movies = await Movies.find();
@@ -21,10 +17,10 @@ router.get("/", async (req, res) => {
     // Handle any errors that occur during fetching movies
     res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
 // Get a specific movie by ID
-router.get("/:id", async (req, res) => {
+const getMovieById = async (req, res) => {
   try {
     const movieId = req.params.id;
     // Fetch the movie from the database by its ID
@@ -40,12 +36,12 @@ router.get("/:id", async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
 // Find a movie by name using query parameters
 // API Call
 // http://localhost:5000/api/movies/search/name?name=Interstellar
-router.get("/search/name", async (req, res) => {
+const getMovieByName = async (req, res) => {
   try {
     const name = req.query.name;
 
@@ -70,10 +66,10 @@ router.get("/search/name", async (req, res) => {
     console.log(error);
     return res.status(500).send("Failed to find movie.");
   }
-});
+};
 
 // Insert a new movie
-router.post("/post", async (req, res) => {
+const insertNewMovie = async (req, res) => {
   try {
     const token = req.headers.authorization;
     // Check if the JWT token is provided
@@ -110,9 +106,9 @@ router.post("/post", async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: "Failed to create movie." });
   }
-});
+};
 
-router.put("/update/:id", async (req, res) => {
+const updateMovie = async (req, res) => {
   try {
     const id = req.params.id;
     const updatedMovie = req.body;
@@ -152,10 +148,10 @@ router.put("/update/:id", async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: "Failed to update movie." });
   }
-});
+};
 
 // Delete a movie by ID
-router.delete("/delete/:id", async (req, res) => {
+const deleteMovieById = async (req, res) => {
   try {
     const id = req.params.id;
     const token = req.headers.authorization;
@@ -192,6 +188,14 @@ router.delete("/delete/:id", async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: "Failed to delete movie." });
   }
-});
+};
 
-module.exports = router;
+// exports
+module.exports = {
+  getMovies,
+  getMovieById,
+  getMovieByName,
+  insertNewMovie,
+  updateMovie,
+  deleteMovieById,
+};

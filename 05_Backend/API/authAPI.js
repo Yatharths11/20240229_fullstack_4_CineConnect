@@ -3,8 +3,6 @@ const { jwt, bcrypt } = require('../utils/auth')
 const {verifyPassword} = require('../utils/utility')
 const Users = require('../schema/users')
 
-
-
 // Login with credentials
 router.post('/login', async (req, res) => {
     try {

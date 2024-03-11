@@ -1,21 +1,16 @@
-const router = require("../utils/router");
-const Theatres = require("../schema/theatre");
-const Movies = require("../schema/movies");
-const { token_provided, verifyToken } = require("../validator/tokenValidator");
-// const { check_admin, check_superAdmin } = require('../validator/RoleValidator')
+const Theatres = require("../models/theatre");
+const Movies = require("../models/movies");
+const { token_provided, verifyToken } = require("../validators/tokenValidator");
+// const { check_admin, check_superAdmin } = require('../validators/RoleValidator')
 const {
   validateTheatrePost,
   validateTheatreUpdate,
-} = require("../validator/theatreValidator");
-// const {token_provided,verifyToken} = require('../validator/tokenValidator')
-const {
-  check_superAdmin,
-  check_admin,
-  check_user,
-} = require("../validator/checkRole");
+} = require("../validators/theatreValidator");
+// const {token_provided,verifyToken} = require('../validators/tokenValidator')
+// const { check_superAdmin, check_admin, check_user } = require('../validators/checkRole')
 
 // API to get all the list of theatres and their details
-router.get("/", async (req, res) => {
+const theatreList = async (req, res) => {
   console.log("I am in");
   try {
     const theatres = await Theatres.find();
@@ -24,10 +19,10 @@ router.get("/", async (req, res) => {
     console.error("Error retrieving data:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
 // API to get details of a particular theatre
-router.get("/:id", async (req, res) => {
+const getTheatreDetailsById = async (req, res) => {
   console.log("inside");
   try {
     const id = req.params.id;
@@ -40,10 +35,10 @@ router.get("/:id", async (req, res) => {
     console.error("Error retrieving theatre details:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
 // API to create a new theatre
-router.post("/", async (req, res) => {
+const createNewTheatre = async (req, res) => {
   //check token
   if (!(await verifyToken(req.header.authorization))) {
     return res
@@ -51,12 +46,10 @@ router.post("/", async (req, res) => {
       .json({ auth: false, message: "Failed to authenticate." });
   }
   if (!check_admin || !check_superAdmin) {
-    return res
-      .status(403)
-      .json({
-        auth: false,
-        message: "You are not authorized to perform this action!",
-      });
+    return res.status(403).json({
+      auth: false,
+      message: "You are not authorized to perform this action!",
+    });
   }
 
   const theatre = req.body;
@@ -89,10 +82,10 @@ router.post("/", async (req, res) => {
     console.error("Error creating theatre:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
 // API to delete a theatre by ID
-router.delete("/deleteTheatre/:id", async (req, res) => {
+const deleteTheatreById = async (req, res) => {
   const id = req.params.id;
   try {
     // Extract the token from the request headers
@@ -123,10 +116,10 @@ router.delete("/deleteTheatre/:id", async (req, res) => {
     console.error("Error deleting theatre:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
 // API to get movies of a particular theatre
-router.get("/:id/movies", async (req, res) => {
+const getMovies = async (req, res) => {
   try {
     const movies = await Movies.find({ theatre_id: req.params.id });
     console.log(movies);
@@ -143,6 +136,13 @@ router.get("/:id/movies", async (req, res) => {
     console.error("Error retrieving movies:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
-module.exports = router;
+// exports
+module.exports = {
+  theatreList,
+  getTheatreDetailsById,
+  createNewTheatre,
+  deleteTheatreById,
+  getMovies,
+};

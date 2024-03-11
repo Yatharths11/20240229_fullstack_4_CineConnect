@@ -15,6 +15,8 @@ import { PaymentComponent } from './payment/payment.component';
 import { ManageTheatreComponent } from './manage-theatre/manage-theatre.component';
 import { CreateShowComponent } from './create-show/create-show.component';
 import { CreateTheatreComponent } from './create-theatre/create-theatre.component';
+import { HomeComponent } from './home/home.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { CreateTheatreComponent } from './create-theatre/create-theatre.componen
     ManageTheatreComponent,
     CreateShowComponent,
     CreateTheatreComponent,
+    HomeComponent,
+    EditProfileComponent,
 
   ],
   imports: [

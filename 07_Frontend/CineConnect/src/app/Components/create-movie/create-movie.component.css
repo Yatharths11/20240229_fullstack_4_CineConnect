@@ -1,0 +1,51 @@
+.creator {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 900px;
+    background-color: #edf2f4;
+    padding: 20px;
+    font-family: "karla";
+    border-radius: 4px;
+}
+
+.form-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    width: 200px; 
+    text-align: left;
+    font-family: "karla";
+    font-size: 20px;
+    margin-right: 10px;
+    color: #2b2d42;
+}
+
+input {
+    flex: 1; /* Fill remaining width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 20px;
+    font-family: "karla";
+    color: #2b2d42;
+    outline: none;
+}
+.create-button{
+    background-color: #ef233c; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 0px 12px 0px 12px;
+    height: 35px;
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */
+    margin: 10px;
+    font-family: "Karla", sans-serif;
+    font-size: 16px;
+}

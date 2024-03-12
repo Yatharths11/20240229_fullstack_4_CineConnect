@@ -1,0 +1,46 @@
+.nav {
+  display: flex;
+  height: 65px;
+  background-color: #242537;
+  border-bottom: 5px solid #d90429;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  font-family: "Karla", sans-serif;
+  color: #edf2f4;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Styles for Search Bar */
+.search-bar {
+  margin-bottom: 10px; /* Add spacing between search bar and buttons */
+  margin-top: 40px;
+}
+
+/* Styles for Buttons */
+.custom-button {
+  background-color: #2196f3; /* Primary color */
+  color: white;
+  border: 1px solid #1976d2; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */
+  margin-right: 10px; /* Add spacing between buttons */
+}
+
+.custom-button:hover {
+  transform: scale(1.05); /* Scale up on hover */
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2); /* Add subtle box shadow on hover */
+}

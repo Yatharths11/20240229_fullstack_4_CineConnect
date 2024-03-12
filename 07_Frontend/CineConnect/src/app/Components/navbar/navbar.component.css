@@ -1,0 +1,51 @@
+.nav {
+  display: flex;
+  height: 65px;
+  background-color: #242537;
+  border-bottom: 5px solid #d90429;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  font-family: "Karla", sans-serif;
+  color: #edf2f4;
+  font-weight: 400;
+  margin: 0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #2b2d42;
+  border: 1px solid #2b2d42;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 700px;
+  margin-left: -300px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  background-color: #2b2d42;
+  color: white;
+}
+
+.right-content {
+  display: flex;
+}

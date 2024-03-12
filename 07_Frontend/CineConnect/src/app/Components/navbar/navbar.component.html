@@ -1,0 +1,18 @@
+<div class="nav">
+  <div class="logo" routerLink="">
+    <img src="../../../assets/cc_logo.svg" />
+    <h1>CineConnect</h1>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <fa-icon style="color: white; margin: 5px" [icon]="faSearch"></fa-icon
+    ><input type="text" placeholder="Search" />
+  </div>
+
+  <!-- Signup and Login Buttons -->
+  <div class="right-content">
+    <ng-content select="[buttonsContent]"></ng-content>
+    <ng-content select="[adminContent]"></ng-content>
+  </div>
+</div>

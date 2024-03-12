@@ -1,37 +1,38 @@
 <div class="creator">
+  <form (submit)="createMovie()">
     <p class="form-field"> 
-        <label for="movieName">Name :</label>
-        <input type="text" id="movieName" placeholder="Enter movie name">
+      <label for="movieName">Name :</label>
+      <input type="text" id="movieName" [(ngModel)]="movie.name" name="movieName" placeholder="Enter movie name" required>
     </p>
     <p class="form-field"> 
-        <label for="movieGenre">Genre :</label>
-        <input type="text" id="movieGenre" placeholder="Enter Genre">
+      <label for="movieGenre">Genre :</label>
+      <input type="text" id="movieGenre" [(ngModel)]="movie.genre" name="movieGenre" placeholder="Enter Genre" required>
     </p>
     <p class="form-field"> 
-        <label for="movieLanguage">Language :</label>
-        <input type="text" id="movieLanguage" placeholder="Enter languages">
+      <label for="movieLanguage">Language :</label>
+      <input type="text" id="movieLanguage" [(ngModel)]="movie.language" name="movieLanguage" placeholder="Enter languages" required>
     </p>
     <p class="form-field"> 
-        <label for="movieTheatre">Theatre :</label>
-        <input type="text" id="movieTheatre" placeholder="Enter Theatre">
+      <label for="movieTheatre">Theatre :</label>
+      <input type="text" id="movieTheatre" [(ngModel)]="movie.theatre" name="movieTheatre" placeholder="Enter Theatre" required>
     </p>
     <p class="form-field"> 
-        <label for="movieDate">Date :</label>
-        <input type="datetime-local" id="movieDate" placeholder="Enter date">
+      <label for="movieDate">Date :</label>
+      <input type="datetime-local" id="movieDate" [(ngModel)]="movie.date" name="movieDate" placeholder="Enter date" required>
     </p>
     <p class="form-field"> 
-        <label for="movieRating">Rating :</label>
-        <input type="text" id="movieRating" placeholder="Enter rating of the movie">
+      <label for="movieRating">Rating :</label>
+      <input type="text" id="movieRating" [(ngModel)]="movie.rating" name="movieRating" placeholder="Enter rating of the movie" required>
     </p>
     <p class="form-field"> 
-        <label for="ticketPrice">Price per Ticket :</label>
-        <input type="text" id="ticketPrice" placeholder="Enter price per ticket">
+      <label for="ticketPrice">Price per Ticket :</label>
+      <input type="text" id="ticketPrice" [(ngModel)]="movie.ticketPrice" name="ticketPrice" placeholder="Enter price per ticket" required>
     </p>
     <p class="form-field"> 
-        <label for="posterLink">Poster Link :</label>
-        <input type="url" id="posterLink" placeholder="Enter poster link of movie">
+      <label for="posterLink">Poster Link :</label>
+      <input type="url" id="posterLink" [(ngModel)]="movie.posterLink" name="posterLink" placeholder="Enter poster link of movie" required>
     </p>
 
-    <p class="create-button">Create Movie</p>
-
+    <button type="submit" (click)="createMovie()" class="create-button">Create Movie</button>
+  </form>
 </div>

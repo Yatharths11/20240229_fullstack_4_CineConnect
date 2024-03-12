@@ -9,12 +9,11 @@ import { SigninpageComponent } from './Pages/signinpage/signinpage.component';
 import { SignuppageComponent } from './Pages/signuppage/signuppage.component';
 
 export const routes: Routes = [
-    { path: 'signin', component: SigninpageComponent },
-    {path: 'signup',component: SignuppageComponent},
     {path:'',component:HomeComponent},
+    {path:'signin', component: SigninpageComponent },
+    {path:'signup',component: SignuppageComponent},
     {path:'adminhomepage',component:AdminHomeComponent},
     {path:'createshow',component:CreateShowComponent},
     {path:'createtheatre',component:CreateTheatreComponent},
     {path:'**',component:PageNotFoundComponent}
-    {path:'**',component:PageNotFoundComponent},
 ];

@@ -1,0 +1,25 @@
+.admin-left-sidebar{
+    height:  650px;
+    width: 300px;
+    border-radius: 10px;
+    background-color:  #8d99ae;
+    margin: 20px;
+    padding: 10px;
+    font-family: 'karla';
+}
+
+.list-group{
+    margin: 25px;
+}
+
+h4{
+    padding: 5px 10px;
+    border-radius: 10px;
+    /* border: 1px solid red; */
+    transition: transform 0.1s ease;
+}
+
+h4:hover{   
+    background-color: #7a8699;
+    /* transform: scale(1.1); */
+}

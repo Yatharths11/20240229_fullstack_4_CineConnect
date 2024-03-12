@@ -71,7 +71,7 @@ const register = async (req, res) => {
 const info = async (req, res) => {
   try {
     const id = req.params.id;
-    const token = req.headers.authorization;
+    const token = req.headers.authorization.split(" ")[1];
 
     if (!token_provided(token)) {
       return res
@@ -79,9 +79,9 @@ const info = async (req, res) => {
         .send({ error: "Access denied. Token not provided." });
     }
 
-    const decodedToken = verifyToken(token);
-
-    if (!decodedToken || !check_user(token)) {
+    const decodedToken = await verifyToken(token);
+    console.log(decodedToken);
+    if (!decodedToken || check_user(token)) {
       return res
         .status(403)
         .send({ message: "Forbidden. Only users can perform this action." });

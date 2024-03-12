@@ -1,0 +1,28 @@
+/* Styles for Buttons */
+.button-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .signup-button,
+  .login-button {
+    background-color: #ef233c; /* Primary color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 0px 12px 0px 12px;
+    height: 35px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */
+    margin: 10px;
+    font-family: "Karla", sans-serif;
+    font-size: 16px;
+  }
+  
+  .signup-button:hover,
+  .login-button:hover {
+    transform: scale(1.05); /* Scale up on hover */
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2); /* Add subtle box shadow on hover */
+  }
+  

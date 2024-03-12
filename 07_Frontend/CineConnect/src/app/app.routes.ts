@@ -8,5 +8,4 @@ export const routes: Routes = [
     {path:'',component:HomeComponent},
     {path:'adminhomepage',component:AdminHomeComponent},
     {path:'**',component:PageNotFoundComponent}
-
 ];

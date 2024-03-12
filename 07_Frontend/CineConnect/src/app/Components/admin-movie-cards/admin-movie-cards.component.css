@@ -1,0 +1,53 @@
+.movie-card{
+    margin: 10px;
+    padding: 10px;
+    width: 900px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    font-family: "karla";
+    /* border: 1px solid red; */
+    background-color: #edf2f4;
+    border-radius: 4px;
+    justify-content: space-between;
+}
+.movie{
+    display: flex;
+    flex-direction: row;
+}
+
+
+img{
+    height: 192px;
+    width: 140px;
+    border-radius: 2px;
+}
+.movie-image{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.movie-details{
+    display: flex;
+    flex-direction: column;
+    color: #2b2d42;
+    margin: 20px;
+}
+
+
+.buttons{
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.button{
+    padding: 5px;
+    text-align: center;
+    background-color: #ef233c;
+    color: #edf2f4;
+    border-radius: 4    px;
+    margin: 20px;
+}

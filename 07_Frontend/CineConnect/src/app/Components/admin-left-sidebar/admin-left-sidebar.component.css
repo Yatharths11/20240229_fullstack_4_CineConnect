@@ -1,10 +1,11 @@
 .admin-left-sidebar{
     height:  650px;
-    width: 300px;
-    border-radius: 10px;
-    background-color:  #8d99ae;
-    margin: 20px;
+    width: 280px;
+    /* border-radius: 10px; */
+    background-color:  #242537;
+    color : #edf2f4;
     padding: 10px;
+    padding-left:20px;
     font-family: 'karla';
 }
 
@@ -14,8 +15,8 @@
 
 h4{
     padding: 5px 10px;
-    border-radius: 10px;
-    /* border: 1px solid red; */
+    border-radius: 4px;
+    
     transition: transform 0.1s ease;
 }
 

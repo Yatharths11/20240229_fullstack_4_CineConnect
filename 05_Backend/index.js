@@ -43,6 +43,9 @@ const swaggerSpec = swaggerJSDoc(options);
 
 
 
+// Load environment variables from .env file
+dotenv.config();
+
 
 const URI = process.env.URI
 

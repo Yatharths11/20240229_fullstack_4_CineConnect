@@ -1,0 +1,23 @@
+<mat-form-field class="auth-input">
+    <mat-label>Username</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="usernameFormControl"
+      [errorStateMatcher]="matcher"
+      placeholder="Username"
+      (focus)="resetController()"
+    />
+    <mat-hint>Your username</mat-hint>
+    <mat-error>
+      {{
+        usernameFormControl.hasError("required")
+          ? "Username is Required"
+          : usernameFormControl.hasError("minlength")
+          ? "Username must be at least 8 characters long"
+          : usernameFormControl.hasError("maxlength")
+          ? "Username must be at most 20 characters long"
+          : ""
+      }}
+    </mat-error>
+  </mat-form-field>

@@ -10,5 +10,4 @@ import { AdminLeftSidebarComponent } from './Components/admin-left-sidebar/admin
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'CineConnect';
 }

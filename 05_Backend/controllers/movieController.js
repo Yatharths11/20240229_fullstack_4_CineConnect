@@ -181,7 +181,6 @@ router.post("/post", async (req, res) => {
     if (!token_provided(token)) {
       return res.status(401).json({ error: "Access denied. Token not provided." });
     }
-
     // Find the user by ID
     const decodedToken = verifyToken(token);
 
@@ -266,7 +265,7 @@ router.put("/update/:id", async (req, res) => {
 
     // Find and update the movie by its ID
     const movie = await Movies.findByIdAndUpdate(id, updatedMovie, {
-      new: true
+      new: true,
     });
 
     // Check if the movie exists
@@ -322,7 +321,9 @@ router.delete("/delete/:id", async (req, res) => {
 
     // Check if the JWT token is provided
     if (!token_provided(token)) {
-      return res.status(401).json({ error: "Access denied. Token not provided." });
+      return res
+        .status(401)
+        .json({ error: "Access denied. Token not provided." });
     }
 
     // Verify the token and extract the decoded token

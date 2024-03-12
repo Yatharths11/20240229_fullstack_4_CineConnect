@@ -1,39 +1,50 @@
-require("dotenv").config()
-const express = require("express")
-const app = express()
-const mongoose = require("mongoose")
-app.use(express.json())
+// Import required modules
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
 
+// Load environment variables from .env file
+dotenv.config();
 
+// Create an Express app
+const app = express();
 
+// Parse JSON requests
+app.use(bodyParser.json());
 
-const URI = process.env.URI
+// Define routes
+const authRoutes = require("./routes/authRoutes.js");
+const userRoutes = require("./routes/userroutes.js");
+const theatreRoutes = require("./routes/theatreRoutes.js");
+const movieRoutes = require("./routes/movieRoutes.js");
+const bookingRoutes = require("./routes/bookingRoutes.js");
 
-const authRoutes = require("./API/authAPI.js")
-const userRoutes = require("./API/userAPI.js")
-const theatreRoutes = require("./API/theatreAPI.js")
-const movieRoutes = require("./API/movieAPI.js")
-const bookingRoutes = require("./API/bookingAPI.js")
+// Connect to MongoDB asynchronously
+const connectToMongoDB = async () => {
+  try {
+    await mongoose.connect(process.env.URI);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit the process if unable to connect
+  }
+};
 
+// Use the routes in your app
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/theatres", theatreRoutes);
+app.use("/bookings", bookingRoutes);
+app.use("/movies", movieRoutes);
 
+// Start the server after connecting to MongoDB
+const startServer = async () => {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+};
 
-if (mongoose.connect(URI)) {
-  console.log("🚀 Connected to Database Successfully 🚀")
-  app.listen(process.env.PORT, () => {
-    console.log("🚀 Server is running 🚀")
-  })
-} else {
-  console.log("Failed to Connected.")
-}
-
-
-app.use('/api/auth', authRoutes) // Mount the userAPI router at the /api/users base path
-app.use('/api/users', userRoutes) // Mount the userAPI router at the /api/users base path
-app.use('/api/theatres', theatreRoutes) // Mount the theatreAPI router at the /api/theatres base path
-app.use('/api/bookings', bookingRoutes)// Mount the bookingAPI router at the /api/bookings base path
-app.use('/api/movies', movieRoutes) // Mount the movieAPI router at the /api/movies base path
-
-
-
-
-
+// Call the asynchronous functions
+connectToMongoDB().then(startServer);

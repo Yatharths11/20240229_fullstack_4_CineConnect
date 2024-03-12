@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
   name: {
@@ -56,9 +56,8 @@ const movieSchema = new mongoose.Schema({
   pgRating: {
     type: String,
     required: true,
-    enum : ["G", "PG", "PG-13","R","NC-17"]
+    enum: ["G", "PG", "PG-13", "R", "NC-17"],
   },
-})
+});
 
-
-module.exports = mongoose.model("Movie", movieSchema)
+module.exports = mongoose.model("Movie", movieSchema);

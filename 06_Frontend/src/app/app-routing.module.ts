@@ -12,6 +12,7 @@ import { ManageShowsComponent } from './manage-shows/manage-shows.component';
 import { PaymentComponent } from './payment/payment.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
+
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },

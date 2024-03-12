@@ -78,6 +78,8 @@
     "sift": "^16.0.1",
     "sparse-bitfield": "^3.0.3",
     "statuses": "^2.0.1",
+    "swagger-jsdoc": "5.0.1",
+    "swagger-ui-express": "^5.0.0",
     "toidentifier": "^1.0.1",
     "tr46": "^4.1.1",
     "type-is": "^1.6.18",

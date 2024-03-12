@@ -1,11 +1,10 @@
-const express = require("express")
-const router = express.Router()
-const jwt = require("jsonwebtoken")
-const Movies = require("../schema/movies.js")
-const Users = require("../schema/users.js")
-const { check_admin, check_superAdmin } = require('../validator/RoleValidator.js')
-const { token_provided, verifyToken } = require('../validator/tokenValidator')
-const { validateMovieData } = require('../validator/validateMovieData.js')
+const Movies = require("../models/movies.js");
+const {
+  check_admin,
+  check_superAdmin,
+} = require("../validators/RoleValidator.js");
+const { token_provided, verifyToken } = require("../validators/tokenValidator");
+const { validateMovieData } = require("../validators/validateMovieData.js");
 
 // Get all movies
 /**
@@ -24,8 +23,8 @@ const { validateMovieData } = require('../validator/validateMovieData.js')
  *       500:
  *         description: Internal Server Error. Failed to fetch movies.
  */
-
 router.get("/", async (req, res) => {
+
   try {
     // Fetch all movies from the database
     const movies = await Movies.find();
@@ -86,7 +85,7 @@ router.get("/:id", async (req, res) => {
 
 
 // Find a movie by name using query parameters
-// API Call 
+// API Call
 // http://localhost:5000/api/movies/search/name?name=Interstellar
 /**
  * @swagger
@@ -353,4 +352,12 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-module.exports = router
+// exports
+module.exports = {
+  getMovies,
+  getMovieById,
+  getMovieByName,
+  insertNewMovie,
+  updateMovie,
+  deleteMovieById,
+};

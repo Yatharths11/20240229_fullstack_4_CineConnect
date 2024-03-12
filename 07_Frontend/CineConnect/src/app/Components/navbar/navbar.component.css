@@ -1,6 +1,6 @@
 .nav {
   display: flex;
-  height: 65px;
+  height: 70px;
   background-color: #242537;
   border-bottom: 5px solid #d90429;
   justify-content: space-between;
@@ -23,6 +23,7 @@
   color: #edf2f4;
   font-weight: 400;
   margin: 0;
+  font-size: 24px;
 }
 
 .search-bar {

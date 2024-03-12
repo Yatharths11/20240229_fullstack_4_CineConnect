@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .logo img {
@@ -24,23 +25,51 @@
   margin: 0;
 }
 
-/* Styles for Search Bar */
 .search-bar {
-  margin-bottom: 10px; /* Add spacing between search bar and buttons */
-  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #2b2d42;
+  border: 1px solid #2b2d42;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 700px;
+  margin-left: -300px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  background-color: #2b2d42;
+  color: white;
 }
 
 /* Styles for Buttons */
-.custom-button {
-  background-color: #2196f3; /* Primary color */
-  color: white;
-  border: 1px solid #1976d2; /* Border color */
-  border-radius: 5px; /* Rounded corners */
-  transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */
-  margin-right: 10px; /* Add spacing between buttons */
+.button-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 
-.custom-button:hover {
+.signup-button,
+.login-button {
+  background-color: #ef233c; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  padding: 0px 12px 0px 12px;
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */
+  margin: 10px;
+  font-family: "Karla", sans-serif;
+  font-size: 16px;
+}
+
+.signup-button:hover,
+.login-button:hover {
   transform: scale(1.05); /* Scale up on hover */
   box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2); /* Add subtle box shadow on hover */
 }

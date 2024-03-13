@@ -9,6 +9,10 @@
     color: #EDF2F4;
 }
 
+.auth-input {
+    width: 80%;
+}
+
 .left-footer h1 {
     color: #EDF2F4;
     margin: 0;
@@ -66,7 +70,7 @@
 .new-user-registration {
     width: 80%;
     height: 38px;
-    background-color: #f25019;
+    background-color: #D90429;
     border: none;
     color: white;
     cursor: pointer;

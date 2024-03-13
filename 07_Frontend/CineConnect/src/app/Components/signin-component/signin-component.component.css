@@ -19,11 +19,11 @@
     width: 250px;
     position: relative;
     font-weight: bolder;
-    font-family: Poppins;
+    font-family: Karla;
 }
 
 .left-footer-bottom {
-    font-family: poppins;
+    font-family: Karla;
     margin-top: 40px;
 }
 
@@ -88,6 +88,7 @@
     cursor: pointer;
     margin-left: 6px;
     font-weight: bold;
+    font-size: 14px
 }
 
 .password-section{

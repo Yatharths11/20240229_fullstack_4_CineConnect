@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { MovieCardComponent } from '../../Components/movie-card/movie-card.component';
 import { FooterComponent } from '../../Components/footer/footer.component';
 import { TheatreCardComponent } from '../../Components/theatre-card/theatre-card.component';
+import { AuthServiceService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,7 @@ import { TheatreCardComponent } from '../../Components/theatre-card/theatre-card
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
+  providers:[AuthServiceService]
 })
 export class HomeComponent {
   images = [62, 83, 466, 965, 982, 1043, 738].map(

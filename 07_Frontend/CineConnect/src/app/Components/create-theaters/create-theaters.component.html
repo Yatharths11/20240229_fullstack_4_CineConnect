@@ -1,26 +1,25 @@
 <div class="creator">
-    <p class="form-field"> 
-        <label for="theatreName">Name of Theaters :</label>
-        <input type="text" id="theatreName" placeholder="Enter theatre name">
-    </p>
-    <p class="form-field"> 
-        <label for="location">Location :</label>
-        <input type="text" id="location" placeholder="Enter location">
-    </p>
-    <p class="form-field">
-        <label for="theatreScreens">Screens :</label>
-        <input type="text" id="theatreScreens" placeholder="Enter number of screens">
-    </p>
-    <p class="form-field">
-        <label for="theatreSeats">Seats :</label>
-        <input type="seats" id="theatreSeats" placeholder="Enter date">
-    </p>
-    <p class="form-field">
-        <label for="theatreAddress">Rating :</label>
-        <input type="text" id="theatreAddress" placeholder="Enter address theatre">
-    </p>
-    
-
-    <p class="create-button">Create Theatre</p>
-
+    <form (submit)="createTheatre()">
+        <p class="form-field"> 
+            <label for="theatreName">Name of Theaters :</label>
+            <input type="text" id="theatreName" [(ngModel)]="theatre.name" name="theatreName" placeholder="Enter theatre name">
+        </p>
+        <p class="form-field"> 
+            <label for="location">Location :</label>
+            <input type="text" id="location" [(ngModel)]="theatre.location" name="location" placeholder="Enter location">
+        </p>
+        <p class="form-field">
+            <label for="theatreScreens">Screens :</label>
+            <input type="number" id="theatreScreens" [(ngModel)]="theatre.screens" name="theatreScreens" placeholder="Enter number of screens">
+        </p>
+        <p class="form-field">
+            <label for="theatreSeats">Seats :</label>
+            <input type="number" id="theatreSeats" [(ngModel)]="theatre.seats" name="theatreSeats" placeholder="Enter number of seats">
+        </p>
+        <p class="form-field">
+            <label for="theatreAddress">Address :</label>
+            <input type="text" id="theatreAddress" [(ngModel)]="theatre.address" name="theatreAddress" placeholder="Enter address of theatre">
+        </p>
+        <button type="submit" class="create-button">Create Theatre</button>
+    </form>
 </div>

@@ -6,10 +6,11 @@ const dotenv = require("dotenv");
 
 // Load environment variables from .env file
 dotenv.config();
+const cors = require('cors');
 
 // Create an Express app
 const app = express();
-
+app.use(cors());
 // Parse JSON requests
 app.use(bodyParser.json());
 

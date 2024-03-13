@@ -21,6 +21,7 @@ function token_provided(token) {
  */
 async function verifyToken(token) {
   return new Promise((resolve, reject) => {
+    token = token.split(" ")[1]; // remove 'Bearer' from
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         // Token verification failed

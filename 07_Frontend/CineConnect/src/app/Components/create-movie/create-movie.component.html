@@ -1,5 +1,5 @@
 <div class="creator">
-  <form (submit)="createMovie()">
+  <form (submit)="createNewMovie()">
     <p class="form-field"> 
       <label for="movieName">Name :</label>
       <input type="text" id="movieName" [(ngModel)]="movie.name" name="movieName" placeholder="Enter movie name" required>
@@ -33,6 +33,6 @@
       <input type="url" id="posterLink" [(ngModel)]="movie.posterLink" name="posterLink" placeholder="Enter poster link of movie" required>
     </p>
 
-    <button type="submit" (click)="createMovie()" class="create-button">Create Movie</button>
+    <button type="submit"  class="create-button">Create Movie</button>
   </form>
 </div>

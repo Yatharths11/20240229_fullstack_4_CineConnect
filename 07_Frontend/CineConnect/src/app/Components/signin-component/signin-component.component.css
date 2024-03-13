@@ -1,0 +1,91 @@
+.password-frame {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-footer {
+    margin-top: 50px;
+    margin-left: 80px;
+    color: #EDF2F4;
+}
+
+.left-footer h1 {
+    color: #EDF2F4;
+    margin: 0;
+    width: 250px;
+    position: relative;
+    font-weight: bolder;
+    font-family: Poppins;
+}
+
+.left-footer-bottom {
+    font-family: poppins;
+    margin-top: 40px;
+}
+
+.register-as-seller {
+    display: flex;
+}
+
+.register-as-buyer {
+    display: flex;
+}
+
+.email {
+    margin-top: 10px;
+}
+
+.signin-button input {
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 26px;
+    width: 60%;
+    padding-left: 6px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.password-label {
+    margin-top: 20px;
+}
+
+.password-label input {
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 26px;
+    width: 60%;
+    padding-left: 6px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.forgot-password {
+    margin-top: 60px;
+}
+
+.new-user-registration {
+    width: 80%;
+    height: 38px;
+    background-color: #f25019;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: medium;
+}
+
+.register {
+    width: 90%;
+    margin: 2px 5px;
+}
+
+.register-as-buyer1,
+.register-as-seller1 {
+    cursor: pointer;
+    margin-left: 6px;
+    font-weight: bold;
+}
+
+.password-section{
+    margin-top: 5px;
+}

@@ -6,7 +6,7 @@
         <app-email-input></app-email-input>
         <app-password-input class="password-section"></app-password-input>
         <div class="forgot-password">Forgot Password?</div>
-        <button class="new-user-registration">
+        <button (click)="signin()" class="new-user-registration">
           <div class="new-user-type" id="newUserType"></div>
           <b class="sign-in">Sign in</b>
         </button>

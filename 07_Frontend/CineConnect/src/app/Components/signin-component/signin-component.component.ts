@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { EmailInputComponent } from '../email-input/email-input.component';
 import { PasswordInputComponent } from '../password-input/password-input.component';
 
@@ -13,7 +12,10 @@ import { PasswordInputComponent } from '../password-input/password-input.compone
 })
 export class SigninComponentComponent {
   
+  signin(){
+    console.log(this)
 
+  }
   
 
 }

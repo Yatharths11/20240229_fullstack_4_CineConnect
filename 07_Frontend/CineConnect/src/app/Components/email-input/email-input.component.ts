@@ -49,6 +49,6 @@ export class EmailInputComponent {
     this.emailFormControl.reset();
     this.emailFormControl.setValue(value);
   }
-
+  
   matcher = new MyErrorStateMatcher();
 }

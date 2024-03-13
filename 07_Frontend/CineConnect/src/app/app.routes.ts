@@ -18,5 +18,4 @@ export const routes: Routes = [
     {path:'signup',component:SignuppageComponent},
     {path:'adminhomepage',component:AdminHomeComponent},
     {path:'**',component:PageNotFoundComponent},
-
 ];

@@ -9,17 +9,21 @@
     color: #EDF2F4;
 }
 
+.auth-input {
+    width: 80%;
+}
+
 .left-footer h1 {
     color: #EDF2F4;
     margin: 0;
     width: 250px;
     position: relative;
     font-weight: bolder;
-    font-family: Poppins;
+    font-family: Karla;
 }
 
 .left-footer-bottom {
-    font-family: poppins;
+    font-family: Karla;
     margin-top: 40px;
 }
 
@@ -66,7 +70,7 @@
 .new-user-registration {
     width: 80%;
     height: 38px;
-    background-color: #f25019;
+    background-color: #D90429;
     border: none;
     color: white;
     cursor: pointer;
@@ -84,6 +88,7 @@
     cursor: pointer;
     margin-left: 6px;
     font-weight: bold;
+    font-size: 14px
 }
 
 .password-section{

@@ -1,30 +1,72 @@
-
 <div class="left-footer">
-    <h1>Log In</h1>
-    <div class="left-footer-bottom" id="left-footer-bottom">
-      <form class="password-frame">
-        <app-email-input></app-email-input>
-        <app-password-input class="password-section"></app-password-input>
-        <div class="forgot-password">Forgot Password?</div>
-        <button (click)="signin()" class="new-user-registration">
-          <div class="new-user-type" id="newUserType"></div>
-          <b class="sign-in">Sign in</b>
-        </button>
-        <div class="new-user-registration1">
-          <div class="existing-user-prompt">
-            <div class="register">
-              <div class="register-as-buyer">
-                <div class="dont-have-an">Don't have an account yet?</div>
-                <a href="/signup">
-                    <div class="register-as-buyer1" id="registerAsBuyer">
-                        Create an account
-                      </div>
-                </a>
-              </div>
+  <h1>Log In</h1>
+  <div class="left-footer-bottom" id="left-footer-bottom">
+    <form class="password-frame">
+      <mat-form-field class="auth-input">
+        <mat-label>Username</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="usernameFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="Username"
+          (focus)="resetController()"
+        />
+        <mat-hint>Your username</mat-hint>
+        <mat-error>
+          {{
+            usernameFormControl.hasError("required")
+              ? "Username is Required"
+              : usernameFormControl.hasError("minlength")
+              ? "Username must be at least 8 characters long"
+              : usernameFormControl.hasError("maxlength")
+              ? "Username must be at most 20 characters long"
+              : ""
+          }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="auth-input password-section">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          [formControl]="passwordFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="*********"
+          (focus)="resetController()"
+        />
+        <mat-hint>Your password</mat-hint>
+        <mat-error>
+          {{
+            passwordFormControl.hasError("required")
+              ? "Password is required"
+              : passwordFormControl.hasError("minlength")
+              ? "Password must be at least 8 characters long"
+              : passwordFormControl.hasError("maxlength")
+              ? "Password must be at most 20 characters long"
+              : ""
+          }}
+        </mat-error>
+      </mat-form-field>
+      <div class="forgot-password">Forgot Password?</div>
+      <button (click)="signin()" class="new-user-registration">
+        <div class="new-user-type" id="newUserType"></div>
+        <b class="sign-in">Sign in</b>
+      </button>
+      <div class="new-user-registration1">
+        <div class="existing-user-prompt">
+          <div class="register">
+            <div class="register-as-buyer">
+              <div class="dont-have-an">Don't have an account yet?</div>
+              <a href="/signup">
+                <div class="register-as-buyer1" id="registerAsBuyer">
+                  Create an account
+                </div>
+              </a>
             </div>
-            
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
+</div>

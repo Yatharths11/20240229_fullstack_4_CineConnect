@@ -1,23 +1,55 @@
 <app-navbar>
-  <!-- <div buttonsContent class="button-container">
+  <div buttonsContent class="button-container">
     <button class="signup-button">Sign Up</button>
     <button class="login-button">Login</button>
-  </div> -->
-  <div adminContent class="button-container">
-    <button class="signup-button">+ create</button>
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        height: 45px;
-        width: 45px;
-        background-color: #d90429;
-        margin: 10px;
-      "
-    >
-      <fa-icon style="color: white; margin: 5px" [icon]="accountIcon"></fa-icon>
-    </div>
   </div>
 </app-navbar>
+
+<ngb-carousel
+  class="my-carousel"
+  #carousel
+  [interval]="3000"
+  [pauseOnHover]="pauseOnHover"
+  [pauseOnFocus]="pauseOnFocus"
+  (slide)="onSlide($event)"
+>
+  @for (img of images; track img; let i = $index) {
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="img" />
+    </div>
+  </ng-template>
+  }
+</ngb-carousel>
+
+<div style="display: flex; flex-direction: row; justify-content: space-between">
+  <p>All Movies</p>
+  <span
+    style="
+      font-size: 18px;
+      color: red;
+      margin: 20px;
+      margin-top: 60px;
+      margin-right: 50px;
+    "
+    >View All</span
+  >
+</div>
+<div class="movie-grid">
+  <app-movie-card *ngFor="let movie of movies" [movie]="movie"></app-movie-card>
+</div>
+
+<!-- Theatre section -->
+<div class="Theatre-section">
+  <div style="display: flex;flex-direction: row;">
+    <fa-icon
+      style="color: #ef233c; padding: 40px; font-size: 60px"
+      [icon]="faCirclePlay"
+    ></fa-icon>
+    <span style="margin-top: 60px;margin-left: -20px;font-size: 40px;color:#2b2d42;font-family: Karla;font-weight: bold;">THEATRES</span>
+  </div>
+  <div class="theatre-grid">
+    <app-theatre-card *ngFor="let t of theatre" [theatre]="t"></app-theatre-card>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 @Component({
   selector: 'app-create-movie',
@@ -9,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class CreateMovieComponent {
   movie: any = {};
+  http: HttpClient = inject(HttpClient)
+  token: string = ""
 
   createMovie() {
     const movieData = {
@@ -23,5 +26,14 @@ export class CreateMovieComponent {
     };
 
     console.log('Created Movie:', movieData);
+  }
+
+  createNewMovie(){
+    const headers = new  HttpHeaders({"token":this.token});
+    // const body = new HttpBody(JSON.stringify(this.movie));
+    this.http.post("http://localhost:5000/api/movies/post",{headers:headers},this.movie)
+    .subscribe((response)=>{
+      console.log(response)
+    })
   }
 }

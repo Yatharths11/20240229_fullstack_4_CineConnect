@@ -5,13 +5,10 @@ import { Component } from '@angular/core';
 import { AdminHomeComponent } from './Pages/admin-home/admin-home.component';
 import { CreateShowComponent } from './Pages/create-show/create-show.component';
 import { CreateTheatreComponent } from './Pages/create-theatre/create-theatre.component';
-// import { SigninpageComponent } from './Pages/signinpage/signinpage.component';
-// import { SignuppageComponent } from './Pages/signuppage/signuppage.component';
+
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
-    // {path:'signin', component: SigninpageComponent },
-    // {path:'signup',component: SignuppageComponent},
     {path:'',component:HomeComponent},
     {path:'adminhomepage',component:AdminHomeComponent},
     {path:'createshow',component:CreateShowComponent},

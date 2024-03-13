@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 @Component({
   selector: 'app-create-movie',
   standalone: true,
-  imports : [FormsModule],
+  imports : [FormsModule,
+              HttpClientModule],
   templateUrl: './create-movie.component.html',
   styleUrls: ['./create-movie.component.css']
 })
@@ -31,9 +33,14 @@ export class CreateMovieComponent {
   createNewMovie(){
     const headers = new  HttpHeaders({"token":this.token});
     // const body = new HttpBody(JSON.stringify(this.movie));
-    this.http.post("http://localhost:5000/api/movies/post",{headers:headers},this.movie)
+    this.http.post("http://localhost:5000/movies/post",{headers:headers},this.movie)
     .subscribe((response)=>{
       console.log(response)
-    })
+    },
+    error => {
+      console.error('Error:', error);
+      // Handle error here
+    }
+    )
   }
 }

@@ -1,4 +1,25 @@
-<app-navbar></app-navbar>
+<app-navbar>
+    <div adminContent class="button-container">
+      <button class="signup-button">+ create</button>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          height: 45px;
+          width: 45px;
+          background-color: #d90429;
+          margin: 10px;
+        "
+      >
+        <fa-icon
+          style="color: white; font-size: 34px"
+          [icon]="accountIcon"
+        ></fa-icon>
+      </div>
+    </div>
+  </app-navbar>
 <div class="main-content">
     <app-admin-left-sidebar></app-admin-left-sidebar>
     <div class="main">

@@ -1,5 +1,16 @@
-.btn{
-    background-color: white;
-color: black;
-border: 1px solid gray;
+.btn {
+    background-color: #ef233c; /* Background color */
+    color: #edf2f4; /* Text color */
+    border: none;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    width: 230px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    border-radius: 15px;
+}
+
+.btn:hover {
+    background-color: #d90429; /* Darker background color on hover */
+    color: #8d99ae; /* Lighter text color on hover */
 }

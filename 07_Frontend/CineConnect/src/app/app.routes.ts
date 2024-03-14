@@ -8,24 +8,22 @@ import { SigninpageComponent } from './Pages/signinpage/signinpage.component';
 import { SignuppageComponent } from './Pages/signuppage/signuppage.component';
 import { PageNotFoundPageComponent } from './Pages/page-not-found-page/page-not-found-page.component';
 import { BookTicketPageComponent } from './Pages/book-ticket-page/book-ticket-page.component';
-import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { QrComponent } from './Components/qr/qr.component';
 import { MovieDetailsComponent } from './Pages/movie-details/movie-details.component';
 import { TicketPageComponent } from './Pages/ticket-page/ticket-page.component';
+import { TicketComponent } from './Components/ticket/ticket.component';
 
 export const routes: Routes = [
-
-    {path:'',component:HomeComponent},
-    { path: 'pay', component: PaymentGatewayComponent },
-    {path:'qr',component:QrComponent},
-    {path:'adminhomepage',component:AdminHomeComponent},
-    {path:'createshow',component:CreateShowComponent},
-    {path:'createtheatre',component:CreateTheatreComponent},
-    {path:'bookseat',component:BookTicketPageComponent},
-    {path:'signin',component:SigninpageComponent},
-    {path:'signup',component:SignuppageComponent},
-    {path:'adminhomepage',component:AdminHomeComponent},
-    {path:'moviedetails',component:MovieDetailsComponent},
-    {path:"ticket",component:TicketPageComponent},
-    {path:'**',component:PageNotFoundPageComponent},
+  { path: '', component: HomeComponent },
+  { path: 'qr', component: QrComponent },
+  { path: 'adminhomepage', component: AdminHomeComponent },
+  { path: 'createshow', component: CreateShowComponent },
+  { path: 'createtheatre', component: CreateTheatreComponent },
+  { path: 'bookseat', component: BookTicketPageComponent },
+  { path: 'signin', component: SigninpageComponent },
+  { path: 'signup', component: SignuppageComponent },
+  { path: 'adminhomepage', component: AdminHomeComponent },
+  { path: 'moviedetails', component: MovieDetailsComponent },
+  { path: 'ticket', component: TicketComponent },
+  { path: '**', component: PageNotFoundPageComponent },
 ];

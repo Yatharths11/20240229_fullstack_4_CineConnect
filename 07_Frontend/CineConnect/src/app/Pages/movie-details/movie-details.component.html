@@ -1,17 +1,22 @@
 <app-navbar></app-navbar>
-<div
-    style="display: flex; align-items: center;flex-direction: column;"
->
+<div class="movie-details-container">
+  <div *ngIf="movie" class="movie-details">
     <div class="poster">
-        <img src="https://m.media-amazon.com/images/M/MV5BNDlkMDQ1NzUtNGE3OC00NmUwLWI0NjAtNDJmODUzY2NhOGIzL2ltYWdlXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX300.jpg" alt="">
+      <img [src]="movie.imageUrl" alt="{{ movie.name }}" class="movie-image" />
     </div>
     <div class="details">
-        <div class="features">
-            <span>Movie Name</span>|<span>Rating</span>|<span>Year Released</span>
-        </div>
-        <h6>Theater</h6>
-        <h5>About the movie</h5>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis accusamus tempora veritatis cumque quas nulla nisi similique blanditiis ipsam, hic cum, sed repellat possimus porro vero aspernatur voluptatibus quidem quam.</p>
-        <button>Book Now</button>
+      <div class="title">{{ movie.name }}</div>
+      <div class="features">
+        <span class="info">Rating:</span
+        ><span class="rating">{{ movie.rating }}</span> <br /><span class="info"
+          >Year of Release:</span
+        ><span class="year">{{ movie.year }}</span>
+      </div>
+      <h6>Theater : Avenue</h6>
+      <hr />
+      <h5>About the movie</h5>
+      <p>{{ movie.description }}</p>
+      <button (click)="navigateToBookSeat(movie)" class="book-now-btn">Book Now</button>
     </div>
+  </div>
 </div>

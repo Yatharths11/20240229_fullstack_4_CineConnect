@@ -70,8 +70,7 @@ const register = async (req, res) => {
 //Get the information of specific User
 const info = async (req, res) => {
   try {
-    const id = req.params.id;
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization;
 
     if (!token_provided(token)) {
       return res
@@ -87,15 +86,17 @@ const info = async (req, res) => {
         .send({ message: "Forbidden. Only users can perform this action." });
     }
 
-    const userExist = await Users.findOne({ _id: id });
+    const userExist = await Users.findOne({ username: decodedToken.username });
 
     if (!userExist) {
       return res.status(404).send({ error: "User not Found." });
     }
 
     if (
-      !(decodedToken.username === userExist.username) ||
-      !decodedToken.role === "superAdmin"
+      !(
+        decodedToken.username === userExist.username ||
+        decodedToken.role === "superAdmin"
+      )
     ) {
       return res.status(401).send({ error: "Sorry, you're not Authorised." });
     }

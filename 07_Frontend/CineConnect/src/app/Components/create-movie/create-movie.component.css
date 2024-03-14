@@ -24,7 +24,7 @@ label {
     color: #2b2d42;
 }
 
-input {
+input, textarea, select{
     flex: 1; /* Fill remaining width */
     padding: 5px;
     border: 1px solid #ccc;

@@ -1,9 +1,41 @@
-<app-navbar>
-  <div buttonsContent class="button-container">
-    <button routerLink="/signup" class="signup-button">Sign Up</button>
-    <button routerLink="/signin" class="login-button">Login</button>
-  </div>
-</app-navbar>
+<div *ngIf="isLoggedIn; else loggedOutNavbar">
+  <app-navbar>
+    <div adminContent class="button-container">
+      <div>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="userMenu"
+          aria-label="User Menu"
+          class="custom-button"
+        >
+          <fa-icon
+            style="color: white; font-size: 34px"
+            [icon]="accountIcon"
+          ></fa-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="viewProfile()">View Profile</button>
+          <div *ngIf="userInfo" class="user-info">
+            <h6><strong>Username:</strong> {{ userInfo.username }}</h6>
+            <h6><strong>Email:</strong> {{ userInfo.email }}</h6>
+          </div>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+  </app-navbar>
+</div>
+
+<!-- Display user information in a modal -->
+
+<ng-template #loggedOutNavbar>
+  <app-navbar>
+    <div buttonsContent class="button-container">
+      <button routerLink="/signup" class="signup-button">Sign Up</button>
+      <button routerLink="/signin" class="login-button">Login</button>
+    </div>
+  </app-navbar>
+</ng-template>
 
 <ngb-carousel
   class="my-carousel"
@@ -36,20 +68,33 @@
   >
 </div>
 <div class="movie-grid">
-  <app-movie-card *ngFor="let movie of movies" [movie]="movie"></app-movie-card>
+  <app-movie-card *ngFor="let movie of movies" [movie]="movie" routerLink="/moviedetails" ></app-movie-card>
 </div>
 
 <!-- Theatre section -->
 <div class="Theatre-section">
-  <div style="display: flex;flex-direction: row;">
+  <div style="display: flex; flex-direction: row">
     <fa-icon
       style="color: #ef233c; padding: 40px; font-size: 60px"
       [icon]="faCirclePlay"
     ></fa-icon>
-    <span style="margin-top: 60px;margin-left: -20px;font-size: 40px;color:#2b2d42;font-family: Karla;font-weight: bold;">THEATRES</span>
+    <span
+      style="
+        margin-top: 60px;
+        margin-left: -20px;
+        font-size: 40px;
+        color: #2b2d42;
+        font-family: Karla;
+        font-weight: bold;
+      "
+      >THEATRES</span
+    >
   </div>
   <div class="theatre-grid">
-    <app-theatre-card *ngFor="let t of theatre" [theatre]="t"></app-theatre-card>
+    <app-theatre-card
+      *ngFor="let t of theatre"
+      [theatre]="t"
+    ></app-theatre-card>
   </div>
 </div>
 <app-footer></app-footer>

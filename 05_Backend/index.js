@@ -3,15 +3,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const cors = require('cors');
 
 // Load environment variables from .env file
 dotenv.config();
+// const cors = require('cors');
 
 // Create an Express app
 const app = express();
-
+app.use(cors());
 // Parse JSON requests
 app.use(bodyParser.json());
+app.use(cors());
 
 // Define routes
 const authRoutes = require("./routes/authRoutes.js");

@@ -1,26 +1,21 @@
 <div class="creator">
-    <p class="form-field"> 
-        <label for="theatreName">Name of Theaters :</label>
-        <input type="text" id="theatreName" placeholder="Enter theatre name">
-    </p>
-    <p class="form-field"> 
-        <label for="location">Location :</label>
-        <input type="text" id="location" placeholder="Enter location">
-    </p>
-    <p class="form-field">
-        <label for="theatreScreens">Screens :</label>
-        <input type="text" id="theatreScreens" placeholder="Enter number of screens">
-    </p>
-    <p class="form-field">
-        <label for="theatreSeats">Seats :</label>
-        <input type="seats" id="theatreSeats" placeholder="Enter date">
-    </p>
-    <p class="form-field">
-        <label for="theatreAddress">Rating :</label>
-        <input type="text" id="theatreAddress" placeholder="Enter address theatre">
-    </p>
-    
-
-    <p class="create-button">Create Theatre</p>
-
+    <form (submit)="submitForm()">
+        <p class="form-field"> 
+            <label for="name">Name:</label>
+            <input type="text" id="name" [(ngModel)]="theatre.name" name="name" placeholder="Enter theater name" required>
+        </p>
+        <p class="form-field">
+            <label for="street">Street:</label>
+            <input type="text" id="street" [(ngModel)]="theatre.street" name="street" placeholder="Enter street" required>
+        </p>
+        <p class="form-field">
+            <label for="area">Area:</label>
+            <input type="text" id="area" [(ngModel)]="theatre.area" name="area" placeholder="Enter area" required>
+        </p>
+        <p class="form-field">
+            <label for="city">City:</label>
+            <input type="text" id="city" [(ngModel)]="theatre.city" name="city" placeholder="Enter city" required>
+        </p>
+        <button type="submit" class="create-button">Create Theatre</button>
+    </form>
 </div>

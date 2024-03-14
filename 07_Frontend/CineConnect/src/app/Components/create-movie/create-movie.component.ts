@@ -1,46 +1,72 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule,ReactiveFormsModule } from '@angular/forms'; 
 @Component({
   selector: 'app-create-movie',
   standalone: true,
   imports : [FormsModule,
-              HttpClientModule],
+              HttpClientModule,
+              ReactiveFormsModule],
+  // providers:[FormGroup],
   templateUrl: './create-movie.component.html',
   styleUrls: ['./create-movie.component.css']
 })
 export class CreateMovieComponent {
   movie: any = {};
-  http: HttpClient = inject(HttpClient)
-  token: string = ""
+  // http: HttpClient = inject(HttpClient)
+  token: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzEwMzkyMTA0LCJleHAiOjE3MTA0MjgxMDR9.u1sNpr3Lkw_aqFrS1H27iFJHGyhrTOGvfBpG_lp1jkg"
+  movieForm: any;
+  name: any;
+  theatre_id: any;
+  description: any;
+  screen: any;
+  language: any;
+  genre: any;
+  price: any;
+  ratings: any;
+  date: any;
+  availableSeats: any;
+  pgRating: any;
+  constructor(private http: HttpClient) {}
 
-  createMovie() {
+  onSubmit() {
     const movieData = {
-      name: this.movie.name,
-      genre: this.movie.genre,
-      language: this.movie.language,
-      theatre: this.movie.theatre,
-      date: this.movie.date,
-      rating: this.movie.rating,
-      ticketPrice: this.movie.ticketPrice,
-      posterLink: this.movie.posterLink
+      name: this.name,
+      theatre_id: this.theatre_id,
+      description: this.description,
+      screen: this.screen,
+      language: this.language,
+      genre: this.genre,
+      price: this.price,
+      ratings: this.ratings,
+      date: this.date,
+      availableSeats: this.availableSeats,
+      pgRating: this.pgRating
     };
-
-    console.log('Created Movie:', movieData);
+    console.log(movieData)
+    const headers = new HttpHeaders().set("Authorization", this.token);
+    this.http.post("http://localhost:5000/movies/post", movieData, { headers })
+      .subscribe(
+        (response) => {
+          console.log(`Movie created. Status: ${response}`);
+          // Reset form fields
+          this.resetForm();
+        }
+      );
   }
 
-  createNewMovie(){
-    const headers = new  HttpHeaders({"token":this.token});
-    // const body = new HttpBody(JSON.stringify(this.movie));
-    this.http.post("http://localhost:5000/movies/post",{headers:headers},this.movie)
-    .subscribe((response)=>{
-      console.log(response)
-    },
-    error => {
-      console.error('Error:', error);
-      // Handle error here
-    }
-    )
+  resetForm() {
+    this.name = '';
+    this.theatre_id = '';
+    this.description = '';
+    this.screen = '';
+    this.language = '';
+    this.genre = [];
+    this.price = null;
+    this.ratings = null;
+    this.date = null;
+    this.availableSeats = null;
+    this.pgRating = '';
   }
 }

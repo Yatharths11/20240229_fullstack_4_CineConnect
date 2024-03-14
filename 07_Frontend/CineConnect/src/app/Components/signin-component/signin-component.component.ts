@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-
-
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroupDirective,
@@ -12,6 +10,11 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthServiceService } from '../../auth-service.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AuthInterceptor } from '../../auth-interceptor';
+import { NavbarService } from '../../navbar.service';
 
 /** Angular Material based class to handle matching of error state */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -19,11 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
   ): boolean {
-    return !!(
-      control &&
-      control.invalid &&
-      control.touched
-    );
+    return !!(control && control.invalid && control.touched);
   }
 }
 
@@ -34,26 +33,30 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,],
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   templateUrl: './signin-component.component.html',
-  styleUrl: './signin-component.component.css'
+  styleUrl: './signin-component.component.css',
+  providers: [
+    AuthServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class SigninComponentComponent {
-  
-
-  signin(){
-    console.log("hello")
-  }
-  
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(8),
-    Validators.maxLength(20),
-  ]);
-
   usernameFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
+    Validators.maxLength(20),
+  ]);
+
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
     Validators.maxLength(20),
   ]);
 
@@ -66,9 +69,36 @@ export class SigninComponentComponent {
     this.passwordFormControl.reset();
     this.passwordFormControl.setValue(passValue);
   }
-  
+
   isDirty: boolean = false;
   matcher = new MyErrorStateMatcher();
 
+  constructor(
+    private authService: AuthServiceService,
+    private router: Router,
+    private navbarService: NavbarService
 
+  ) {}
+
+  signin(): void {
+    if (this.usernameFormControl.valid && this.passwordFormControl.valid) {
+      const username = this.usernameFormControl.value;
+      const password = this.passwordFormControl.value;
+
+      this.authService.signin(username, password).subscribe(
+        (response) => {
+          console.log('Login successful:', response);
+          this.navbarService.setLoggedIn(true);
+          this.authService.setToken(response.token);
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          console.error('Login failed:', error);
+        }
+      );
+    } else {
+      this.usernameFormControl.markAsTouched();
+      this.passwordFormControl.markAsTouched();
+    }
+  }
 }

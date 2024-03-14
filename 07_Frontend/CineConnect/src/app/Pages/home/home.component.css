@@ -59,8 +59,7 @@ p {
   margin-top: -20px;
 }
 
-.Theatre-section
-{
+.Theatre-section {
   width: 100%;
   height: fit-content;
   background-color: #8d99ae;
@@ -73,4 +72,19 @@ p {
   justify-content: center;
   padding: 50px;
   margin-top: -60px;
+}
+
+.custom-button {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: #d90429;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info {
+  padding: 18px;
 }

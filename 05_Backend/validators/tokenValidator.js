@@ -1,3 +1,4 @@
+const { decode } = require("punycode");
 const { jwt } = require("../utils/auth");
 require("dotenv").config();
 
@@ -13,24 +14,18 @@ function token_provided(token) {
     return true;
   }
 }
-
-/**
- * verifying token and returning user data from it.
- * @param {token} token
- * @returns
- */
-async function verifyToken(token) {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-      if (err) {
-        // Token verification failed
-        reject(err);
-      } else {
-        // Token is valid, return the decoded payload
-        resolve(decoded);
-      }
-    });
-  });
+function verifyToken(token) {
+  console.log(token)
+  token = token.split(" ")[1]  
+  try {
+    const decodetoken = token; // remove 'Bearer' from token
+    const decode= jwt.verify(decodetoken, process.env.SECRET_KEY);
+    // console.log("valid"+decode.role);
+    return decode;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 }
 
 module.exports = { token_provided, verifyToken };

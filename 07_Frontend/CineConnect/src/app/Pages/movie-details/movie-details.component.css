@@ -1,0 +1,30 @@
+img{
+    width: 1230px;
+    height: 900px;
+}
+.poster{
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.details{
+    width: 1270px;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    background-color: #8d99ae;
+    flex-direction: column;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 5px;
+}
+h3{
+    display: inline;
+}
+button{
+    width: fit-content;
+    border-radius:  6px;
+    background-color: #ef233c;
+    outline: none;
+}

@@ -24,11 +24,15 @@ const login = async (req, res) => {
     const accessToken = jwt.sign(
       { username: user.username, role: user.role },
       process.env.SECRET_KEY,
-      { expiresIn: "10h" }
+      { expiresIn: "23h" }
     );
 
+    const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
+    console.log("Decoded Token:", decoded);
     res.set("Authorization", "Bearer " + accessToken);
-    res.status(200).json({ message: "User logged in successfully." });
+    res
+      .status(200)
+      .json({ token: accessToken, message: "User logged in successfully." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to login. Try again." });

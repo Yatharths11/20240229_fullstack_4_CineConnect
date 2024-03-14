@@ -7,15 +7,17 @@ import { CreateTheatreComponent } from './Pages/create-theatre/create-theatre.co
 import { SigninpageComponent } from './Pages/signinpage/signinpage.component';
 import { SignuppageComponent } from './Pages/signuppage/signuppage.component';
 import { PageNotFoundPageComponent } from './Pages/page-not-found-page/page-not-found-page.component';
+import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 export const routes: Routes = [
-
-    {path:'',component:HomeComponent},
-    {path:'adminhomepage',component:AdminHomeComponent},
-    {path:'createshow',component:CreateShowComponent},
-    {path:'createtheatre',component:CreateTheatreComponent},
-    {path:'signin',component:SigninpageComponent},
-    {path:'signup',component:SignuppageComponent},
-    {path:'adminhomepage',component:AdminHomeComponent},
-    {path:'**',component:PageNotFoundPageComponent},
-
+  
+  { path: '', component: HomeComponent },
+  { path: 'pay', component: PaymentGatewayComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'adminhomepage', component: AdminHomeComponent },
+  { path: 'createshow', component: CreateShowComponent },
+  { path: 'createtheatre', component: CreateTheatreComponent },
+  { path: 'signin', component: SigninpageComponent },
+  { path: 'signup', component: SignuppageComponent },
+  { path: 'adminhomepage', component: AdminHomeComponent },
+  { path: '**', component: PageNotFoundPageComponent },
 ];

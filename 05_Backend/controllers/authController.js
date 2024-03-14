@@ -24,10 +24,11 @@ const login = async (req, res) => {
     const accessToken = jwt.sign(
       { username: user.username, role: user.role },
       process.env.SECRET_KEY,
-      { expiresIn: "10h" }
+      { expiresIn: "23h" }
     );
 
-    console.log("Generated Token:", accessToken);
+    const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
+    console.log("Decoded Token:", decoded);
     res.set("Authorization", "Bearer " + accessToken);
     res
       .status(200)

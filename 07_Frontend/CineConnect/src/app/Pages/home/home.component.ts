@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavbarComponent } from '../../Components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlay, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+
 import {
   NgbCarousel,
   NgbCarouselModule,
@@ -15,6 +16,11 @@ import { MovieCardComponent } from '../../Components/movie-card/movie-card.compo
 import { FooterComponent } from '../../Components/footer/footer.component';
 import { TheatreCardComponent } from '../../Components/theatre-card/theatre-card.component';
 import { AuthServiceService } from '../../auth-service.service';
+import { NavbarService } from '../../navbar.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-home',
@@ -29,10 +35,13 @@ import { AuthServiceService } from '../../auth-service.service';
     MovieCardComponent,
     FooterComponent,
     TheatreCardComponent,
+    MatIconModule,
+    MatMenuModule,
+    HttpClientModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers:[AuthServiceService]
+  providers: [AuthServiceService, UserService, NavbarService],
 })
 export class HomeComponent {
   images = [62, 83, 466, 965, 982, 1043, 738].map(
@@ -104,4 +113,43 @@ export class HomeComponent {
   ];
 
   faCirclePlay = faCirclePlay;
+  accountIcon = faCircleUser;
+
+  isLoggedIn = this.navbarService.isAuthenticated();
+
+  constructor(
+    private navbarService: NavbarService,
+    private authService: AuthServiceService,
+    private router: Router,
+    private userService: UserService
+  ) {}
+
+  ngOnInit(): void {
+    this.navbarService.isLoggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
+  }
+
+  userInfo: any;
+  viewProfile(): void {
+    this.userService.getUserInfo().subscribe(
+      (response) => {
+        console.log('User Info:', response);
+        this.userInfo = response; // Store user information
+        // Additional logic to display the information (e.g., open a modal)
+        // Display the user information as needed
+      },
+      (error) => {
+        console.error('Failed to fetch user info:', error);
+        // Handle error
+      }
+    );
+  }
+
+  logout(): void {
+    // Implement logic to log out the user
+    this.authService.clearToken();
+    // Optionally, you can navigate to the login page or perform other actions
+    console.log('Logout clicked');
+  }
 }

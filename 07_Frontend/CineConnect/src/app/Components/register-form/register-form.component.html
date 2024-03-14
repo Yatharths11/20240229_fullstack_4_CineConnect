@@ -1,89 +1,86 @@
-
 <div class="left-footer">
-    <h1>Register</h1>
-    <div class="left-footer-bottom" id="left-footer-bottom">
-      <form class="password-frame">
-        <mat-form-field class="auth-input">
-            <mat-label>Email</mat-label>
-            <input
-            type="email"
-            matInput
-            [formControl] = "emailFormControl" 
-            placeholder="Ex. pat@example.com"
-            (focus)="resetController()"
-          />
-          
-            <mat-hint>Your email address</mat-hint>
-            <mat-error>
-              {{
-                emailFormControl.hasError("email")
-                  ? "Not a valid email"
-                  : emailFormControl.hasError("required")
-                  ? "Email is required"
-                  : ""
-              }}
-            </mat-error>
-          </mat-form-field>
-          
-          <mat-form-field class="auth-input password-section">
-            <mat-label>Password</mat-label>
-            <input
-              type="password"
-              matInput
-              [formControl]="passwordFormControl"
-              [errorStateMatcher]="matcher"
-              placeholder="*********"
-              (focus)="resetController()"
-            />
-            <mat-hint>Your password</mat-hint>
-            <mat-error>
-              {{
-                passwordFormControl.hasError("required")
-                  ? "Password is required"
-                  : passwordFormControl.hasError("minlength")
-                  ? "Password must be at least 8 characters long"
-                  : passwordFormControl.hasError("maxlength")
-                  ? "Password must be at most 20 characters long"
-                  : ""
-              }}
-            </mat-error>
-          </mat-form-field>
+  <h1>Register</h1>
+  <div class="left-footer-bottom" id="left-footer-bottom">
+    <form class="password-frame">
+      <mat-form-field class="auth-input">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          placeholder="Ex. pat@example.com"
+          (focus)="resetController()"
+        />
 
-       <mat-form-field class="auth-input">
-    <mat-label>Username</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="usernameFormControl"
-      [errorStateMatcher]="matcher"
-      placeholder="Username"
-      (focus)="resetController()"
-    />
-    <mat-hint>Your username</mat-hint>
-    <mat-error>
-      {{
-        usernameFormControl.hasError("required")
-          ? "Username is Required"
-          : usernameFormControl.hasError("minlength")
-          ? "Username must be at least 8 characters long"
-          : usernameFormControl.hasError("maxlength")
-          ? "Username must be at most 20 characters long"
-          : ""
-      }}
-    </mat-error>
-  </mat-form-field>
-        <button class="new-user-registration">
-          <div class="new-user-type" id="newUserType"></div>
-          <b class="sign-in">Create my Account</b>
-        </button>
-        <div class="bottom-text">
-            <div class="dont-have-an">Already have an Account?</div>
-                <a href="/signin">
-                    <div class="register-as-buyer1" id="registerAsBuyer">
-                        Sign-In
-                      </div>
-                </a>
-        </div>
-      </form>
-    </div>
+        <mat-hint>Your email address</mat-hint>
+        <mat-error>
+          {{
+            emailFormControl.hasError("email")
+              ? "Not a valid email"
+              : emailFormControl.hasError("required")
+              ? "Email is required"
+              : ""
+          }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="auth-input password-section">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          [formControl]="passwordFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="*********"
+          (focus)="resetController()"
+        />
+        <mat-hint>Your password</mat-hint>
+        <mat-error>
+          {{
+            passwordFormControl.hasError("required")
+              ? "Password is required"
+              : passwordFormControl.hasError("minlength")
+              ? "Password must be at least 8 characters long"
+              : passwordFormControl.hasError("maxlength")
+              ? "Password must be at most 20 characters long"
+              : ""
+          }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="auth-input">
+        <mat-label>Username</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="usernameFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="Username"
+          (focus)="resetController()"
+        />
+        <mat-hint>Your username</mat-hint>
+        <mat-error>
+          {{
+            usernameFormControl.hasError("required")
+              ? "Username is Required"
+              : usernameFormControl.hasError("minlength")
+              ? "Username must be at least 8 characters long"
+              : usernameFormControl.hasError("maxlength")
+              ? "Username must be at most 20 characters long"
+              : ""
+          }}
+        </mat-error>
+      </mat-form-field>
+      <button (click)="signup()" class="new-user-registration">
+        <div class="new-user-type" id="newUserType"></div>
+        <b class="sign-in">Create my Account</b>
+      </button>
+      <div class="bottom-text">
+        <div class="dont-have-an">Already have an Account?</div>
+        <a href="/signin">
+          <div class="register-as-buyer1" id="registerAsBuyer">Sign-In</div>
+        </a>
+      </div>
+    </form>
   </div>
+</div>

@@ -1,13 +1,20 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
+  setLoggedIn(value: boolean): void {
+    this.isLoggedInSubject.next(value);
+  }
+
   private apiUrl = 'http://localhost:5000/auth';
   private tokenKey = 'authToken';
 
@@ -26,35 +33,6 @@ export class AuthServiceService {
       })
     );
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   setToken(token: string): void {
     console.log('Setting token:', token);

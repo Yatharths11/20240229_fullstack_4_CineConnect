@@ -11,9 +11,10 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthServiceService } from '../../auth-service.service';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthInterceptor } from '../../auth-interceptor';
+import { NavbarService } from '../../navbar.service';
 
 /** Angular Material based class to handle matching of error state */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -37,11 +38,14 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   ],
   templateUrl: './signin-component.component.html',
   styleUrl: './signin-component.component.css',
-  providers: [AuthServiceService,{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true,
-  }],
+  providers: [
+    AuthServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class SigninComponentComponent {
   usernameFormControl = new FormControl('', [
@@ -71,7 +75,9 @@ export class SigninComponentComponent {
 
   constructor(
     private authService: AuthServiceService,
-    private router: Router
+    private router: Router,
+    private navbarService: NavbarService
+
   ) {}
 
   signin(): void {
@@ -82,7 +88,7 @@ export class SigninComponentComponent {
       this.authService.signin(username, password).subscribe(
         (response) => {
           console.log('Login successful:', response);
-
+          this.navbarService.setLoggedIn(true);
           this.authService.setToken(response.token);
           this.router.navigate(['/']);
         },

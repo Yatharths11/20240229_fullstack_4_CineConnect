@@ -76,21 +76,56 @@ export class HomeComponent {
   }
 
   movies = [
-    { name: 'Movie 1', imageUrl: '../../assets/movie1.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
-    { name: 'Movie 1', imageUrl: '../../assets/movie3.jpg', genre: 'Action' },
-    { name: 'Movie 2', imageUrl: '../../assets/movie2.jpg', genre: 'Comedy' },
+    {
+      name: 'Why Him?',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BNDlkMDQ1NzUtNGE3OC00NmUwLWI0NjAtNDJmODUzY2NhOGIzL2ltYWdlXkEyXkFqcGdeQXVyNDg2MjUxNjM@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: "Why We're Killing Gunther",
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTgyMjUwNjYxNl5BMl5BanBnXkFtZTgwOTU0NjczMzI@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: 'Why Did I Get Married?',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjAzMDM0Nzg3OV5BMl5BanBnXkFtZTcwNzMxOTI1MQ@@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: 'Why We Fight',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTY2NzU2MjM0MF5BMl5BanBnXkFtZTYwMDMwNDE3._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: 'Why Did I Get Married Too?',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjIwMDc4MDgyMF5BMl5BanBnXkFtZTcwNjgxODkxMw@@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: "Why Don't You Play in Hell?",
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BZTczNmY5NTQtNzQ5Ni00YjYwLWIzM2EtOGJlNzkxMmZiYWFjXkEyXkFqcGdeQXVyNTQyODc1OTY@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: 'Why Stop Now?',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTUxNDU0MzAwNF5BMl5BanBnXkFtZTcwMzU4ODgwOA@@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: "Why Don't You Just Die!",
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BZmQ3OGExMzktM2Q2MC00NmFlLWI3ZjItMjVlN2Q3YjE3NTM0XkEyXkFqcGdeQXVyMTg0MTI3Mg@@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: 'Bill Burr: Why Do I Do This?',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjI3OTcxNTA1MV5BMl5BanBnXkFtZTgwNDY2MjA2MDE@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    },
+    {
+      name: 'Why Did You Kill Me?',
+      imageUrl: 'https://m.media-amazon.com/images/M/MV5BODBjM2Y3ZjctYzZhNS00ZjRkLThhYzgtZDJjYjk2NWViMWMwXkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_SX300.jpg',
+      genre: [ 'Action', 'Sci-Fi' ]
+    }
     // Add more movies as needed
   ];
 

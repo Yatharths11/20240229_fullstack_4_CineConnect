@@ -1,5 +1,5 @@
-<div class="movie-card">
-  <img [src]="movie.imageUrl" alt="{{ movie.name }}" class="movie-image" />
+<div class="movie-card" >
+  <img [src]="movie.imageUrl" alt="{{ movie.name }}" class="movie-image" routerLink="/moviedetails" />
   <div class="movie-details">
     <h3 class="movie-name">{{ movie.name }}</h3>
     <p class="movie-genre">{{ movie.genre }}</p>

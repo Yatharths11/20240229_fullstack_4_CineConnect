@@ -15,8 +15,7 @@ function token_provided(token) {
   }
 }
 function verifyToken(token) {
-  console.log(token)
-  token = token.split(" ")[1]  
+  console.log(token)  
   try {
     const decodetoken = token; // remove 'Bearer' from token
     const decode= jwt.verify(decodetoken, process.env.SECRET_KEY);

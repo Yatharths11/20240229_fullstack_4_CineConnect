@@ -181,6 +181,8 @@ export class HomeComponent {
     );
   }
 
+  
+
   logout(): void {
     // Implement logic to log out the user
     this.authService.clearToken();

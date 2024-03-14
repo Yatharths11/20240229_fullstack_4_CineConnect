@@ -82,7 +82,7 @@ const postBooking = async (req, res) => {
 // Retrieve all the Bookings of the user
 const myBooking = async (req, res) => {
   try {
-    const token = req.headers.authorization.split(" ")[1]; // Extract the JWT token from the request headers
+    const token = req.headers.authorization; // Extract the JWT token from the request headers
     // Check if the JWT token is provided
     if (!token_provided(token)) {
       return res

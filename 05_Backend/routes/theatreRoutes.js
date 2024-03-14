@@ -8,7 +8,7 @@ const theatreController = require("../controllers/theatreController");
 // routes
 router.get("/", theatreController.theatreList);
 router.get("/:id", theatreController.getTheatreDetailsById);
-router.post("/", theatreController.createNewTheatre);
+router.post("/post", theatreController.createNewTheatre);
 router.delete("/deleteTheatre/:id", theatreController.deleteTheatreById);
 router.get("/:id/movies", theatreController.getMovies);
 

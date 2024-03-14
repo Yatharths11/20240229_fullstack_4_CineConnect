@@ -1,7 +1,7 @@
 const Theatres = require("../models/theatre");
 const Movies = require("../models/movies");
 const { token_provided, verifyToken } = require("../validators/tokenValidator");
-// const { check_admin, check_superAdmin } = require('../validators/RoleValidator')
+const { check_admin, check_superAdmin } = require('../validators/RoleValidator')
 const {
   validateTheatrePost,
   validateTheatreUpdate,
@@ -39,20 +39,6 @@ const getTheatreDetailsById = async (req, res) => {
 
 // API to create a new theatre
 const createNewTheatre = async (req, res) => {
-  //check token
-  if (!(await verifyToken(req.header.authorization))) {
-    return res
-      .status(401)
-      .json({ auth: false, message: "Failed to authenticate." });
-  }
-  if (!check_admin || !check_superAdmin) {
-    return res.status(403).json({
-      auth: false,
-      message: "You are not authorized to perform this action!",
-    });
-  }
-
-  const theatre = req.body;
   try {
     // Extract the token from the request headers
     const token = req.headers.authorization;
@@ -79,7 +65,7 @@ const createNewTheatre = async (req, res) => {
     // Return the newly created theatre
     return res.status(201).json(newTheatre);
   } catch (err) {
-    console.error("Error creating theatre:", err);
+    // console.error("Error creating theatre:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -105,7 +91,7 @@ const deleteTheatreById = async (req, res) => {
       return res
         .status(401)
         .json({ error: "Sorry, you're not authorized to delete a theatre." });
-    }
+    }       
 
     const result = await Theatres.deleteOne({ _id: id });
     if (result.deletedCount === 0) {

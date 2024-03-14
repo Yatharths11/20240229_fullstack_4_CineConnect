@@ -1,13 +1,30 @@
 <div class="bookseatcomp">
-    <app-navbar></app-navbar>
-
-<div class="bookseatmainbody">
-    <div class="right-part">
-        <app-movie-seat-booking [bookedTickets]="bookedTickets"></app-movie-seat-booking>
+    <div class="navbar-comp">
+        <app-navbar></app-navbar>
     </div>
 
-    <div class="left-part">
-        <app-movie-card [movie]="movie"></app-movie-card>
+
+<div class="bookseatmainbody1">
+    
+    <div class="bookseatmainbody">
+        <div class="right-part">
+            <div class="text-right">
+                Movie : <div class="text-right-value">
+                    {{movie.name}}
+                </div>, 
+                Price: <div class="text-right-value">
+                    {{movie.Price}}
+                </div>
+            </div>
+            <app-movie-seat-booking [bookedTickets]="bookedTickets" #childComponent></app-movie-seat-booking>
+        </div>
+    
+        <div class="left-part">
+            <app-movie-card [movie]="movie"></app-movie-card>
+            <app-payment-component></app-payment-component>
+        </div>
     </div>
+
+    
 </div>
 </div>

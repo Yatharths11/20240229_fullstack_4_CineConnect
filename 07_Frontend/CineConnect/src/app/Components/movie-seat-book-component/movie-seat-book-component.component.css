@@ -10,10 +10,12 @@
   align-items: center;
   height: fit-content;
   width: fit-content;
-  border: 1px solid red;
   color: white;
   margin: 0;
   padding: 50px;
+}
+.text #total{
+  margin-left: 10px;
 }
 
 h2 {
@@ -27,7 +29,8 @@ h2 {
 }
 .row-number{
     width: fit-content;
-    color: red;
+    color: white;
+    font-style: italic;
 }
 
 .movie-container select {
@@ -46,8 +49,8 @@ h2 {
   display: flex;
     align-items: center;
     justify-content: center;
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   box-shadow: 0 1px 1px red;
   margin: 5px;
   border-top-left-radius: 5px;

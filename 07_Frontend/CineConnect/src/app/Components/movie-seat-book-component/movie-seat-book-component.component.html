@@ -1,8 +1,4 @@
 <div class="bodyCheckout">
-    <div class="movie-container">
-      <label>Movie Name:</label>
-      <div class="movie-name">{{movieList.movieName}}</div>
-    </div>
   
     <ul class="showcase">
       <li>
@@ -35,9 +31,9 @@
     </div>
   
     <p class="text">
-      You have selected <span id="count">{{bookedSeatNo.length}}</span> movies for price of $<span
+      <span id="count">{{bookedSeatNo.length}}</span> Tickets:<span
         id="total"
-        >{{getPrice()}}</span
+        >{{getPrice()}} {{movieList.currency}}</span
       >
     </p>
     <!-- <script src="script.js"></script> -->

@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PaymentService } from '../../payment.service';
 
 @Component({
   selector: 'app-movie-seat-booking',
@@ -21,21 +22,24 @@ export class MovieSeatBookComponent {
 movieList: any={
   movieName:"X-Men",
   ticketRate:"250",
+  currency: "INR",
   movieBanner: "../../assets/movie1.jpg",
   description:"lkas;dkfhn;andsfk;jandf;knasdf",
   shows:[],
   seatRows:[
     {row:'A',noOfSeats: 8},
-    {row:'b',noOfSeats: 8},
-    {row:'c',noOfSeats: 9},
+    {row:'b',noOfSeats: 7},
+    {row:'c',noOfSeats: 6},
     {row:'d',noOfSeats: 8},
     {row:'e',noOfSeats: 8},
     {row:'f',noOfSeats: 8},
   ]
 }
 
-
+totalPrice:number=0;
 bookedSeatNo:any[]=[]
+
+constructor(private paymentService: PaymentService) {}
 
 getSeatArray(totalSeats:number){
   let arrayOfSeats=[]
@@ -78,8 +82,12 @@ checkIfPrevOccupied(rowNo:string,seatNo:number){
   return true
 }
 
-getPrice(){
-  return this.movieList.ticketRate*this.bookedSeatNo.length
+
+getPrice() {
+  this.totalPrice = this.movieList.ticketRate * this.bookedSeatNo.length;
+  this.paymentService.updateTotalPrice(this.totalPrice);
+ 
+ return this.totalPrice// Emit the updated total price
 }
 
 

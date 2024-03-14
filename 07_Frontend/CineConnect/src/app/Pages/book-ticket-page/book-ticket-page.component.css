@@ -11,6 +11,7 @@
 }
 
 .bookseatmainbody1{
+    overflow-x: hidden;
     margin-top: 50px;
 }
 .left-part{
@@ -32,7 +33,7 @@
     text-align: center;
 }
 .text-right{
-    font-size: 2em;
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
 }

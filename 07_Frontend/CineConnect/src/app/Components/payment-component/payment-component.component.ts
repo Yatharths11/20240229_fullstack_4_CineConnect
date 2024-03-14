@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 /** Declare Razorpay as an external variable */
 declare var Razorpay: any;
 import { PaymentService } from '../../payment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-component',
@@ -13,7 +14,7 @@ import { PaymentService } from '../../payment.service';
 export class PaymentComponentComponent {
   totalPrice: number = 0;
 
-  constructor(private paymentService: PaymentService) {
+  constructor(private paymentService: PaymentService,private router:Router) {
     this.paymentService.totalPrice$.subscribe(price => (this.totalPrice = price));
   }
 
@@ -33,6 +34,12 @@ export class PaymentComponentComponent {
         email: 'gauravpathak2@gmail.com',
         contact: '8459247750',
       },
+      handler: (response: any) => {
+        // Handle success callback
+        console.log('Payment success:', response);
+        // Redirect to the success page or perform any other action
+        this.router.navigate(['/ticket']);
+      },
       theme: {
         color: '#d90429',
       },
@@ -45,6 +52,7 @@ export class PaymentComponentComponent {
 
     const successCallback = (paymentId: any) => {
       console.log('Payment successful with ID:', paymentId);
+      // this.router.navigate(['/ticket']);
     };
 
     const failureCallback = (error: any) => {

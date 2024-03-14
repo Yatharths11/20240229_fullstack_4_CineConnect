@@ -3,10 +3,15 @@ import { MovieSeatBookComponent } from '../../Components/movie-seat-book-compone
 import { NavbarComponent } from '../../Components/navbar/navbar.component';
 import { MovieCardComponent } from '../../Components/movie-card/movie-card.component';
 import { PaymentComponentComponent } from '../../Components/payment-component/payment-component.component';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-book-ticket-page',
   standalone: true,
-  imports: [MovieSeatBookComponent,NavbarComponent,MovieCardComponent,PaymentComponentComponent],
+  imports: [MovieSeatBookComponent,
+    NavbarComponent,
+    MovieCardComponent,
+    PaymentComponentComponent,
+    RouterLink],
   templateUrl: './book-ticket-page.component.html',
   styleUrl: './book-ticket-page.component.css'
 })

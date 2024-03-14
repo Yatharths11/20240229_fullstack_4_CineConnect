@@ -5,7 +5,6 @@ import qrCode from 'razorpay/dist/types/qrCode';
 import { v4 as uuidv4 } from 'uuid';
 import { jwtDecode } from 'jwt-decode';
 
-
 @Component({
   selector: 'app-ticket',
   standalone: true,
@@ -13,7 +12,6 @@ import { jwtDecode } from 'jwt-decode';
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.css',
 })
-
 export class TicketComponent implements OnInit {
   movie: any;
   username: any;
@@ -28,7 +26,7 @@ export class TicketComponent implements OnInit {
     this.movie = history.state.movie;
     const token = localStorage.getItem('authToken');
     console.log(token);
-  
+
     // Check if token exists
     if (token) {
       // Decode the token manually
@@ -39,7 +37,7 @@ export class TicketComponent implements OnInit {
         console.error('Error decoding token:', error);
         // Handle invalid token (e.g., display error message)
       }
-  
+
       // Set booking details
       this.booking = {
         id: this.uuid,
@@ -49,7 +47,6 @@ export class TicketComponent implements OnInit {
       };
     }
   }
-  
 
   get bookingDetails(): string {
     // Convert booking details object to JSON string

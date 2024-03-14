@@ -71,7 +71,7 @@ const register = async (req, res) => {
 const info = async (req, res) => {
   try {
     const id = req.params.id;
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization;
 
     if (!token_provided(token)) {
       return res

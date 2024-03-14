@@ -87,21 +87,21 @@ function validateMovieData(data) {
     };
   }
 
-  // Validate genre
-  if (
-    !Array.isArray(genre) ||
-    genre.length === 0 ||
-    !genre.every(
-      (g) =>
-        typeof g === "string" && g.trim() !== "" && /^[a-zA-Z\s]{1,15}$/.test(g)
-    )
-  ) {
-    return {
-      valid: false,
-      error:
-        "Genre must be a non-empty array of strings with each string containing only letters and spaces, and having a maximum length of 15 characters.",
-    };
-  }
+  // // Validate genre
+  // if (
+  //   !Array.isArray(genre) ||
+  //   genre.length === 0 ||
+  //   !genre.every(
+  //     (g) =>
+  //       typeof g === "string" && g.trim() !== "" && /^[a-zA-Z\s]{1,15}$/.test(g)
+  //   )
+  // ) {
+  //   return {
+  //     valid: false,
+  //     error:
+  //       "Genre must be a non-empty array of strings with each string containing only letters and spaces, and having a maximum length of 15 characters.",
+  //   };
+  // }
 
   // Validate price
   if (typeof price !== "number" || price <= 0) {

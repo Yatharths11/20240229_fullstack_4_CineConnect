@@ -7,6 +7,7 @@ const typeCheck = (theatreData) => {
   // Validate name (only alphabetic characters)
   const nameRegex = /^[a-zA-Z]+$/;
   if (!nameRegex.test(theatreData.name)) {
+    console.log("here")
     return false;
   }
 
@@ -28,13 +29,16 @@ const typeCheck = (theatreData) => {
  * @returns
  */
 const validateTheatrePost = (theatreData) => {
+  console.log(theatreData);
   // Check if theatreData is provided
   if (!theatreData.name || !theatreData.address) {
+    
     return false;
   }
 
   // Check data type
   if (!typeCheck(theatreData)) {
+    console.log("here")
     return false;
   }
 

@@ -7,6 +7,8 @@ import { CreateTheatreComponent } from './Pages/create-theatre/create-theatre.co
 import { SigninpageComponent } from './Pages/signinpage/signinpage.component';
 import { SignuppageComponent } from './Pages/signuppage/signuppage.component';
 import { PageNotFoundPageComponent } from './Pages/page-not-found-page/page-not-found-page.component';
+import { MovieDetailsComponent } from './Pages/movie-details/movie-details.component';
+import { TicketPageComponent } from './Pages/ticket-page/ticket-page.component';
 export const routes: Routes = [
 
     {path:'',component:HomeComponent},
@@ -16,6 +18,7 @@ export const routes: Routes = [
     {path:'signin',component:SigninpageComponent},
     {path:'signup',component:SignuppageComponent},
     {path:'adminhomepage',component:AdminHomeComponent},
+    {path:'moviedetails',component:MovieDetailsComponent},
+    {path:"ticket",component:TicketPageComponent},
     {path:'**',component:PageNotFoundPageComponent},
-
 ];

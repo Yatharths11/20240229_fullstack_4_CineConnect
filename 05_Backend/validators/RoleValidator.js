@@ -1,4 +1,5 @@
 //import internal dependencies
+const { log } = require("console");
 const { verifyToken } = require("./tokenValidator");
 // const decoded = require('../utils/utility.js')
 
@@ -12,6 +13,7 @@ function check_superAdmin(token) {
   const decodedToken = verifyToken(token);
   //token Role compare with admin role
   if (decodedToken.role === "superAdmin") {
+    console.log("abe mai admin ho");
     return true;
   }
   return false;
@@ -24,9 +26,13 @@ function check_superAdmin(token) {
  */
 function check_admin(token) {
   //token Role compare with admin role
+ 
   const decodedToken = verifyToken(token);
+ 
   //token Role compare with admin role
+  console.log("abe gandu :-"+decodedToken.role);
   if (decodedToken.role === "admin") {
+    console.log("abe mai admin ho");
     return true;
   }
   return false;

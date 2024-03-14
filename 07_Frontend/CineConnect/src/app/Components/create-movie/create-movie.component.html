@@ -1,38 +1,55 @@
 <div class="creator">
-  <form (submit)="createNewMovie()">
-    <p class="form-field"> 
-      <label for="movieName">Name :</label>
-      <input type="text" id="movieName" [(ngModel)]="movie.name" name="movieName" placeholder="Enter movie name" required>
+  <form (submit)="onSubmit()">
+    <p class="form-field">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="Enter movie name" required>
     </p>
-    <p class="form-field"> 
-      <label for="movieGenre">Genre :</label>
-      <input type="text" id="movieGenre" [(ngModel)]="movie.genre" name="movieGenre" placeholder="Enter Genre" required>
+    <p class="form-field">
+      <label for="theatre_id">Theatre ID:</label>
+      <input type="text" id="theatre_id" [(ngModel)]="theatre_id" name="theatre_id" placeholder="Enter theatre ID" required>
     </p>
-    <p class="form-field"> 
-      <label for="movieLanguage">Language :</label>
-      <input type="text" id="movieLanguage" [(ngModel)]="movie.language" name="movieLanguage" placeholder="Enter languages" required>
+    <p class="form-field">
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="description" name="description" placeholder="Enter description"></textarea>
     </p>
-    <p class="form-field"> 
-      <label for="movieTheatre">Theatre :</label>
-      <input type="text" id="movieTheatre" [(ngModel)]="movie.theatre" name="movieTheatre" placeholder="Enter Theatre" required>
+    <p class="form-field">
+      <label for="screen">Screen:</label>
+      <input type="text" id="screen" [(ngModel)]="screen" name="screen" placeholder="Enter screen" required>
     </p>
-    <p class="form-field"> 
-      <label for="movieDate">Date :</label>
-      <input type="datetime-local" id="movieDate" [(ngModel)]="movie.date" name="movieDate" placeholder="Enter date" required>
+    <p class="form-field">
+      <label for="language">Language:</label>
+      <input type="text" id="language" [(ngModel)]="language" name="language" placeholder="Enter language" required>
     </p>
-    <p class="form-field"> 
-      <label for="movieRating">Rating :</label>
-      <input type="text" id="movieRating" [(ngModel)]="movie.rating" name="movieRating" placeholder="Enter rating of the movie" required>
+    <p class="form-field">
+      <label for="genre">Genre:</label>
+      <input type="text" id="genre" [(ngModel)]="genre" name="genre" placeholder="Enter genre" required>
     </p>
-    <p class="form-field"> 
-      <label for="ticketPrice">Price per Ticket :</label>
-      <input type="text" id="ticketPrice" [(ngModel)]="movie.ticketPrice" name="ticketPrice" placeholder="Enter price per ticket" required>
+    <p class="form-field">
+      <label for="price">Price:</label>
+      <input type="number" id="price" [(ngModel)]="price" name="price" placeholder="Enter price" required>
     </p>
-    <p class="form-field"> 
-      <label for="posterLink">Poster Link :</label>
-      <input type="url" id="posterLink" [(ngModel)]="movie.posterLink" name="posterLink" placeholder="Enter poster link of movie" required>
+    <p class="form-field">
+      <label for="ratings">Ratings:</label>
+      <input type="number" id="ratings" [(ngModel)]="ratings" name="ratings" placeholder="Enter ratings" required>
     </p>
-
-    <button type="submit"  class="create-button">Create Movie</button>
+    <p class="form-field">
+      <label for="date">Date:</label>
+      <input type="date" id="date" [(ngModel)]="date" name="date" placeholder="Enter date" required>
+    </p>
+    <p class="form-field">
+      <label for="availableSeats">Available Seats:</label>
+      <input type="number" id="availableSeats" [(ngModel)]="availableSeats" name="availableSeats" placeholder="Enter available seats">
+    </p>
+    <p class="form-field">
+      <label for="pgRating">PG Rating:</label>
+      <select id="pgRating" [(ngModel)]="pgRating" name="pgRating" required>
+        <option value="G">G</option>
+        <option value="PG">PG</option>
+        <option value="PG-13">PG-13</option>
+        <option value="R">R</option>
+        <option value="NC-17">NC-17</option>
+      </select>
+    </p>
+    <button type="submit" class="create-button">Create Movie</button>
   </form>
 </div>

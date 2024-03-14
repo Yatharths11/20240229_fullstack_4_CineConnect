@@ -1,0 +1,45 @@
+<div class="bodyCheckout">
+    <div class="movie-container">
+      <label>Movie Name:</label>
+      <div class="movie-name">{{movieList.movieName}}</div>
+    </div>
+  
+    <ul class="showcase">
+      <li>
+        <div class="seat"></div>
+        <small>Available</small>
+      </li>
+      <li>
+        <div class="seat selected"></div>
+        <small>Selected</small>
+      </li>
+      <li>
+        <div class="seat occupied"></div>
+        <small>Occupied</small>
+      </li>
+    </ul>
+  
+    <div class="container">
+      <div class="screen"><img [src]="movieList?.movieBanner" alt=""></div>
+  
+      <div class="row" *ngFor="let rows of movieList?.seatRows">
+        <div class="row-number">
+            {{rows.row}}
+        </div>
+        <div [ngClass]="{
+            'occupied2': checkIfOccupied(rows.row, seats),
+            'occupied': checkIfPrevOccupied(rows.row, seats)
+          }"
+          class="seat " (click)="bookSeat(rows.row,seats)" *ngFor="let seats of getSeatArray(rows.noOfSeats)">{{seats}}</div>
+      </div>
+    </div>
+  
+    <p class="text">
+      You have selected <span id="count">{{bookedSeatNo.length}}</span> movies for price of $<span
+        id="total"
+        >{{getPrice()}}</span
+      >
+    </p>
+    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
+  </div>

@@ -1,0 +1,11 @@
+.bookseatcomp{
+    height: 100vh;
+    width: 100vw;
+}
+.bookseatmainbody{
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

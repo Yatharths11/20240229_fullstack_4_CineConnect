@@ -37,5 +37,5 @@ gettotalPrice(){
 ]
 
 movie = 
-  { name: 'X-Men',Price: '250', imageUrl: '../../assets/movie1.jpg', genre: 'Action' }
+  { name: 'X-Men',Price:'250', imageUrl: '../../assets/movie1.jpg', genre: ['Action'] }
 }

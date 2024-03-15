@@ -8,13 +8,13 @@
                 <span>ADMIT ONE</span>
             </p>
             <div class="ticket-number">
-                <p>#20231304</p>
+                <p>#{{ ticketData.ticketNumber }}</p>
             </div>
         </div>
         <div class="ticket-info">
             <p class="date">
-                <span>EMPIRE</span>
-                <span class="nov-10">JUNE 2024</span>
+                <span>{{ ticketData.venue }}</span>
+                <span class="nov-10">{{ ticketData.date }}</span>
                 <span>ISSUE</span>
             </p>
             <div class="show-name">
@@ -23,10 +23,10 @@
                 <h3>{{username}}</h3>
             </div>
             <div class="time">
-                <p>12:49 PM <span>TO</span> TBD</p>
+                <p>{{ ticketData.startTime }} <span>TO</span> {{ ticketData.endTime }}</p>
             </div>
             <div class="tagline">
-                <p>IN THIS LIFE OR THE NEXT</p>
+                <p>{{ ticketData.tagline }}</p>
             </div>
             <p class="location">
                 <span>Avenue</span>
@@ -35,6 +35,7 @@
             </p>
         </div>
     </div>
+    <!-- Right side -->
     <div class="right">
         <p class="admit-one">
             <span>ADMIT ONE</span>
@@ -43,7 +44,7 @@
         </p>
         <div class="right-info-container">
             <div class="show-name">
-                <h1>#SaveWarriorNun</h1>
+                <h1>#{{ ticketData.event }}</h1>
             </div>
             <div class="time">
                 <p>13.04.2023</p>

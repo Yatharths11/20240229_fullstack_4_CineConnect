@@ -65,6 +65,7 @@ export class PaymentComponentComponent implements OnInit {
 
     const successCallback = (paymentId: any) => {
       console.log('Payment successful with ID:', paymentId);
+      // this.router.navigate(['/ticket']);
     };
 
     const failureCallback = (error: any) => {

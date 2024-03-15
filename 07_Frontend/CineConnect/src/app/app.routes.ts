@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Pages/home/home.component';
-import { Component } from '@angular/core';
 import { AdminHomeComponent } from './Pages/admin-home/admin-home.component';
 import { CreateShowComponent } from './Pages/create-show/create-show.component';
 import { CreateTheatreComponent } from './Pages/create-theatre/create-theatre.component';
@@ -10,7 +9,7 @@ import { PageNotFoundPageComponent } from './Pages/page-not-found-page/page-not-
 import { BookTicketPageComponent } from './Pages/book-ticket-page/book-ticket-page.component';
 import { QrComponent } from './Components/qr/qr.component';
 import { MovieDetailsComponent } from './Pages/movie-details/movie-details.component';
-import { TicketPageComponent } from './Pages/ticket-page/ticket-page.component';
+// import { TicketPageComponent } from './Pages/ticket-page/ticket-page.component';
 import { TicketComponent } from './Components/ticket/ticket.component';
 
 export const routes: Routes = [
@@ -25,5 +24,7 @@ export const routes: Routes = [
   { path: 'adminhomepage', component: AdminHomeComponent },
   { path: 'moviedetails', component: MovieDetailsComponent },
   { path: 'ticket', component: TicketComponent },
+  { path: 'bookseats', component: BookTicketPageComponent },
+  // { path: 'ticket', component: TicketPageComponent },
   { path: '**', component: PageNotFoundPageComponent },
 ];

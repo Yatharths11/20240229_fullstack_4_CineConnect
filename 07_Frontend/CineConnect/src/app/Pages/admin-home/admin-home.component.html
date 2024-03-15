@@ -1,6 +1,6 @@
 <app-navbar>
   <div adminContent class="button-container">
-    <button class="signup-button">+ create</button>
+    <button class="signup-button" routerLink="/createshow" >+ create</button>
     <div
       style="
         display: flex;
@@ -21,12 +21,18 @@
   </div>
 </app-navbar>
 <div class="main-content">
-    <app-admin-left-sidebar></app-admin-left-sidebar>
+    <!-- <app-admin-left-sidebar></app-admin-left-sidebar> -->
     <div class="main">
         <h1 style="color: #edf2f4;">Manager Shows</h1>
+        <!-- Assuming the parent component has a list of movie cards -->
+        <!-- Assuming the parent component has a list of movie cards -->
+        <!-- <app-create-movie *ngFor="let movie of movies" [movie]="movie" (click)="onEditMovie($event)"></app-create-movie>
+        <button (click)="openCreateMovieForm()">Create Movie</button> -->
+
         <app-admin-movie-cards></app-admin-movie-cards>
-        <app-admin-movie-cards></app-admin-movie-cards>
-        <app-admin-movie-cards></app-admin-movie-cards>
+        <!-- <app-create-movie style="border: 2px solid red;"></app-create-movie> -->
+
+
     </div>
 </div>
 

@@ -30,9 +30,9 @@ function check_admin(token) {
   const decodedToken = verifyToken(token);
  
   //token Role compare with admin role
-  console.log("abe gandu :-"+decodedToken.role);
+ 
   if (decodedToken.role === "admin") {
-    console.log("abe mai admin ho");
+    
     return true;
   }
   return false;

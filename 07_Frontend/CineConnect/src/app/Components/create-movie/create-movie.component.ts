@@ -55,7 +55,7 @@ export class CreateMovieComponent implements  OnInit{
   isEditMode: boolean = false;
   movie: any; 
   // http: HttpClient = inject(HttpClient)
-  token: string = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzEwNDc4MzcwLCJleHAiOjE3MTA1NjExNzB9.h5RnH9ipls0VKKJF7-JuceFRQFUjKO0dV6MHRkf3dlU";
+  token: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzEwNDg1MjUxLCJleHAiOjE3MTA1NjgwNTF9.S-6l-NPNq4LC3mMFYM5J6DAzaCLUtEWZ-W-5kxCM2TE";
   
 
 

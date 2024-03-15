@@ -1,30 +1,90 @@
-img{
-    width: 1230px;
-    height: 900px;
+.movie-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.poster{
-    display: flex;
-    justify-content: center;
-    padding-left: 20px;
-    padding-right: 20px;
+
+.movie-details {
+  display: flex;
+  background-color: #2b2d42;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.details{
-    width: 1270px;
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    background-color: #8d99ae;
-    flex-direction: column;
-    border-radius: 4px;
-    margin: 10px;
-    padding: 5px;
+
+.poster {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-h3{
-    display: inline;
+
+.poster img {
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
-button{
-    width: fit-content;
-    border-radius:  6px;
-    background-color: #ef233c;
-    outline: none;
+
+.details {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #edf2f4;
+  margin-bottom: 5px;
+}
+
+.features {
+  margin-bottom: 20px;
+}
+
+.info {
+  font-size: 16px;
+  color: #8d99ae;
+  margin-right: 10px;
+}
+
+.info:last-child {
+  margin-right: 0;
+}
+
+.rating {
+  color: #ffd700; /* Yellow color for rating */
+}
+
+.year {
+  color: #8d99ae;
+}
+
+h6,
+h5 {
+  color: #edf2f4;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #edf2f4;
+  margin-bottom: 20px;
+}
+
+.book-now-btn {
+  background-color: #ef233c;
+  color: #edf2f4;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.book-now-btn:hover {
+  background-color: #d90429;
 }

@@ -1,7 +1,7 @@
-<div class="ticket created-by-anniedotexe">
-    <!-- Left side -->
+<div style="margin-top: 20px;" class="ticket created-by-anniedotexe">
     <div class="left">
         <div class="image">
+            <img  src={{movie.imageUrl}}>
             <p class="admit-one">
                 <span>ADMIT ONE</span>
                 <span>ADMIT ONE</span>
@@ -18,9 +18,9 @@
                 <span>ISSUE</span>
             </p>
             <div class="show-name">
-                <h1>{{ ticketData.event }}</h1>
-                <h2>{{ ticketData.movieName }}</h2>
-                <h3>feat. {{ ticketData.featArtist }}</h3>
+                <h1>CineConnect</h1>
+                <h2>{{movie.name}}</h2>
+                <h3>{{username}}</h3>
             </div>
             <div class="time">
                 <p>{{ ticketData.startTime }} <span>TO</span> {{ ticketData.endTime }}</p>
@@ -29,9 +29,9 @@
                 <p>{{ ticketData.tagline }}</p>
             </div>
             <p class="location">
-                <span>{{ ticketData.location }}</span>
+                <span>Avenue</span>
                 <span class="separator"><i class="fas fa-cross"></i></span>
-                <span>{{ ticketData.city }}</span>
+                <span>HYDERABAD, INDIA</span>
             </p>
         </div>
     </div>
@@ -47,13 +47,13 @@
                 <h1>#{{ ticketData.event }}</h1>
             </div>
             <div class="time">
-                <p>{{ ticketData.date }}</p>
-                <p>{{ ticketData.startTime }} <span>TO</span> {{ ticketData.endTime }}</p>
+                <p>13.04.2023</p>
             </div>
             <div class="barcode">
-                <img [src]="ticketData.qrCodeUrl" alt="QR code">
+                <div>
+                    <qrcode [qrdata]="bookingDetails"></qrcode>
+                  </div>
             </div>
-            <p class="ticket-number">#{{ ticketData.ticketNumber }}</p>
         </div>
     </div>
 </div>

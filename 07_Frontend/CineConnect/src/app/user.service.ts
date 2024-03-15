@@ -16,7 +16,6 @@ export class UserService {
     const headers = new HttpHeaders({
       Authorization: `${localStorage.getItem('authToken')}`, // Retrieve the token from local storage
     });
-
     return this.http.get(`${this.apiUrl}/info`, { headers });
   }
 }

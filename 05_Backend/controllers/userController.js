@@ -80,7 +80,7 @@ const info = async (req, res) => {
 
     const decodedToken = await verifyToken(token);
     console.log(decodedToken);
-    if (!decodedToken || check_user(token)) {
+    if (!decodedToken || !check_user(token)) {
       return res
         .status(403)
         .send({ message: "Forbidden. Only users can perform this action." });

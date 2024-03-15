@@ -1,23 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 /** Declare Razorpay as an external variable */
 declare var Razorpay: any;
 import { PaymentService } from '../../payment.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-component',
   standalone: true,
   imports: [],
   templateUrl: './payment-component.component.html',
-  styleUrl: './payment-component.component.css'
+  styleUrl: './payment-component.component.css',
 })
-export class PaymentComponentComponent {
-  totalPrice: number = 0;
-
-  constructor(private paymentService: PaymentService,private router:Router) {
-    this.paymentService.totalPrice$.subscribe(price => (this.totalPrice = price));
+export class PaymentComponentComponent implements OnInit {
+  movie: any;
+  constructor(
+    private paymentService: PaymentService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.paymentService.totalPrice$.subscribe(
+      (price) => (this.totalPrice = price)
+    );
   }
 
+  ngOnInit(): void {
+    this.movie = history.state.movie;
+    console.log('Movie Details:', this.movie);
+  }
+
+  totalPrice: number = 0;
+
+  handleSuccessfulPayment() {
+    this.router.navigate(['/ticket'], { state: { movie: this.movie } });
+  }
   /**
    * Function to handle payment using Razorpay.
    */
@@ -25,7 +40,7 @@ export class PaymentComponentComponent {
     const options = {
       description: 'Sample Razorpay demo',
       currency: 'INR',
-      amount: this.totalPrice*100,
+      amount: this.totalPrice * 100,
       name: 'CineConnect',
       key: 'rzp_test_OaFc3NxBZxWSHF',
       image: '../../../assets/cineConnectLogo.svg',
@@ -34,12 +49,6 @@ export class PaymentComponentComponent {
         email: 'gauravpathak2@gmail.com',
         contact: '8459247750',
       },
-      handler: (response: any) => {
-        // Handle success callback
-        console.log('Payment success:', response);
-        // Redirect to the success page or perform any other action
-        this.router.navigate(['/ticket']);
-      },
       theme: {
         color: '#d90429',
       },
@@ -47,6 +56,10 @@ export class PaymentComponentComponent {
         ondismiss: () => {
           console.log('Payment dismissed');
         },
+      },
+      handler: (response: any) => {
+        // Navigate to another page upon successful payment
+        this.handleSuccessfulPayment();
       },
     };
 

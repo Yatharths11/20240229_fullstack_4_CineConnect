@@ -39,3 +39,94 @@
   
 
   
+
+  /* Styles for Buttons */
+.button-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup-button,
+.login-button {
+  background-color: #ef233c; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  padding: 0px 12px 0px 12px;
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */
+  margin: 10px;
+  font-family: "Karla", sans-serif;
+  font-size: 16px;
+}
+
+.signup-button:hover,
+.login-button:hover {
+  transform: scale(1.05); /* Scale up on hover */
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2); /* Add subtle box shadow on hover */
+}
+
+.my-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  margin-top: 20px;
+  box-shadow: 0 12px 15px rgba(0, 0, 0, 0.4);
+}
+
+img {
+  border-radius: 10px;
+  width: 100%;
+  height: 60vh;
+  border: 1px solid white;
+}
+
+p {
+  margin: 20px;
+  color: white;
+  font-size: 28px;
+  font-family: "Karla";
+  margin-top: 40px;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  padding: 30px;
+  margin-top: -20px;
+}
+
+.Theatre-section {
+  width: 100%;
+  height: fit-content;
+  background-color: #8d99ae;
+}
+
+.theatre-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 50px;
+  justify-content: center;
+  padding: 50px;
+  margin-top: -60px;
+}
+
+.custom-button {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: #d90429;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info {
+  padding: 18px;
+}

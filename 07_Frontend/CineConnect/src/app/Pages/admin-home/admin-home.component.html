@@ -1,38 +1,52 @@
-<app-navbar>
-  <div adminContent class="button-container">
-    <button class="signup-button" routerLink="/createshow" >+ create</button>
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        height: 45px;
-        width: 45px;
-        background-color: #d90429;
-        margin: 10px;
-      "
-    >
-      <fa-icon
-        style="color: white; font-size: 34px"
-        [icon]="accountIcon"
-      ></fa-icon>
+<div *ngIf="isLoggedIn; else loggedOutNavbar">
+  <app-navbar>
+    <div adminContent class="button-container">
+      <button class="signup-button" routerLink="/createshow">+ create</button>
+      <div>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="userMenu"
+          aria-label="User Menu"
+          class="custom-button"
+        >
+          <fa-icon
+            style="color: white; font-size: 34px"
+            [icon]="accountIcon"
+          ></fa-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item>Admin</button>
+          <div *ngIf="userInfo" class="user-info">
+            <h6><strong>Username:</strong> {{ userInfo.username }}</h6>
+            <h6><strong>Email:</strong> {{ userInfo.email }}</h6>
+          </div>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
     </div>
-  </div>
-</app-navbar>
-<div class="main-content">
-    <!-- <app-admin-left-sidebar></app-admin-left-sidebar> -->
-    <div class="main">
-        <h1 style="color: #edf2f4;">Manager Shows</h1>
-        <!-- Assuming the parent component has a list of movie cards -->
-        <!-- Assuming the parent component has a list of movie cards -->
-        <!-- <app-create-movie *ngFor="let movie of movies" [movie]="movie" (click)="onEditMovie($event)"></app-create-movie>
-        <button (click)="openCreateMovieForm()">Create Movie</button> -->
-
-        <app-admin-movie-cards></app-admin-movie-cards>
-        <!-- <app-create-movie style="border: 2px solid red;"></app-create-movie> -->
-
-
-    </div>
+  </app-navbar>
 </div>
 
+<!-- Display user information in a modal -->
+<ng-template #loggedOutNavbar>
+  <app-navbar>
+    <div buttonsContent class="button-container">
+      <button routerLink="/signup" class="signup-button">Sign Up</button>
+      <button routerLink="/signin" class="login-button">Login</button>
+    </div>
+  </app-navbar>
+</ng-template>
+
+<div class="main-content">
+  <!-- <app-admin-left-sidebar></app-admin-left-sidebar> -->
+  <div class="main">
+    <h1 style="color: #edf2f4">Manager Shows</h1>
+    <!-- Assuming the parent component has a list of movie cards -->z
+    <!-- Assuming the parent component has a list of movie cards -->
+    <!-- <app-create-movie *ngFor="let movie of movies" [movie]="movie" (click)="onEditMovie($event)"></app-create-movie>
+        <button (click)="openCreateMovieForm()">Create Movie</button> -->
+
+    <app-admin-movie-cards></app-admin-movie-cards>
+    <!-- <app-create-movie style="border: 2px solid red;"></app-create-movie> -->
+  </div>
+</div>

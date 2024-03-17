@@ -1,4 +1,3 @@
-const { log } = require("console");
 const Movies = require("../models/movies.js");
 const {
   check_admin,
@@ -80,12 +79,10 @@ const insertNewMovie = async (req, res) => {
         .json({ error: "Access denied. Token not provided." });
     }
 
-    
     // Find the user by ID
     const decodedToken = verifyToken(token);
 
-    
-    console.log("token check:"+decodedToken);
+    console.log("token check:" + decodedToken);
     // Check if the user is authorized to create a movie
     if (!decodedToken || (!check_admin(token) && !check_superAdmin(token))) {
       return res.status(401).json({ error: "Sorry, you're not authorized." });
@@ -95,14 +92,14 @@ const insertNewMovie = async (req, res) => {
     const newMovie = req.body;
 
     // Validate the movie data
-    const validationResult = validateMovieData(newMovie);
-    if (!validationResult.valid) {
-      return res.status(400).json({ error: validationResult.error });
-    }
+    // const validationResult = validateMovieData(newMovie);
+    // if (!validationResult.valid) {
+    //   return res.status(400).json({ error: validationResult.error });
+    // }
 
     const createdMovie = await Movies.create(newMovie);
     // Return success message and the created movie
-    console.log("here")
+    console.log("here");
     return res.status(200).json({
       message: "Movie created successfully",
       movie: createdMovie,

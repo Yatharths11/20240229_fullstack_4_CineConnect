@@ -41,7 +41,7 @@ input, textarea, select{
     border: none;
     border-radius: 5px; /* Rounded corners */
     padding: 0px 12px 0px 12px;
-    height: 35px;
+    height: fit-content;
     width: 100px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s; /* Add smooth hover animation */

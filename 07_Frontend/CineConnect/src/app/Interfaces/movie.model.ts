@@ -1,9 +1,8 @@
 // movie.model.ts
-
-// Define an interface named 'Movie' to represent the structure of a movie object
 export interface Movie {
     id: number;          // Unique identifier for the movie
-    name: string;        // Name of the movie
+    name: string; 
+    IMG:string;       // Name of the movie
     theatre_id: string;  // ID of the theater where the movie is being shown
     description: string; // Description of the movie
     screen: string;      // Screen where the movie is being shown

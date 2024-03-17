@@ -16,7 +16,7 @@ import { CreateMovieComponent } from "../../Components/create-movie/create-movie
         AdminLeftSidebarComponent,
         AdminMovieCardsComponent,
         AdminTheaterCardsComponent,
-        FontAwesomeModule, CreateMovieComponent]
+        FontAwesomeModule, CreateMovieComponent,]
 })
 export class AdminCreateShowComponent {
   accountIcon = faCircleUser

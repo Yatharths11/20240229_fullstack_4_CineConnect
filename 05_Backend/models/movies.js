@@ -5,9 +5,12 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+  IMG: {
+    type: String,
+    required: true,
+  },
   theatre_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "Theatre",
     required: true,
   },
@@ -19,7 +22,6 @@ const movieSchema = new mongoose.Schema({
   screen: {
     type: String,
     required: true,
-    default: "Audi_01",
   },
 
   language: {
@@ -50,7 +52,7 @@ const movieSchema = new mongoose.Schema({
 
   availableSeats: {
     type: Number,
-    default:100,
+    default: 100,
     min: 0,
   },
 

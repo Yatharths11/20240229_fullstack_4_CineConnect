@@ -88,3 +88,8 @@ p {
 .user-info {
   padding: 18px;
 }
+
+.picsum-img-wrapper{
+  height: auto;
+  width: auto;
+}

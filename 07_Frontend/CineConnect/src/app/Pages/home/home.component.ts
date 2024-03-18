@@ -44,10 +44,11 @@ import { UserService } from '../../user.service';
   providers: [AuthServiceService, UserService, NavbarService],
 })
 export class HomeComponent {
-  images = [62, 83, 466, 965, 982, 1043, 738].map(
-    (n) => `https://picsum.photos/id/${n}/1513/415`
-  );
-
+  images = [
+    "https://images.unsplash.com/photo-1460881680858-30d872d5b530?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1vdmllc3xlbnwwfDB8MHx8fDA%3D",
+    'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW92aWVzfGVufDB8MHwwfHx8MA%3D%3D',
+    'https://images.unsplash.com/photo-1618343931116-fadc431fdec3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fG1vdmllc3xlbnwwfDB8MHx8fDA%3D',
+  ];
   paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;

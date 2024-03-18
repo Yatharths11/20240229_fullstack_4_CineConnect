@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 declare var Razorpay: any;
 import { PaymentService } from '../../payment.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthServiceService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-payment-component',
@@ -10,17 +11,29 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [],
   templateUrl: './payment-component.component.html',
   styleUrl: './payment-component.component.css',
+  providers: [AuthServiceService],
 })
 export class PaymentComponentComponent implements OnInit {
   movie: any;
   constructor(
     private paymentService: PaymentService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthServiceService
   ) {
     this.paymentService.totalPrice$.subscribe(
       (price) => (this.totalPrice = price)
     );
+  }
+
+  purchaseTicket(): void {
+    if (this.authService.isLoggedIn()) {
+      // User is logged in, proceed with purchasing ticket
+      this.payNow();
+    } else {
+      // User is not logged in, redirect to login page
+      this.router.navigate(['/signin']);
+    }
   }
 
   ngOnInit(): void {

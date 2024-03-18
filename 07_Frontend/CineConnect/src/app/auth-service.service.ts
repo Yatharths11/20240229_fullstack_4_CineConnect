@@ -8,6 +8,14 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthServiceService {
+
+  isLoggedIn(): boolean {
+    // Check if user is logged in based on your authentication logic
+    // For example, check if authentication token exists in local storage
+    const authToken = localStorage.getItem('authToken');
+    return !!authToken; // Return true if authToken exists, else false
+  }
+  
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
